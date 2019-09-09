@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "800755725006",
+    "firebase_url": "https://ensemble-65b0c.firebaseio.com",
+    "project_id": "ensemble-65b0c",
+    "storage_bucket": "ensemble-65b0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800755725006:android:964d63a2924e415158969f",
+        "android_client_info": {
+          "package_name": "com.companyname.ensemble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "800755725006-o2spokauuk19jk5nlp2avi9pl6l9in47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD25wXdD1WxUQGQD3zkXNkf3X9UYJYaAtE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "800755725006-o2spokauuk19jk5nlp2avi9pl6l9in47.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
