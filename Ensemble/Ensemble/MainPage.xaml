@@ -9,15 +9,15 @@
         <StackLayout>
             <!-- Place new controls here -->
             <Image Aspect="AspectFit" WidthRequest="150" HeightRequest="150" Source="ensemble.png" Margin="25,0,0,0" Grid.ColumnSpan="2"/>
-            <Entry Placeholder="username" WidthRequest="300" HeightRequest="40" HorizontalOptions="Center" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
-            <Entry Placeholder="password" WidthRequest="300" HeightRequest="40" HorizontalOptions="Center" IsPassword="True" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
+            <Entry x:Name="username"  Placeholder="username" WidthRequest="300" HeightRequest="40" HorizontalOptions="Center" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
+            <Entry x:Name="password" Placeholder="password" WidthRequest="300" HeightRequest="40" HorizontalOptions="Center" IsPassword="True" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
             <Grid HorizontalOptions="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="125"></ColumnDefinition>
                     <ColumnDefinition Width="125"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Text="Sign up" WidthRequest="150" HeightRequest="40" Grid.Column="0"/>
-                <Button Text="Sign in" WidthRequest="150" HeightRequest="40" Grid.Column="1"/>
+                <Button x:Name="signIn" Text="Sign in" WidthRequest="150" HeightRequest="40" Grid.Column="1" Clicked="OnSignIn"/>
             </Grid>
             <Label Text="Forgot Password?" TextColor="DeepSkyBlue" HorizontalTextAlignment="Center" WidthRequest="300" HeightRequest="35" HorizontalOptions="Center" TextDecorations="Underline"></Label>
         </StackLayout>

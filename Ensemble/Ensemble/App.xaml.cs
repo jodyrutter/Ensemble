@@ -9,7 +9,6 @@ namespace Ensemble
         public App()
         {
             InitializeComponent();
-
             MainPage = new MainPage();
         }
 

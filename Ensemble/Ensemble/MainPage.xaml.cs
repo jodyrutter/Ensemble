@@ -13,9 +13,19 @@ namespace Ensemble
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        //UI is accessable with their real names in this script. For example, the username is just username.
         public MainPage()
         {
             InitializeComponent();
+        }
+        /**
+         * Runs when the sign in button is clicked.
+         */
+        void OnSignIn(object sender, EventArgs args)
+        {
+            string user, pass; //Strings to contain the user's login credentials.
+            user = username.Text;
+            pass = password.Text;
         }
     }
 }
