@@ -16,7 +16,7 @@
                     <ColumnDefinition Width="125"></ColumnDefinition>
                     <ColumnDefinition Width="125"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Text="Sign up" WidthRequest="150" HeightRequest="40" Grid.Column="0"/>
+                <Button Text="Sign up" WidthRequest="150" HeightRequest="40" Grid.Column="0" Clicked="OnSignUp"/>
                 <Button x:Name="signIn" Text="Sign in" WidthRequest="150" HeightRequest="40" Grid.Column="1" Clicked="OnSignIn"/>
             </Grid>
             <Label Text="Forgot Password?" TextColor="DeepSkyBlue" HorizontalTextAlignment="Center" WidthRequest="300" HeightRequest="35" HorizontalOptions="Center" TextDecorations="Underline"></Label>

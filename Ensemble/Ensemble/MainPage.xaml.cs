@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-
 namespace Ensemble
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
@@ -26,6 +25,10 @@ namespace Ensemble
             string user, pass; //Strings to contain the user's login credentials.
             user = username.Text;
             pass = password.Text;
+        }
+        void OnSignUp(object sender, EventArgs args)
+        {
+            Navigation.PushModalAsync(new Page1());
         }
     }
 }
