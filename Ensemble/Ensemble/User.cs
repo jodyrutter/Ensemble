@@ -7,8 +7,8 @@ namespace Ensemble
 {
     public class User
     {
-        public string email { get; set; }
-        public string pwd { get; set; }
+        public string Email { get; set; }
+        public string Pwd { get; set; }
 
     }
 }
