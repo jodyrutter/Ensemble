@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <BundleResource Include="Connected Services\AzureStorage1\ConnectedService.json" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WindowsAzure.Storage">
-      <Version>9.1.1</Version>
+      <Version>9.3.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />

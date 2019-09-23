@@ -71,7 +71,7 @@
       <Version>2.1.2</Version>
     </PackageReference>
     <PackageReference Include="WindowsAzure.Storage">
-      <Version>9.1.1</Version>
+      <Version>9.3.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Common">
       <Version>71.1610.0</Version>
@@ -107,7 +107,6 @@
     <GoogleServicesJson Include="google-services.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </GoogleServicesJson>
-    <None Include="Connected Services\AzureStorage1\ConnectedService.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
