@@ -38,6 +38,39 @@ namespace Ensemble
             string user, pass; //Strings to contain the user's login credentials.
             user = username.Text;
             pass = password.Text;
+
+            if (ValidateEntries())
+            {
+
+            }
+        }
+
+        private bool ValidateEntries()
+        {
+            bool isEmail = true;
+            bool isPwd = true;
+
+            if (username.Text == null)
+            {
+                isEmail = false;
+            }
+
+            else if (username.Text != null)
+            {
+                isEmail = true;
+            }
+
+            if (password.Text == null)
+            {
+                isPwd = false;
+            }
+
+            else if (password.Text != null)
+            {
+                isPwd = true;
+            }
+
+            return isEmail && isPwd;
         }
 
         private void SignUp(object sender, EventArgs e)
