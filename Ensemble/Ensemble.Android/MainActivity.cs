@@ -11,7 +11,8 @@ using Firebase.Auth;
 using static Android.Views.View;
 using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
-
+using System.Collections.Generic;
+using Android.Content;
 
 namespace Ensemble.Droid
 {
@@ -22,11 +23,13 @@ namespace Ensemble.Droid
         EditText input_email, input_pwd;
         TextView btnSignUp, btnForgetPwd;
         RelativeLayout activity_main;
-        public static FirebaseApp app;
+        public static FirebaseApp Myapp;
         FirebaseAuth auth;
+        private Context context;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            SetTheme(Resource.Style.AppTheme);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Main);
             InitFirebaseAuth();
@@ -52,20 +55,43 @@ namespace Ensemble.Droid
 
         private void InitFirebaseAuth()
         {
-            var options = new FirebaseOptions.Builder()
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                .SetDatabaseUrl("https://ensemble-65b0c.firebaseio.com/")
                 .SetApplicationId("1:800755725006:android:964d63a2924e415158969f")
                 .SetApiKey("AIzaSyAJBWfWnAu-3pnw6VzHoQu17bZKghnZJOA")
                 .Build();
-            if (app == null)
-                app = FirebaseApp.InitializeApp(this, options);
-            auth = FirebaseAuth.GetInstance(app);
+
+            Boolean hasBeenInit = false;
+            List<FirebaseApp> firebaseApps = FirebaseApp.GetApps(context);
+            for (FirebaseApp app : firebaseApps)
+            {
+                if (app.getName().equals(FirebaseApp.DefaultAppName))
+                {
+                    hasBeenInit = true;
+                    Myapp = app;
+                }
+            }
+            
+
+            if (!hasBeenInit)
+            {
+                Myapp = FirebaseApp.InitializeApp(this, options);
+            }
+            /*
+            if (Myapp == null)
+            {
+                Myapp = FirebaseApp.InitializeApp(this, options);
+                
+            }*/
+            auth = FirebaseAuth.GetInstance(Myapp);
+
         }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        /*public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+        }*/
 
         public void OnClick(View v)
         {
@@ -94,7 +120,7 @@ namespace Ensemble.Droid
         {
             if (task.IsSuccessful)
             {
-                StartActivity(new Android.Content.Intent(this, typeof(MainActivity)));
+                StartActivity(new Android.Content.Intent(this, typeof(Dashboard)));
                 Finish();
             }
             else

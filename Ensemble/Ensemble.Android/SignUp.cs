@@ -57,7 +57,7 @@ namespace Ensemble.Droid
             SetContentView(Resource.Layout.SignUp);
 
             //Init Firebase
-            auth = FirebaseAuth.GetInstance(MainActivity.app);
+            auth = FirebaseAuth.GetInstance(MainActivity.Myapp);
 
             //views
             btnSignup = FindViewById<Button>(Resource.Id.signup_btn_register);
