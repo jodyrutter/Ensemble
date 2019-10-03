@@ -13,19 +13,23 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.Design.Widget;
+using Android.Support.V7.App;
+using Firebase;
+//using Firebase.Database;
 
 namespace Ensemble.Droid
 {
     [Activity(Label = "SignUp", Theme = "@style/AppTheme")]
-    public class SignUp : Activity, IOnClickListener, IOnCompleteListener
+    public class SignUp : AppCompatActivity
     {
         Button btnSignup;
         TextView btnLogin, btnForgetPass;
         EditText input_email, input_pwd;
         RelativeLayout activity_sign_up;
         FirebaseAuth auth;
-
-        public void OnClick(View v)
+       // FirebaseDatabase db;
+        TaskCompletionListener tcl = new TaskCompletionListener();
+        /*public void OnClick(View v)
         {
             if (v.Id == Resource.Id.signup_btn_login)
             {
@@ -42,13 +46,14 @@ namespace Ensemble.Droid
             else if (v.Id == Resource.Id.signup_btn_register)
             {
                 SignUpUser(input_email.Text, input_pwd.Text);
+               
             }
         }
 
         private void SignUpUser(string email, string password)
         {
             auth.CreateUserWithEmailAndPassword(email, password).AddOnCompleteListener(this, this);
-        }
+        }*/
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -57,33 +62,114 @@ namespace Ensemble.Droid
             SetContentView(Resource.Layout.SignUp);
 
             //Init Firebase
-            auth = FirebaseAuth.GetInstance(MainActivity.Myapp);
+            InitFirebase();
+            auth = FirebaseAuth.Instance;
+            ConnectControl();
+        }
 
+        void InitFirebase()
+        {
+            var app = FirebaseApp.InitializeApp(this);
+
+            if (app == null)
+            {
+                var options = new FirebaseOptions.Builder()
+                     .SetApplicationId("ensemble-65b0c")
+                     .SetApiKey("AIzaSyD25wXdD1WxUQGQD3zkXNkf3X9UYJYaAtE")
+                     .Build();
+
+                app = FirebaseApp.InitializeApp(this, options);
+                //database = FirebaseDatabase.GetInstance(app);
+            }
+            else
+            {
+                //database = FirebaseDatabase.GetInstance(app);
+            }
+
+
+        }
+
+
+        void ConnectControl()
+        {
             //views
             btnSignup = FindViewById<Button>(Resource.Id.signup_btn_register);
-            btnLogin = FindViewById<Button>(Resource.Id.signup_btn_login);
-            btnForgetPass = FindViewById<Button>(Resource.Id.signup_btn_forget_password); //Take out later
+            btnLogin = FindViewById<TextView>(Resource.Id.signup_btn_login);
+            btnForgetPass = FindViewById<TextView>(Resource.Id.signup_btn_forget_password); //Take out later
             input_email = FindViewById<EditText>(Resource.Id.signup_email);
             input_pwd = FindViewById<EditText>(Resource.Id.signup_password);
             activity_sign_up = FindViewById<RelativeLayout>(Resource.Id.activity_sign_up);
 
-            btnLogin.SetOnClickListener(this);
-            btnSignup.SetOnClickListener(this);
-            btnForgetPass.SetOnClickListener(this);
+            btnSignup.Click += btnSignup_Click;
+            btnLogin.Click += btnLogin_Click;
+            btnForgetPass.Click += btnForgetPass_Click;
         }
 
-        public void OnComplete(Task task)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (task.IsSuccessful == true)
-            {
-                Snackbar sn = Snackbar.Make(activity_sign_up, "Register Successfully ", Snackbar.LengthShort);
-                sn.Show();
-            }
-            else
-            {
-                Snackbar sn = Snackbar.Make(activity_sign_up, "Register Failed! ", Snackbar.LengthShort);
-                sn.Show();
-            }
+            StartActivity(typeof(MainActivity));
+            Finish();
         }
+
+        private void btnForgetPass_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(ForgetPassword));
+            Finish();
+        }
+
+        private void btnSignup_Click(object sender, EventArgs e)
+        {
+            string em = input_email.Text;
+            string p = input_pwd.Text;
+
+            if (!em.Contains("@"))
+            {
+                Snackbar.Make(activity_sign_up, "Please enter a valid email", Snackbar.LengthShort).Show();
+                return;
+            }
+            else if (p.Length < 8)
+            {
+                Snackbar.Make(activity_sign_up, "Please enter a password upto 8 characters", Snackbar.LengthShort).Show();
+                return;
+            }
+            RegisterUser(em, p);
+        }
+
+        void RegisterUser(string email, string pass)
+        {
+            tcl.Success += TaskCompletionListener_Success;
+            tcl.Failure += TaskCompletionListener_Failure;
+
+            auth.CreateUserWithEmailAndPassword(email, pass)
+                .AddOnSuccessListener(tcl)
+                .AddOnFailureListener(tcl);
+        }
+
+        private void TaskCompletionListener_Failure(object sender, EventArgs e)
+        {
+            Snackbar.Make(activity_sign_up, "User Registration failed", Snackbar.LengthShort).Show();
+        }
+
+        private void TaskCompletionListener_Success(object sender, EventArgs e)
+        {
+            Snackbar.Make(activity_sign_up, "User Registration Success", Snackbar.LengthShort).Show();
+            StartActivity(typeof(MainActivity));
+            Finish();
+            //Database work integration
+        }
+
+        /* public void OnComplete(Task task)
+         {
+             if (task.IsSuccessful == true)
+             {
+                 Snackbar sn = Snackbar.Make(activity_sign_up, "Register Successfully ", Snackbar.LengthShort);
+                 sn.Show();
+             }
+             else
+             {
+                 Snackbar sn = Snackbar.Make(activity_sign_up, "Register Failed! ", Snackbar.LengthShort);
+                 sn.Show();
+             }
+         }*/
     }
 }

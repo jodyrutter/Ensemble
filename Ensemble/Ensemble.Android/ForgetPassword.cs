@@ -50,7 +50,7 @@ namespace Ensemble.Droid
             SetContentView(Resource.Layout.ForgetPassword);
 
             //Init Firebase
-            auth = FirebaseAuth.GetInstance(MainActivity.Myapp);
+            //auth = FirebaseAuth.GetInstance(MainActivity.app);
 
             //Views
             input_email = FindViewById<EditText>(Resource.Id.forget_email);
