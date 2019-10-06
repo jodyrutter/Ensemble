@@ -24,7 +24,7 @@ namespace Ensemble
                 }).ToList();
         }
 
-        protected async Task AddUser(string e, string p)
+        public async Task AddUser(string e, string p)
         {
             await firebase
                 .Child("Users")

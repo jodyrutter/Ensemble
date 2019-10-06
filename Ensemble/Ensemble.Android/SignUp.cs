@@ -8,6 +8,7 @@ using Android.Content;
 using Android.Gms.Tasks;
 using Android.OS;
 using Firebase.Auth;
+using Firebase.Database;
 using static Android.Views.View;
 using Android.Runtime;
 using Android.Views;
@@ -15,6 +16,8 @@ using Android.Widget;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Firebase;
+using Java.Util;
+using Java.Lang;
 
 //using Firebase.Database;
 
@@ -28,8 +31,15 @@ namespace Ensemble.Droid
         EditText input_email, input_pwd;
         RelativeLayout activity_sign_up;
         FirebaseAuth auth;
-       // FirebaseDatabase db;
+        string email;
+        string pwd;
+        FirebaseDatabase db;
         TaskCompletionListener tcl = new TaskCompletionListener();
+        FirebaseHelper fh = new FirebaseHelper();
+
+        ISharedPreferences preferences = Application.Context.GetSharedPreferences("userinfo", FileCreationMode.Private);
+        ISharedPreferencesEditor editor;
+
         /*public void OnClick(View v)
         {
             if (v.Id == Resource.Id.signup_btn_login)
@@ -65,6 +75,7 @@ namespace Ensemble.Droid
             //Init Firebase
             //InitFirebase();
             auth = FirebaseAuth.GetInstance(MainActivity.app);
+            db = FirebaseDatabase.GetInstance(MainActivity.app);
             ConnectControl();
         }
 
@@ -139,20 +150,20 @@ namespace Ensemble.Droid
 
         private void btnSignup_Click(object sender, EventArgs e)
         {
-            string em = input_email.Text;
-            string p = input_pwd.Text;
+            email = input_email.Text;
+            pwd = input_pwd.Text;
 
-            if (!em.Contains("@"))
+            if (!email.Contains("@"))
             {
                 Snackbar.Make(activity_sign_up, "Please enter a valid email", Snackbar.LengthShort).Show();
                 return;
             }
-            else if (p.Length < 8)
+            else if (pwd.Length < 8)
             {
                 Snackbar.Make(activity_sign_up, "Please enter a password up to 8 characters", Snackbar.LengthShort).Show();
                 return;
             }
-            RegisterUser(em, p);
+            RegisterUser(email, pwd);
         }
 
         void RegisterUser(string email, string pass)
@@ -163,20 +174,56 @@ namespace Ensemble.Droid
             auth.CreateUserWithEmailAndPassword(email, pass)
                 .AddOnSuccessListener(tcl)
                 .AddOnFailureListener(tcl);
+
         }
 
         private void TaskCompletionListener_Failure(object sender, EventArgs e)
         {
             Snackbar.Make(activity_sign_up, "User Registration failed", Snackbar.LengthShort).Show();
         }
-
+        private async void AddtoRealtime()
+        {
+            await fh.AddUser(email, pwd);
+            
+            //await DisplayAlert("Success", "Person Added Successfully", "OK");
+        }
         private void TaskCompletionListener_Success(object sender, EventArgs e)
         {
             Snackbar.Make(activity_sign_up, "User Registration Success", Snackbar.LengthShort).Show();
+            AddtoRealtime();
+            
+
+            /*HashMap userMap = new HashMap();
+            userMap.Put("email", email);
+            userMap.Put("password", pwd);
+
+
+            DatabaseReference userRef = db.GetReference("users/" + auth.CurrentUser.Uid);
+            userRef.SetValue(userMap);
+            */
             StartActivity(typeof(MainActivity));
             Finish();
             //Database work integration
         }
+        /*
+        void SaveToSharedPreference()
+        {
+
+            editor = preferences.Edit();
+
+            editor.PutString("email", email);
+            editor.PutString("password", pwd);
+            
+
+            editor.Apply();
+
+        }
+
+        void RetriveData()
+        {
+            string email = preferences.GetString("email", "");
+        }
+        */
 
         /* public void OnComplete(Task task)
          {

@@ -15,7 +15,7 @@ using Android.Support.Design.Widget;
 using System.Collections.Generic;
 using Android.Content;
 using System.Numerics;
-//using Firebase.Database;
+using Firebase.Database;
 //using Firebase.FirebaseOptions;
 
 namespace Ensemble.Droid
@@ -28,6 +28,7 @@ namespace Ensemble.Droid
         TextView btnSignUp, btnForgetPwd;
         RelativeLayout activity_main;
         FirebaseAuth mAuth;
+        FirebaseDatabase db;
         public static FirebaseApp app;
         
 
@@ -121,7 +122,7 @@ namespace Ensemble.Droid
             
             app = FirebaseApp.InitializeApp(this);
 
-            var options = new FirebaseOptions.Builder()
+            var options = new Firebase.FirebaseOptions.Builder()
                     .SetApplicationId("ensemble-65b0c")
                     .SetApiKey("AIzaSyD25wXdD1WxUQGQD3zkXNkf3X9UYJYaAtE")
                     .SetDatabaseUrl("https://ensemble-65b0c.firebaseio.com")
@@ -144,13 +145,14 @@ namespace Ensemble.Droid
                     .Build();
                     */
                 app = FirebaseApp.InitializeApp(this, options);
+                db = FirebaseDatabase.GetInstance(app);
                 //mAuth = FirebaseAuth.Instance;
             }
 
             mAuth = FirebaseAuth.GetInstance(app);
+            db = FirebaseDatabase.GetInstance(app);
 
 
-            //mAuth = FirebaseAuth.GetInstance(app);
             Snackbar.Make(activity_main, "Firebase initialized", Snackbar.LengthShort).Show(); 
 
             

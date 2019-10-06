@@ -79,6 +79,9 @@
     <PackageReference Include="Xamarin.Firebase.Common">
       <Version>60.1142.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Database">
+      <Version>60.1142.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Messaging">
       <Version>60.1142.1</Version>
     </PackageReference>
