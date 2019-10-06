@@ -20,12 +20,14 @@ namespace Ensemble.Droid
     [Activity(Label = "ForgetPasswordcs", Theme = "@style/AppTheme")]
     public class ForgetPassword : AppCompatActivity, IOnClickListener, IOnCompleteListener 
     {
+        //initialize variables
         EditText input_email;
         Button btnResetPas;
         TextView btnBack;
         RelativeLayout activity_forget;
         FirebaseAuth auth;
 
+        //initialize button clicks
         public void OnClick(View v)
         {
             if (v.Id == Resource.Id.forget_btn_back)
@@ -38,12 +40,13 @@ namespace Ensemble.Droid
                 ResetPassword(input_email.Text);
             }
         }
-
+        //Reset password by sending link to email
+        //May be tricky if we keep putting password into Realtime database
         private void ResetPassword(string email)
         {
             auth.SendPasswordResetEmail(email).AddOnCompleteListener(this, this);
         }
-
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

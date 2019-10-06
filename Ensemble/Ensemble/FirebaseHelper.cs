@@ -11,8 +11,10 @@ namespace Ensemble
     
     public class FirebaseHelper
     {
+        //makes sure it links to Ensemble Firebase Realtime database
         FirebaseClient firebase = new FirebaseClient("https://ensemble-65b0c.firebaseio.com/");
 
+        //Get all users from Realtime Database
         public async Task<List<User>> GetAllUsers()
         {
             return (await firebase
@@ -23,14 +25,14 @@ namespace Ensemble
                     Pwd = item.Object.Pwd
                 }).ToList();
         }
-
+        //Add 1 user to Realtime Database
         public async Task AddUser(string e, string p)
         {
             await firebase
                 .Child("Users")
                 .PostAsync(new User() { Email = e, Pwd = p });
         }
-
+        //Get user from Realtime Database based on email
         public async Task<User> GetUser(string email)
         {
             var allUsers = await GetAllUsers();
@@ -39,7 +41,7 @@ namespace Ensemble
                 .OnceAsync<User>();
             return allUsers.Where(a => a.Email == email).FirstOrDefault();
         }
-
+        //update user information on Realtime Database
         public async Task UpdateUser(string e, string p)
         {
             var toUpdateUser = (await firebase
@@ -53,6 +55,7 @@ namespace Ensemble
                 .PutAsync(new User() { Email = e, Pwd = p });
         }
 
+        //Delete user from Realtime Database based on email
         public async Task DeleteUser(string e)
         {
             var toDelete = (await firebase

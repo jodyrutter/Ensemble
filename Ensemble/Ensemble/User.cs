@@ -7,6 +7,7 @@ namespace Ensemble
 {
     public class User
     {
+        //user information has to be finalized
         public string Email { get; set; }
         public string Pwd { get; set; }
         public string FName { get; set; }
@@ -16,6 +17,12 @@ namespace Ensemble
         public User()
         {
 
+        }
+
+        public User(string e, string p)
+        {
+            Email = e;
+            Pwd = p;
         }
 
         public User(string e, string p, string fname, string lname, int age)

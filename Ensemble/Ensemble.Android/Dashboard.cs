@@ -20,12 +20,16 @@ namespace Ensemble.Droid
     [Activity(Label = "DashBoard", Theme = "@style/AppTheme")]
     public class Dashboard : AppCompatActivity, IOnClickListener, IOnCompleteListener
     {
+
+        //Initialize variables
         TextView txtWelcome;
         EditText input_new_pwd;
         Button btnChangePwd, btnLogOut;
         RelativeLayout activity_dashboard;
         FirebaseAuth auth;
+        FirebaseHelper fh = new FirebaseHelper();
 
+        //Initialize button presses
         public void OnClick(View v)
         {
             if (v.Id == Resource.Id.dashboard_btn_change_pass)
@@ -34,6 +38,7 @@ namespace Ensemble.Droid
                 LogoutUser();
         }
 
+        //Logout user account
         private void LogoutUser()
         {
             auth.SignOut();
@@ -46,11 +51,21 @@ namespace Ensemble.Droid
 
         //edit so it edits the password on user database
         //might have to move to other page (edit page)
+        //Change password of user
         private void ChangePassword(string newpwd)
         {
             FirebaseUser user = auth.CurrentUser;
             user.UpdatePassword(newpwd)
                 .AddOnCompleteListener(this);
+
+            //Change password on Realtime database
+            UpdatetoRealtime(user.Email, newpwd);
+        }
+
+        //Update email and password into Realtime database
+        private async void UpdatetoRealtime(string email, string newpwd)
+        {
+            await fh.UpdateUser(email, newpwd);
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
