@@ -59,7 +59,7 @@ namespace Ensemble.Droid
             SetContentView(Resource.Layout.DashBoard);
            
             //Init Firebase
-            //auth = FirebaseAuth.GetInstance(MainActivity.app);
+            auth = FirebaseAuth.GetInstance(MainActivity.app);
 
             //View
             btnChangePwd = FindViewById<Button>(Resource.Id.dashboard_btn_change_pass);

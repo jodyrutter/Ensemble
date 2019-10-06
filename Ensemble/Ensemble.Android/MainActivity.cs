@@ -27,8 +27,9 @@ namespace Ensemble.Droid
         EditText input_email, input_pwd;
         TextView btnSignUp, btnForgetPwd;
         RelativeLayout activity_main;
+        FirebaseAuth mAuth;
+        public static FirebaseApp app;
         
-        FirebaseAuth auth;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -42,8 +43,10 @@ namespace Ensemble.Droid
             input_pwd = FindViewById<EditText>(Resource.Id.login_password);
             btnSignUp = FindViewById<TextView>(Resource.Id.login_btn_sign_up);
             btnForgetPwd = FindViewById<TextView>(Resource.Id.login_btn_forget_password);
-
+            
             activity_main = FindViewById<RelativeLayout>(Resource.Id.activity_main);
+
+            
 
             btnLogin.Click += LoginButton_Click;
             btnSignUp.Click += BtnSignUp_Click;
@@ -76,7 +79,7 @@ namespace Ensemble.Droid
         private void LoginButton_Click(object sender, EventArgs e)
         {
             string em, p;
-
+           
             em = input_email.Text;
             p = input_pwd.Text;
 
@@ -95,7 +98,7 @@ namespace Ensemble.Droid
             taskCompletionListener.Success += TaskCompletionListener_Success;
             taskCompletionListener.Failure += TaskCompletionListener_Failure;
 
-            auth.SignInWithEmailAndPassword(em, p)
+            mAuth.SignInWithEmailAndPassword(em, p)
                 .AddOnSuccessListener(taskCompletionListener)
                 .AddOnFailureListener(taskCompletionListener);
 
@@ -116,21 +119,40 @@ namespace Ensemble.Droid
         private void InitFirebaseAuth()
         {
             
-            var app = FirebaseApp.InitializeApp(this);
-            if (app == null)
-            {
-                var options = new FirebaseOptions.Builder()
+            app = FirebaseApp.InitializeApp(this);
+
+            var options = new FirebaseOptions.Builder()
                     .SetApplicationId("ensemble-65b0c")
                     .SetApiKey("AIzaSyD25wXdD1WxUQGQD3zkXNkf3X9UYJYaAtE")
+                    .SetDatabaseUrl("https://ensemble-65b0c.firebaseio.com")
+                    .SetStorageBucket("ensemble-65b0c.appspot.com")
                     .Build();
 
-                app = FirebaseApp.InitializeApp(this, options);
-                auth = FirebaseAuth.Instance;
-            }
-            else
+            /*var instance = FirebaseAuth.GetInstance(app);
+            if (instance == null)
             {
-                auth = FirebaseAuth.Instance;
+                instance = new FirebaseAuth(app);
+            }*/
+
+            if (app == null)
+            {
+                /*var options = new FirebaseOptions.Builder()
+                    .SetApplicationId("ensemble-65b0c")
+                    .SetApiKey("AIzaSyD25wXdD1WxUQGQD3zkXNkf3X9UYJYaAtE")
+                    .SetDatabaseUrl("https://ensemble-65b0c.firebaseio.com")
+                    .SetStorageBucket("ensemble-65b0c.appspot.com")
+                    .Build();
+                    */
+                app = FirebaseApp.InitializeApp(this, options);
+                //mAuth = FirebaseAuth.Instance;
             }
+
+            mAuth = FirebaseAuth.GetInstance(app);
+
+
+            //mAuth = FirebaseAuth.GetInstance(app);
+            Snackbar.Make(activity_main, "Firebase initialized", Snackbar.LengthShort).Show(); 
+
             
 
         }

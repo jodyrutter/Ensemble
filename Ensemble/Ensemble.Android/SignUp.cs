@@ -15,6 +15,7 @@ using Android.Widget;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Firebase;
+
 //using Firebase.Database;
 
 namespace Ensemble.Droid
@@ -62,32 +63,51 @@ namespace Ensemble.Droid
             SetContentView(Resource.Layout.SignUp);
 
             //Init Firebase
-            InitFirebase();
-            auth = FirebaseAuth.Instance;
+            //InitFirebase();
+            auth = FirebaseAuth.GetInstance(MainActivity.app);
             ConnectControl();
         }
 
-        void InitFirebase()
+       /* private void InitFirebase()
         {
+
             var app = FirebaseApp.InitializeApp(this);
+
+            var options = new FirebaseOptions.Builder()
+                    .SetApplicationId("ensemble-65b0c")
+                    .SetApiKey("AIzaSyD25wXdD1WxUQGQD3zkXNkf3X9UYJYaAtE")
+                    .SetDatabaseUrl("https://ensemble-65b0c.firebaseio.com")
+                    .SetStorageBucket("ensemble-65b0c.appspot.com")
+                    .Build();
+
+            var instance = FirebaseAuth.GetInstance(app);
+            if (instance == null)
+            {
+                instance = new FirebaseAuth(app);
+            }
 
             if (app == null)
             {
-                var options = new FirebaseOptions.Builder()
-                     .SetApplicationId("ensemble-65b0c")
-                     .SetApiKey("AIzaSyD25wXdD1WxUQGQD3zkXNkf3X9UYJYaAtE")
-                     .Build();
-
-                app = FirebaseApp.InitializeApp(this, options);
-                //database = FirebaseDatabase.GetInstance(app);
-            }
-            else
-            {
-                //database = FirebaseDatabase.GetInstance(app);
+                /*var options = new FirebaseOptions.Builder()
+                    .SetApplicationId("ensemble-65b0c")
+                    .SetApiKey("AIzaSyD25wXdD1WxUQGQD3zkXNkf3X9UYJYaAtE")
+                    .SetDatabaseUrl("https://ensemble-65b0c.firebaseio.com")
+                    .SetStorageBucket("ensemble-65b0c.appspot.com")
+                    .Build();
+                    
+                app = FirebaseApp.InitializeApp(this, options, "Ensemble");
+                //mAuth = FirebaseAuth.Instance;
             }
 
+            auth = instance;
 
-        }
+
+            //mAuth = FirebaseAuth.GetInstance(app);
+            //Snackbar.Make(activity_sign_up, "Firebase initialized", Snackbar.LengthShort).Show();
+
+
+
+        }*/
 
 
         void ConnectControl()
@@ -129,7 +149,7 @@ namespace Ensemble.Droid
             }
             else if (p.Length < 8)
             {
-                Snackbar.Make(activity_sign_up, "Please enter a password upto 8 characters", Snackbar.LengthShort).Show();
+                Snackbar.Make(activity_sign_up, "Please enter a password up to 8 characters", Snackbar.LengthShort).Show();
                 return;
             }
             RegisterUser(em, p);
