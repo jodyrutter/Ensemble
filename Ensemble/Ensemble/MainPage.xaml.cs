@@ -25,6 +25,8 @@ namespace Ensemble
             string user, pass; //Strings to contain the user's login credentials.
             user = username.Text;
             pass = password.Text;
+            //TODO if user is a real user
+            Navigation.PushModalAsync(new LandingPage());
         }
         void OnSignUp(object sender, EventArgs args)
         {
