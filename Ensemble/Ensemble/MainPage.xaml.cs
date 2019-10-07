@@ -26,7 +26,7 @@ namespace Ensemble
             user = username.Text;
             pass = password.Text;
             //TODO if user is a real user
-            Navigation.PushModalAsync(new LandingPage());
+            App.Current.Mainpage = new LandingPage();
         }
         void OnSignUp(object sender, EventArgs args)
         {
