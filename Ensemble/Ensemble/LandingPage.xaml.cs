@@ -14,9 +14,9 @@ namespace Ensemble
     {
         public LandingPage()
         {
-            this.Children.Add(new MainPage { Title = "Profile" });
+            this.Children.Add(new ContentPage { Title = "Profile" });
             this.Children.Add(new MatchingPage { Title = "Match" });
-            this.Children.Add(new MainPage { Title = "Compose" });
+            this.Children.Add(new ContentPage { Title = "Compose" });
 
             Xamarin.Forms.PlatformConfiguration.AndroidSpecific.TabbedPage.SetIsSwipePagingEnabled(this, false);
 
