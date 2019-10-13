@@ -1,93 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?>  
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
-    android:id="@+id/activity_sign_up"  
-    android:padding="16dp"  
-    android:layout_width="match_parent"  
-    android:layout_height="match_parent">  
-    <ImageView  
-        android:id="@+id/icon"  
-        android:layout_alignParentTop="true"  
-        android:layout_centerHorizontal="true"  
-        android:background="@drawable/ensemble"  
-        android:layout_width="100dp"  
-        android:layout_height="100dp" />  
-    <android.support.design.widget.TextInputLayout  
-        android:layout_below="@+id/icon"  
-        android:id="@+id/signup_input_email"  
-        android:layout_width="match_parent"  
-        android:layout_height="wrap_content">  
-        <EditText  
-            android:hint="Enter your Email"  
-            android:id="@+id/signup_email"  
-            android:inputType="textCapWords"  
-            android:maxLines="1"  
-            android:layout_width="match_parent"  
-            android:layout_height="wrap_content" />  
-    </android.support.design.widget.TextInputLayout>  
-    <android.support.design.widget.TextInputLayout  
-        android:layout_below="@+id/signup_input_email"  
-        android:id="@+id/signup_input_password"  
-        android:layout_width="match_parent"  
-        android:layout_height="wrap_content">  
-        <EditText  
-            android:hint="Enter your Password"  
-            android:id="@+id/signup_password"  
-            android:inputType="textPassword"  
-            android:maxLines="1"  
-            android:layout_width="match_parent"  
-            android:layout_height="wrap_content" />  
-    </android.support.design.widget.TextInputLayout>  
-    <Button  
-        android:layout_below="@+id/signup_input_password"  
-        android:id="@+id/signup_btn_register"  
-        android:text="Register"  
-        android:background="#263238"  
-        android:layout_width="match_parent"  
-        android:layout_height="wrap_content"  
-        style="@style/Widget.AppCompat.Button.Colored" />  
-    <TextView  
-        android:layout_below="@+id/signup_btn_register"  
-        android:id="@+id/signup_btn_forget_password"  
-        android:text="Forget Password"  
-        android:textStyle="bold"  
-        android:clickable="true"  
-        android:layout_centerHorizontal="true"  
-        android:layout_width="wrap_content"  
-        android:layout_height="wrap_content"  
-        android:textColor="@color/colorPrimaryDark"  
-        style="@style/Widget.AppCompat.Button.Borderless" />  
-    <LinearLayout  
-        android:layout_below="@+id/signup_btn_forget_password"  
-        android:id="@+id/signup_layout_or"  
-        android:gravity="center"  
-        android:orientation="horizontal"  
-        android:layout_width="match_parent"  
-        android:layout_height="wrap_content">  
-        <View  
-            android:layout_width="200dp"  
-            android:layout_height="1dp"  
-            android:background="#C4C8C9"  
-            android:layout_margin="5dp" />  
-        <TextView  
-            android:padding="5dp"  
-            android:text="OR"  
-            android:layout_width="wrap_content"  
-            android:layout_height="wrap_content" />  
-        <View  
-            android:layout_width="200dp"  
-            android:layout_height="1dp"  
-            android:background="#C4C8C9"  
-            android:layout_margin="5dp" />  
-    </LinearLayout>  
-    <TextView  
-        android:layout_below="@+id/signup_layout_or"  
-        android:id="@+id/signup_btn_login"  
-        android:text="Already Account ? Login Me"  
-        android:textStyle="bold"  
-        android:clickable="true"  
-        android:layout_centerHorizontal="true"  
-        android:layout_width="wrap_content"  
-        android:layout_height="wrap_content"  
-        style="@style/Widget.AppCompat.Button.Borderless"  
-        android:textColor="@color/colorPrimaryDark" />  
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_sign_up"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ensemble"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+    
+    <!-- Email -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/icon"
+        android:id="@+id/signup_input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:hint="Enter your Email"
+            android:id="@+id/signup_email"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    
+    <!-- Password-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/signup_input_email"
+        android:id="@+id/signup_input_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:hint="Enter your Password"
+            android:id="@+id/signup_password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    
+     <!-- First Name-->
+    <android.support.design.widget.TextInputLayout
+            android:layout_below="@id/signup_input_password"
+            android:id="@+id/signup_input_FName"
+            android:layout_width = "match_parent"
+            android:layout_height= "wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <EditText
+                android:hint="Enter First Name"
+                android:id = "@+id/signup_fname"
+                android:inputType= "textCapWords"
+                android:maxLines= "1"
+                android:layout_width= "match_parent"
+                android:layout_height = "wrap_content"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Last Name-->
+    <android.support.design.widget.TextInputLayout
+            android:layout_below="@id/signup_input_FName"
+            android:id="@+id/signup_input_LName"
+            android:layout_width = "match_parent"
+            android:layout_height= "wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <EditText
+                android:hint="Enter Last Name"
+                android:id = "@+id/signup_lname"
+                android:inputType= "textCapWords"
+                android:maxLines= "1"
+                android:layout_width= "match_parent"
+                android:layout_height = "wrap_content"/>
+    </android.support.design.widget.TextInputLayout>
+    <!-- Favorite Instrument -->
+
+        <TextView
+        android:layout_below= "@id/signup_input_LName"
+        android:layout_height= "fill_parent"
+        android:layout_width = "wrap_content"
+        android:text= "Enter Favorite Instrument"/>
+    <Spinner
+        android:id = "@+id/spinner"
+        android:layout_width= "fill_parent"
+        android:layout_height= "wrap_content">
+        android:prompt= "Enter Favorite Instrument"/> 
+        
+    <!-- Register button
+    <Button
+        android:layout_below="@id/spinner"
+        android:id="@+id/signup_btn_register"
+        android:text="Register"
+        android:background="#263238"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Colored" />
+
+    <TextView
+        android:layout_below="@+id/signup_btn_register"
+        android:id="@+id/signup_btn_login"
+        android:text="Already Account ? Login Me"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/colorPrimaryDark" />-->
 </RelativeLayout>  

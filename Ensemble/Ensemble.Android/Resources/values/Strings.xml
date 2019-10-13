@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string-array name="instrument_array">
+    <item>Piano</item>
+    <item>Electric Guitar</item>
+    <item>Acoustic Guitar</item>
+    <item>Bass Guitar</item>
+    <item>Violin</item>
+    <item>Viola</item>
+    <item>Banjo</item>
+    <item>Sitar</item>
+    <item>Marimba</item>
+    <item>Xylophone</item>
+    <item>Vibraphone</item>
+    <item>Glockenspiel</item>
+    <item>Bass Drum</item>
+    <item>Snare Drum</item>
+    <item>Drum Set</item>
+    <item>Tenor Drums</item>
+    <item>Timpani</item>
+    <item>Triangle</item>
+    <item>Clarinet</item>
+    <item>Baritone Saxophone</item>
+    <item>Tenor Saxophone</item>
+    <item>Flute</item>
+    <item>Trumpet</item>
+    <item>Oboe</item>
+    <item>Bass Clarinet</item>
+    <item>Alto Saxophone</item>
+    <item>Bassoon</item>
+    <item>Euphonium</item>
+    <item>Cello</item>
+    <item>Chimes</item>
+    <item>Vocal-Tenor</item>
+    <item>Vocal-Alto 1</item>
+    <item>Vocal-Alto 2</item>
+    <item>Vocal-Soprano 1</item>
+    <item>Vocal-Soprano 2</item>
+    <item>Vocal-Bass</item>
+    <item>Vocal-Baritone</item>
+    <item>Cymbals</item>
+  </string-array>
+</resources> 

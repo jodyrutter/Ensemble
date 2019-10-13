@@ -32,6 +32,13 @@ namespace Ensemble
                 .Child("Users")
                 .PostAsync(new User() { Email = e, Pwd = p });
         }
+        //add a user with credentials into Realtime Database
+        public async Task AddUser(string e, string p, string fname, string lname, int age, string ppic, string favInstrument, string ylink, string bio)
+        {
+            await firebase
+                .Child("Users")
+                .PostAsync(new User(e, p, fname, lname, age, ppic, favInstrument, bio, ylink));
+        }
         //Get user from Realtime Database based on email
         public async Task<User> GetUser(string email)
         {
@@ -41,6 +48,16 @@ namespace Ensemble
                 .OnceAsync<User>();
             return allUsers.Where(a => a.Email == email).FirstOrDefault();
         }
+        //Find user based on name
+        public async Task<User> GetUser(string Fname, string lName)
+        {
+            var allUsers = await GetAllUsers();
+            await firebase
+                .Child("Users")
+                .OnceAsync<User>();
+            return allUsers.Where(a => a.FName == Fname).Where(a => a.LName == lName).FirstOrDefault();
+        }
+        
         //update user information on Realtime Database
         public async Task UpdateUser(string e, string p)
         {

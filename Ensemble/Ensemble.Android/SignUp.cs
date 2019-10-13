@@ -27,8 +27,8 @@ namespace Ensemble.Droid
     public class SignUp : AppCompatActivity
     {
         //Initialize all variables
-        Button btnSignup;                                        //Sign up button
-        TextView btnLogin, btnForgetPass;                        //Login & Forget Password textview buttons
+       // Button btnSignup;                                        //Sign up button
+        //TextView btnLogin;                       //Login & Forget Password textview buttons
         EditText input_email, input_pwd;                         //Variables to input email and password  
         RelativeLayout activity_sign_up;                         //the xaml file variable for the class
         FirebaseAuth auth;                                       //Firebase auth variable
@@ -57,17 +57,28 @@ namespace Ensemble.Droid
         void ConnectControl()
         {
             //views
-            btnSignup = FindViewById<Button>(Resource.Id.signup_btn_register);
-            btnLogin = FindViewById<TextView>(Resource.Id.signup_btn_login);
-            btnForgetPass = FindViewById<TextView>(Resource.Id.signup_btn_forget_password); //Take out later maybe
+            //btnSignup = FindViewById<Button>(Resource.Id.signup_btn_register);
+            //btnLogin = FindViewById<TextView>(Resource.Id.signup_btn_login);
+            Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner);
             input_email = FindViewById<EditText>(Resource.Id.signup_email);
             input_pwd = FindViewById<EditText>(Resource.Id.signup_password);
             activity_sign_up = FindViewById<RelativeLayout>(Resource.Id.activity_sign_up);
 
             //Link button presses to functions
-            btnSignup.Click += btnSignup_Click;
-            btnLogin.Click += btnLogin_Click;
-            btnForgetPass.Click += btnForgetPass_Click;
+            //btnSignup.Click += btnSignup_Click;
+            //btnLogin.Click += btnLogin_Click;
+
+            spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
+            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.instrument_array, Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinner.Adapter = adapter;
+           
+        }
+
+        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner s = (Spinner)sender;
+            string toast = string.Format("The Fav Instrument is {0}", s.GetItemAtPosition(e.Position));
+            Toast.MakeText(this, toast, ToastLength.Long).Show();
         }
 
         //Go to Main Activity
@@ -77,12 +88,6 @@ namespace Ensemble.Droid
             Finish();
         }
 
-        //Go to Forget Password Activity
-        private void btnForgetPass_Click(object sender, EventArgs e)
-        {
-            StartActivity(typeof(ForgetPassword));
-            Finish();
-        }
 
         //If Signup button is pressed
         private void btnSignup_Click(object sender, EventArgs e)
