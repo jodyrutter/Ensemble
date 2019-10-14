@@ -17,6 +17,7 @@ namespace Ensemble
         public string gender { get; set; }
         public string age { get; set; }
         public string instr { get; set; }
+	protected Profile profile;
 
 	public ProfilePage()
         {
