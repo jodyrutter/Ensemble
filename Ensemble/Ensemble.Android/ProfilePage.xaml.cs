@@ -13,7 +13,6 @@ namespace Ensemble
 
     public partial class ProfilePage : ContentPage
     {
-        protected Profile profile = new Profile();
         public string name { get; set; }
         public string gender { get; set; }
         public string age { get; set; }
