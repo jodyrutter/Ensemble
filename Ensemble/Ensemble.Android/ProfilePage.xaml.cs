@@ -19,6 +19,11 @@ namespace Ensemble
         public string age { get; set; }
         public string instr { get; set; }
 
+	public ProfilePage()
+        {
+            profile = new Profile();
+            InitializeComponent();
+        }
 
         async void OnDisplayAlertQuestionButtonClicked(object sender, EventArgs e)
         {
