@@ -10,8 +10,9 @@ namespace Ensemble
         //user information has to be finalized
         public string Email { get; set; }
         public string Pwd { get; set; }   //may get rid of later
-        public string FName { get; set; }
-        public string LName { get; set; }
+        public string uname { get; set; }
+        //public string FName { get; set; }
+        //public string LName { get; set; }
         public int Age { get; set; }
         public string ProfilePic { get; set; }
         public string FavInstrument { get; set; }
@@ -36,12 +37,11 @@ namespace Ensemble
             ShortBio = shortbio;
             yLink = ylink;
         }
-        public User(string e, string p, string fname, string lname, int age, string profile, string instrument, string shortbio, string ylink)
+        public User(string e, string p, string fname, int age, string profile, string instrument, string shortbio, string ylink)
         {
             Email = e;
             Pwd = p;
-            FName = fname;
-            LName = lname;
+            uname = fname;
             Age = age;
             ProfilePic = profile;
             FavInstrument = instrument;

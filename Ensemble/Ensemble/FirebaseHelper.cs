@@ -33,14 +33,14 @@ namespace Ensemble
                 .PostAsync(new User() { Email = e, Pwd = p });
         }
         //add a user with credentials into Realtime Database
-        public async Task AddUser(string e, string p, string fname, string lname, int age, string ppic, string favInstrument, string ylink, string bio)
+        public async Task AddUser(string e, string p, string fname, int age, string ppic, string favInstrument, string ylink, string bio)
         {
             await firebase
                 .Child("Users")
-                .PostAsync(new User(e, p, fname, lname, age, ppic, favInstrument, bio, ylink));
+                .PostAsync(new User(e, p, fname, age, ppic, favInstrument, bio, ylink));
         }
         //Get user from Realtime Database based on email
-        public async Task<User> GetUser(string email)
+        public async Task<User> GetUserwithEmail(string email)
         {
             var allUsers = await GetAllUsers();
             await firebase
@@ -49,13 +49,13 @@ namespace Ensemble
             return allUsers.Where(a => a.Email == email).FirstOrDefault();
         }
         //Find user based on name
-        public async Task<User> GetUser(string Fname, string lName)
+        public async Task<User> GetUserwithUsername(string Fname)
         {
             var allUsers = await GetAllUsers();
             await firebase
                 .Child("Users")
                 .OnceAsync<User>();
-            return allUsers.Where(a => a.FName == Fname).Where(a => a.LName == lName).FirstOrDefault();
+            return allUsers.Where(a => a.uname == Fname).FirstOrDefault();
         }
         
         //update user information on Realtime Database
