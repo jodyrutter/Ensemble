@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_sign_up"
@@ -43,55 +43,41 @@
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
     
-     <!-- First Name-->
+
+    <!-- Username-->
     <android.support.design.widget.TextInputLayout
             android:layout_below="@id/signup_input_password"
-            android:id="@+id/signup_input_FName"
+            android:id="@+id/signup_input_username"
             android:layout_width = "match_parent"
             android:layout_height= "wrap_content"
             android:minWidth="25px"
             android:minHeight="25px">
             <EditText
-                android:hint="Enter First Name"
-                android:id = "@+id/signup_fname"
+                android:hint="Enter Username"
+                android:id = "@+id/signup_username"
                 android:inputType= "textCapWords"
                 android:maxLines= "1"
                 android:layout_width= "match_parent"
                 android:layout_height = "wrap_content"/>
     </android.support.design.widget.TextInputLayout>
-
-    <!-- Last Name-->
-    <android.support.design.widget.TextInputLayout
-            android:layout_below="@id/signup_input_FName"
-            android:id="@+id/signup_input_LName"
-            android:layout_width = "match_parent"
-            android:layout_height= "wrap_content"
-            android:minWidth="25px"
-            android:minHeight="25px">
-            <EditText
-                android:hint="Enter Last Name"
-                android:id = "@+id/signup_lname"
-                android:inputType= "textCapWords"
-                android:maxLines= "1"
-                android:layout_width= "match_parent"
-                android:layout_height = "wrap_content"/>
-    </android.support.design.widget.TextInputLayout>
-    <!-- Favorite Instrument -->
-
-        <TextView
-        android:layout_below= "@id/signup_input_LName"
-        android:layout_height= "fill_parent"
-        android:layout_width = "wrap_content"
+    
+    <!-- Favorite Instrument -->              
+    <TextView
+        android:layout_below= "@+id/signup_input_username"
+        android:layout_height= "40dp"
+        android:layout_width = "179.5dp"
         android:text= "Enter Favorite Instrument"/>
     <Spinner
         android:id = "@+id/spinner"
+        android:layout_below= "@id/signup_input_username"
         android:layout_width= "fill_parent"
-        android:layout_height= "wrap_content">
+        android:layout_height= "wrap_content"
+        android:layout_marginBottom="19.0dp" >
         android:prompt= "Enter Favorite Instrument"/> 
-        
-    <!-- Register button
+    
+     Register button
     <Button
-        android:layout_below="@id/spinner"
+        android:layout_below="@+id/spinner"
         android:id="@+id/signup_btn_register"
         android:text="Register"
         android:background="#263238"
@@ -102,12 +88,13 @@
     <TextView
         android:layout_below="@+id/signup_btn_register"
         android:id="@+id/signup_btn_login"
-        android:text="Already Account ? Login Me"
+        android:text="Already Account? Login"
         android:textStyle="bold"
         android:clickable="true"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:textColor="@color/colorPrimaryDark" />-->
-</RelativeLayout>  
+        android:textColor="@color/colorPrimaryDark" />
+    
+</RelativeLayout>
