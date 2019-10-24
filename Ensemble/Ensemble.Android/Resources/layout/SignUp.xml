@@ -46,7 +46,7 @@
 
     <!-- Username-->
     <android.support.design.widget.TextInputLayout
-            android:layout_below="@id/signup_input_password"
+            android:layout_below="@+id/signup_input_password"
             android:id="@+id/signup_input_username"
             android:layout_width = "match_parent"
             android:layout_height= "wrap_content"
@@ -61,23 +61,71 @@
                 android:layout_height = "wrap_content"/>
     </android.support.design.widget.TextInputLayout>
     
-    <!-- Favorite Instrument -->              
-    <TextView
-        android:layout_below= "@+id/signup_input_username"
-        android:layout_height= "40dp"
-        android:layout_width = "179.5dp"
-        android:text= "Enter Favorite Instrument"/>
-    <Spinner
-        android:id = "@+id/spinner"
-        android:layout_below= "@id/signup_input_username"
-        android:layout_width= "fill_parent"
-        android:layout_height= "wrap_content"
-        android:layout_marginBottom="19.0dp" >
-        android:prompt= "Enter Favorite Instrument"/> 
-    
+
+      <android.support.design.widget.TextInputLayout
+            android:layout_below="@+id/signup_input_username"
+            android:id="@+id/signup_input_favInstrument"
+            android:layout_width = "match_parent"
+            android:layout_height= "wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <EditText
+                android:hint="Enter Favorite Instrument"
+                android:id = "@+id/signup_favInstrument"
+                android:inputType= "textCapWords"
+                android:maxLines= "1"
+                android:layout_width= "match_parent"
+                android:layout_height = "wrap_content"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_below="@+id/signup_input_favInstrument"
+            android:id="@+id/signup_input_age"
+            android:layout_width = "match_parent"
+            android:layout_height= "wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <EditText
+                android:hint="Enter Age"
+                android:id = "@+id/signup_age"
+                android:inputType= "textCapWords"
+                android:maxLines= "1"
+                android:layout_width= "match_parent"
+                android:layout_height = "wrap_content"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+            android:layout_below="@id/signup_input_age"
+            android:id="@+id/signup_input_bio"
+            android:layout_width = "match_parent"
+            android:layout_height= "wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <EditText
+                android:hint="Enter Short Bio"
+                android:id = "@+id/signup_bio"
+                android:inputType= "textCapWords"
+                android:maxLines= "1"
+                android:layout_width= "match_parent"
+                android:layout_height = "wrap_content"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+            android:layout_below="@+id/signup_input_bio"
+            android:id="@+id/signup_input_ylink"
+            android:layout_width = "match_parent"
+            android:layout_height= "wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <EditText
+                android:hint="Submit Youtube link"
+                android:id = "@+id/signup_ylink"
+                android:inputType= "textCapWords"
+                android:maxLines= "1"
+                android:layout_width= "match_parent"
+                android:layout_height = "wrap_content"/>
+    </android.support.design.widget.TextInputLayout>
      Register button
     <Button
-        android:layout_below="@+id/spinner"
+        android:layout_below="@+id/signup_input_ylink"
         android:id="@+id/signup_btn_register"
         android:text="Register"
         android:background="#263238"

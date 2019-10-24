@@ -25,6 +25,7 @@ namespace Ensemble.Droid
         TextView txtWelcome;
         EditText input_new_pwd;
         Button btnChangePwd, btnLogOut;
+        Button btnDelete;
         RelativeLayout activity_dashboard;
         FirebaseAuth auth;
         FirebaseHelper fh = new FirebaseHelper();
@@ -36,11 +37,25 @@ namespace Ensemble.Droid
                 ChangePassword(input_new_pwd.Text);
             else if (v.Id == Resource.Id.dashboard_btn_logout)
                 LogoutUser();
+            else if (v.Id == Resource.Id.dashboard_btn_delete_pass)
+                DeleteUser();
         }
 
         //Logout user account
         private void LogoutUser()
         {
+            auth.SignOut();
+            if (auth.CurrentUser == null)
+            {
+                StartActivity(new Intent(this, typeof(MainActivity)));
+                Finish();
+            }
+        }
+
+        private void DeleteUser()
+        {
+            string em = auth.CurrentUser.Email;
+            fh.DeleteUser(em);
             auth.SignOut();
             if (auth.CurrentUser == null)
             {
@@ -78,12 +93,14 @@ namespace Ensemble.Droid
 
             //View
             btnChangePwd = FindViewById<Button>(Resource.Id.dashboard_btn_change_pass);
+            btnDelete = FindViewById<Button>(Resource.Id.dashboard_btn_delete_pass);
             txtWelcome = FindViewById<TextView>(Resource.Id.dashboard_welcome);
             btnLogOut = FindViewById<Button>(Resource.Id.dashboard_btn_logout);
             input_new_pwd = FindViewById<EditText>(Resource.Id.dashboard_newpassword);
             activity_dashboard = FindViewById<RelativeLayout>(Resource.Id.activity_dashboard);
 
             btnChangePwd.SetOnClickListener(this);
+            btnDelete.SetOnClickListener(this);
             btnLogOut.SetOnClickListener(this);
 
             //check session

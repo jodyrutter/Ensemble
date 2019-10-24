@@ -35,14 +35,23 @@
     </android.support.design.widget.TextInputLayout>  
     <Button  
         android:layout_below="@+id/dashboard_input_newpassword"  
-        android:id="@+id/dashboard_btn_change_pass"  
+        android:id="@+id/dashboard_btn_change_pass" 
+        android:layout_marginTop="20dp" 
         android:text="Change Password"  
         android:background="#263238"  
         android:layout_width="match_parent"  
         android:layout_height="wrap_content" />  
     <Button  
+        android:layout_below="@id/dashboard_btn_change_pass"  
+        android:id="@+id/dashboard_btn_delete_pass"  
+        android:layout_marginTop="20dp" 
+        android:text="Delete Password"  
+        android:background="#263238"  
+        android:layout_width="match_parent"  
+        android:layout_height="wrap_content" /> 
+    <Button  
         android:layout_marginTop="20dp"  
-        android:layout_below="@+id/dashboard_btn_change_pass"  
+        android:layout_below="@+id/dashboard_btn_delete_pass"  
         android:id="@+id/dashboard_btn_logout"  
         android:text="Logout"  
         android:background="#263238"  
