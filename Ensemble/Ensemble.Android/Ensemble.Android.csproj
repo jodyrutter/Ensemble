@@ -95,9 +95,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dashboard.cs" />
+    <Compile Include="Dashboard2.cs" />
     <Compile Include="FirebaseAuthenticator.cs" />
     <Compile Include="ForgetPassword.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="PageAdapt.cs" />
+    <Compile Include="Pager.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignUp.cs" />
@@ -170,6 +173,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\ForgetPassword.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Dashboard2.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

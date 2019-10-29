@@ -54,14 +54,15 @@ namespace Ensemble.Droid
 
         private void DeleteUser()
         {
-            string em = auth.CurrentUser.Email;
+            StartActivity(new Intent(this, typeof(Dashboard2)));
+            /*string em = auth.CurrentUser.Email;
             fh.DeleteUser(em);
             auth.SignOut();
             if (auth.CurrentUser == null)
             {
                 StartActivity(new Intent(this, typeof(MainActivity)));
                 Finish();
-            }
+            }*/
         }
 
         //edit so it edits the password on user database
