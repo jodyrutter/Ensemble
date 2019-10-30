@@ -13,63 +13,60 @@ namespace Ensemble
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LandingPage : ContentPage
     {
+        Grid grid = new Grid
+        {
+            VerticalOptions = LayoutOptions.FillAndExpand,
+            RowDefinitions =
+                {
+                    new RowDefinition { Height = new GridLength(60, GridUnitType.Absolute) },
+                    new RowDefinition { Height = GridLength.Auto },
+                },
+            ColumnDefinitions =
+                {
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                },
+            ColumnSpacing = 0,
+        };
+
         public LandingPage()
         {
-            InitializeComponent();
-            Grid grid = new Grid
-            {
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                RowDefinitions =
-                {
-                    new RowDefinition { Height = GridLength.Auto },
-                    new RowDefinition { Height = GridLength.Auto },
-                    new RowDefinition { Height = GridLength.Auto },
-                    new RowDefinition { Height = GridLength.Auto },
-                },
-                ColumnDefinitions =
-                {
-                    new ColumnDefinition { Width = GridLength.Star },
-                },
-            };
-            grid.Children.Add(new Label
-            {
-                Text = "",
-                FontSize = 48,
-                HorizontalOptions = LayoutOptions.Center,
-                HeightRequest = DeviceDisplay.MainDisplayInfo.Height / 16,
-            }, 0, 0);
             var profileButton = new Button
             {
                 Text = "Profile",
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                WidthRequest = DeviceDisplay.MainDisplayInfo.Width / 4,
-                HeightRequest = DeviceDisplay.MainDisplayInfo.Height / 32,
+                HeightRequest = 60,
+                WidthRequest = 300,
+                BackgroundColor = Color.White,
             };
             profileButton.Clicked += OnProfileButtonClicked;
-            grid.Children.Add(profileButton, 0, 1);
+            grid.Children.Add(profileButton, 0, 0);
 
             var matchButton = new Button
             {
                 Text = "Match",
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                WidthRequest = DeviceDisplay.MainDisplayInfo.Width / 4,
-                HeightRequest = DeviceDisplay.MainDisplayInfo.Height / 32,
+                HeightRequest = 60,
+                WidthRequest = 300,
+                BackgroundColor = Color.White,
             };
             matchButton.Clicked += OnMatchButtonClicked;
-            grid.Children.Add(matchButton, 0, 2);
+            grid.Children.Add(matchButton, 1, 0);
 
             var composeButton = new Button
             {
                 Text = "Compose",
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                WidthRequest = DeviceDisplay.MainDisplayInfo.Width / 4,
-                HeightRequest = DeviceDisplay.MainDisplayInfo.Height / 32,
+                HeightRequest = 60,
+                WidthRequest = 300,
+                BackgroundColor = Color.White,
             };
             composeButton.Clicked += OnComposeButtonClicked;
-            grid.Children.Add(composeButton, 0, 3);
+            grid.Children.Add(composeButton, 2, 0);
 
             //var tPage = new TabbedPage();
             //tPage.Children.Add(new ProfilePage { Title = "Profile" });
@@ -86,17 +83,33 @@ namespace Ensemble
 
         private void OnComposeButtonClicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new ContentPage());
+            //Navigation.PushModalAsync(new ContentPage());
+            if (grid.Children.Count > 3)
+                grid.Children.RemoveAt(3);
+            var cpage = new ContentView();
+            grid.Children.Add(cpage, 0, 1);
+            Grid.SetColumnSpan(cpage, 3);
         }
 
         private void OnMatchButtonClicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new MatchingPage());
+            //Navigation.PushModalAsync(new MatchingPage());
+            if(grid.Children.Count > 3)
+                grid.Children.RemoveAt(3);
+            var mpage = new MatchingPage();
+            grid.Children.Add(mpage, 0, 1);
+            Grid.SetColumnSpan(mpage, 3);
         }
 
         private void OnProfileButtonClicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new ProfilePage());
+            //Navigation.PushModalAsync(new ProfilePage());
+            if (grid.Children.Count > 3)
+                grid.Children.RemoveAt(3);
+            var ppage = new ProfilePage();
+            grid.Children.Add(ppage, 0, 1);
+            Grid.SetColumnSpan(ppage, 3);
+
         }
 
         /*  void OnProfile(object sender, EventArgs args)

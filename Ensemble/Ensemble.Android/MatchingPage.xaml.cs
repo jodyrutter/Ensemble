@@ -11,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace Ensemble
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MatchingPage : ContentPage
+    public partial class MatchingPage : ContentView
     {
         public ObservableCollection<person> people { get; set; }
         ListView lView = new ListView()

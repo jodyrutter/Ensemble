@@ -11,7 +11,7 @@ namespace Ensemble
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
 
-    public partial class ProfilePage : ContentPage
+    public partial class ProfilePage : ContentView
     {
         public string name { get; set; }
         public string gender { get; set; }
@@ -27,7 +27,7 @@ namespace Ensemble
 
         async void OnDisplayAlertQuestionButtonClicked(object sender, EventArgs e)
         {
-            bool response = await DisplayAlert("Save?", "Would you like to save your data?", "Yes", "No");
+            bool response = await App.Current.MainPage.DisplayAlert("Save?", "Would you like to save your data?", "Yes", "No");
             Console.WriteLine("Save data: " + response);
             profile.Age = age;
             profile.Gender = gender;

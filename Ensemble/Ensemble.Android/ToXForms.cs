@@ -30,11 +30,9 @@ namespace Ensemble.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.toxforms);
+            this.RequestWindowFeature(WindowFeatures.NoTitle);
 
-            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-            SupportActionBar.Title = "Ensemble";
+            SetContentView(Resource.Layout.toxforms);
 
             Forms.Init(this, null);
 
