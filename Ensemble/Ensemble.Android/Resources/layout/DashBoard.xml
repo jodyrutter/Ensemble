@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>  
+  
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
     android:id="@+id/activity_dashboard"  
     android:padding="16dp"  
@@ -50,11 +50,27 @@
         android:layout_width="match_parent"  
         android:layout_height="wrap_content" /> 
     <Button  
+        android:layout_below="@id/dashboard_btn_delete_pass"  
+        android:id="@+id/dashboard_btn_go_profile"  
+        android:layout_marginTop="20dp" 
+        android:text="Profile"  
+        android:background="#263238"  
+        android:layout_width="match_parent"  
+        android:layout_height="wrap_content" />
+    <Button  
+        android:layout_below="@id/dashboard_btn_go_profile"  
+        android:id="@+id/dashboard_btn_go_messages"  
+        android:layout_marginTop="20dp" 
+        android:text="Messages"  
+        android:background="#263238"  
+        android:layout_width="match_parent"  
+        android:layout_height="wrap_content" />
+    <Button  
         android:layout_marginTop="20dp"  
-        android:layout_below="@+id/dashboard_btn_delete_pass"  
+        android:layout_below="@+id/dashboard_btn_go_messages"  
         android:id="@+id/dashboard_btn_logout"  
         android:text="Logout"  
         android:background="#263238"  
         android:layout_width="match_parent"  
         android:layout_height="wrap_content" />  
-</RelativeLayout> 
+</RelativeLayout>
