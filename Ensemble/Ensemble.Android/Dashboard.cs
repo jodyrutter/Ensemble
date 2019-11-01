@@ -61,8 +61,16 @@ namespace Ensemble.Droid
         }
 
         private void Profile()
-        { 
+        {
             //To do later
+            //StartActivity(new Intent(this, typeof(Profile)));
+            Finish();
+        }
+
+        private void Message()
+        {
+            //StartActivity(new Intent(this, typeof(Messages)));
+            Finish();
         }
 
         private async System.Threading.Tasks.Task GetUser()

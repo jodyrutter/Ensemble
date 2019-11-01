@@ -94,18 +94,15 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatUsingFirebase.cs" />
     <Compile Include="Dashboard.cs" />
-    <Compile Include="Dashboard2.cs" />
-    <Compile Include="FirebaseAuthenticator.cs" />
     <Compile Include="ForgetPassword.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="PageAdapt.cs" />
-    <Compile Include="Pager.cs" />
+    <Compile Include="MessageContent.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignUp.cs" />
     <Compile Include="TaskCompletionListener.cs" />
-    <Compile Include="Profile.cs" />
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json">

@@ -7,20 +7,24 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Design.Widget;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-using Android.Support.V4.View;
-using Android.Support.V4.App;
+using Firebase.Auth;
+using Firebase.Database;
+//using Firebase.Xamarin.Database;
+
 namespace Ensemble.Droid
 {
-    public class Dashboard2 : FragmentActivity
+    [Activity(Label = "ChatUsingFirebase")]
+    public class ChatUsingFirebase : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Dashboard2);
-            ViewPager vp = FindViewById<ViewPager>(Resource.Id.viewpager);
-            PagerCatalog pageCards = new PagerCatalog();
+
+            // Create your application here
         }
     }
 }
