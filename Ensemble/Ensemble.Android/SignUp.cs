@@ -41,6 +41,8 @@ namespace Ensemble.Droid
         int num;                                                                  
         TaskCompletionListener tcl = new TaskCompletionListener(); 
         FirebaseHelper fh = new FirebaseHelper();                           //FirebaseHelper variable
+        List<string> ye = null;
+        List<string> nay = null;
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -247,7 +249,7 @@ namespace Ensemble.Droid
         {
             int.TryParse(input_age.Text, out num);
             
-            await fh.AddUser(input_email.Text, input_pwd.Text, input_username.Text, num, "Picture", input_favInstrument.Text, input_bio.Text, input_youlink.Text);
+            await fh.AddUser(input_email.Text, input_pwd.Text, input_username.Text, num, "Picture", input_favInstrument.Text, input_bio.Text, input_youlink.Text, ye, nay);
           
 
 

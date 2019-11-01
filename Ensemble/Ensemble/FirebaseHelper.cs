@@ -22,9 +22,49 @@ namespace Ensemble
                 .OnceAsync<User>()).Select(item => new User
                 {
                     Email = item.Object.Email,
-                    Pwd = item.Object.Pwd
+                    Pwd = item.Object.Pwd,
+                    uname = item.Object.uname,
+                    Age = item.Object.Age,
+                    ProfilePic = item.Object.ProfilePic,
+                    FavInstrument = item.Object.FavInstrument,
+                    yLink = item.Object.yLink,
+                    ShortBio = item.Object.ShortBio,
+                    Yes = item.Object.Yes,
+                    No = item.Object.No
                 }).ToList();
         }
+        //Get all users from Realtime Database except specific email
+        public async Task<List<User>> GetAllUsersExcept(string email)
+        {
+            var AllUsers = await GetAllUsers();
+            await firebase
+                .Child("Users")
+                .OnceAsync<User>();
+            return AllUsers.Where(a => a.Email != email).ToList();
+        }
+        //Get all users from Realtime Database except in user's no list
+        public async Task<List<User>> GetAllUsersExceptNoList(List<string> no)
+        {
+            var AllUsers = await GetAllUsers();
+
+            await firebase
+                .Child("Users")
+                .OnceAsync<User>();
+
+            for (int i = 0; i < AllUsers.Count; i++)
+            {
+                for (int j = 0; j < no.Count; j++)
+                {
+                    if (AllUsers[i].Email == no[j])
+                    {
+                        AllUsers.RemoveAt(i);
+                    }
+                }
+            }
+
+            return AllUsers;
+        }
+
         //Add 1 user to Realtime Database
         public async Task AddUser(string e, string p)
         {
@@ -33,11 +73,11 @@ namespace Ensemble
                 .PostAsync(new User() { Email = e, Pwd = p });
         }
         //add a user with credentials into Realtime Database
-        public async Task AddUser(string e, string p, string fname, int age, string ppic, string favInstrument, string ylink, string bio)
+        public async Task AddUser(string e, string p, string fname, int age, string ppic, string favInstrument, string ylink, string bio, List<string> yes, List<string> no)
         {
             await firebase
                 .Child("Users")
-                .PostAsync(new User(e, p, fname, age, ppic, favInstrument, bio, ylink));
+                .PostAsync(new User(e, p, fname, age, ppic, favInstrument, bio, ylink, yes, no));
         }
         //Get user from Realtime Database based on email
         public async Task<User> GetUserwithEmail(string email)

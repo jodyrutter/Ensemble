@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 
 namespace Ensemble
@@ -18,6 +16,8 @@ namespace Ensemble
         public string FavInstrument { get; set; }
         public string ShortBio { get; set; }
         public string yLink { get; set; }
+        public List<string> Yes { get; set; }
+        public List<string> No { get; set; }
 
 
         public User()
@@ -36,8 +36,10 @@ namespace Ensemble
             FavInstrument = instrument;
             ShortBio = shortbio;
             yLink = ylink;
+            Yes = null;
+            No = null;
         }
-        public User(string e, string p, string fname, int age, string profile, string instrument, string shortbio, string ylink)
+        public User(string e, string p, string fname, int age, string profile, string instrument, string shortbio, string ylink, List<string> yes, List<string> no)
         {
             Email = e;
             Pwd = p;
@@ -47,6 +49,8 @@ namespace Ensemble
             FavInstrument = instrument;
             ShortBio = shortbio;
             yLink = ylink;
+            Yes = yes;
+            No = no;
 
         }
 
