@@ -45,8 +45,8 @@ namespace Ensemble.Droid
                 DeleteUser();
             else if (v.Id == Resource.Id.dashboard_btn_go_profile)
                 Profile();
-            else if (v.Id == Resource.Id.dashboard_btn_go_messages) ;
-                //MessagesAsync();
+            else if (v.Id == Resource.Id.dashboard_btn_go_messages)
+                Messages();
         }
 
         //Logout user account
@@ -67,7 +67,7 @@ namespace Ensemble.Droid
             Finish();
         }
 
-        private void Message()
+        private void Messages()
         {
             //StartActivity(new Intent(this, typeof(Messages)));
             Finish();
