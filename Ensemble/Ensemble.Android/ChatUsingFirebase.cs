@@ -13,7 +13,7 @@ using Android.Views;
 using Android.Widget;
 using Firebase.Auth;
 using Firebase.Database;
-//using Firebase.Xamarin.Database;
+using Firebase.Xamarin.Database;
 
 namespace Ensemble.Droid
 {
