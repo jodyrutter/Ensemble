@@ -16,10 +16,11 @@
                     <ColumnDefinition Width="125"></ColumnDefinition>
                     <ColumnDefinition Width="125"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Text="Sign up" WidthRequest="150" HeightRequest="40" Grid.Column="0" Clicked="OnSignUp"/>
+                <Button Text="Sign up" WidthRequest="150" HeightRequest="40" Grid.Column="0" Clicked="SignUp"/>
                 <Button x:Name="signIn" Text="Sign in" WidthRequest="150" HeightRequest="40" Grid.Column="1" Clicked="OnSignIn"/>
+                <Button x:Name="Add" Text="Add" WidthRequest="150" HeightRequest="40" Clicked="Add_Clicked" Grid.Column="2"/>
             </Grid>
-            <Label Text="Forgot Password?" TextColor="DeepSkyBlue" HorizontalTextAlignment="Center" WidthRequest="300" HeightRequest="35" HorizontalOptions="Center" TextDecorations="Underline"></Label>
+            <Label Text="Forgot Password?" TextColor="DeepSkyBlue" HorizontalTextAlignment="Center" WidthRequest="300" HeightRequest="35" HorizontalOptions="Center" TextDecorations="Underline" IsEnabled="True"></Label>
         </StackLayout>
     </ScrollView>
 </ContentPage>

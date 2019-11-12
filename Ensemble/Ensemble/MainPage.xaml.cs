@@ -13,6 +13,9 @@ namespace Ensemble
     public partial class MainPage : ContentPage
     {
         //UI is accessable with their real names in this script. For example, the username is just username.
+
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+        List<User> users = new List<User>();
         public MainPage()
         {
             InitializeComponent();
@@ -20,17 +23,63 @@ namespace Ensemble
         /**
          * Runs when the sign in button is clicked.
          */
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            var allUsers = await firebaseHelper.GetAllUsers();
+            users = allUsers;
+        }
+
+
         void OnSignIn(object sender, EventArgs args)
         {
             string user, pass; //Strings to contain the user's login credentials.
             user = username.Text;
             pass = password.Text;
-            //TODO if user is a real user
-            App.Current.MainPage = new LandingPage();
+
+            if (ValidateEntries())
+            {
+
+            }
         }
-        void OnSignUp(object sender, EventArgs args)
+
+        private bool ValidateEntries()
         {
-            Navigation.PushModalAsync(new Page1());
+            bool isEmail = true;
+            bool isPwd = true;
+
+            if (username.Text == null)
+            {
+                isEmail = false;
+            }
+
+            else if (username.Text != null)
+            {
+                isEmail = true;
+            }
+
+            if (password.Text == null)
+            {
+                isPwd = false;
+            }
+
+            else if (password.Text != null)
+            {
+                isPwd = true;
+            }
+
+            return isEmail && isPwd;
+        }
+
+        private void SignUp(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Add_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }
