@@ -120,6 +120,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="WindowsAzure.Storage">
+      <Version>9.3.3</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
   </ItemGroup>
@@ -129,5 +132,8 @@
       <Project>{0070D4A7-1A05-4F98-8833-8D82B253CE8E}</Project>
       <Name>Ensemble</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
 </Project>

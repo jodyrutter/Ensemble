@@ -146,6 +146,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="WindowsAzure.Storage">
+      <Version>9.3.3</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
@@ -155,6 +158,9 @@
       <Project>{0070D4A7-1A05-4F98-8833-8D82B253CE8E}</Project>
       <Name>Ensemble</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
