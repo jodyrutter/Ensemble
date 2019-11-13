@@ -97,6 +97,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatUsingFirebase.cs" />
+    <Compile Include="ListViewAdapter.cs" />
     <Compile Include="ToXForms.cs" />
     <Compile Include="Dashboard.cs" />
     <Compile Include="FirebaseAuthenticator.cs" />

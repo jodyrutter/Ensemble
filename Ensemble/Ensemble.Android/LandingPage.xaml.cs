@@ -89,6 +89,7 @@ namespace Ensemble
             var cpage = new ContentView();
             grid.Children.Add(cpage, 0, 1);
             Grid.SetColumnSpan(cpage, 3);
+            
         }
 
         private void OnMatchButtonClicked(object sender, EventArgs e)

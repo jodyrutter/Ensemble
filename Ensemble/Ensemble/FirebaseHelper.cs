@@ -61,7 +61,6 @@ namespace Ensemble
                     }
                 }
             }
-
             return AllUsers;
         }
 
@@ -122,5 +121,33 @@ namespace Ensemble
 
             await firebase.Child("Users").Child(toDelete.Key).DeleteAsync();
         }
+
+        public async Task<List<MessageContent>> GetChatSingle(User sender, User recipient)
+        {
+            return (await firebase
+                .Child("Chats")
+                .Child(sender.Email)
+                .Child(recipient.Email)
+                .OnceAsync<MessageContent>()).Select(item => new MessageContent
+                {
+                    Email = item.Object.Email,
+                    Message = item.Object.Message,
+                    Time = item.Object.Time
+                }).ToList();
+        }
+
+        public async Task AddToChat(User sender, User recipient, string msg)
+        {
+            await firebase
+                .Child("Chats")
+                .Child(sender.Email)
+                .Child(recipient.Email)
+                .PostAsync(new MessageContent(sender.Email, msg)
+                {
+                    
+                });
+        }
+        
+        //need function to delete older chat msgs if 50 msgs or more (delete 49)
     }
 }

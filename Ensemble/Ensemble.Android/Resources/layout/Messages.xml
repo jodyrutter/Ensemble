@@ -15,7 +15,6 @@
         android:tint= "@android:color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        app:fabSize= "mini"
         />
 
     <EditText

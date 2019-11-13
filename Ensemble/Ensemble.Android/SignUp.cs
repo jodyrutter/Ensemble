@@ -250,7 +250,7 @@ namespace Ensemble.Droid
             int.TryParse(input_age.Text, out num);
 
             await fh.AddUser(input_email.Text, input_pwd.Text, input_username.Text, num, "Picture", input_favInstrument.Text, input_bio.Text, input_youlink.Text, ye, nay);
-
+            Snackbar.Make(activity_sign_up, "Account added to Realtime Database", Snackbar.LengthShort).Show();
 
 
         }
