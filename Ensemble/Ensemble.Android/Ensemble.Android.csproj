@@ -99,9 +99,10 @@
   <ItemGroup>
     <Compile Include="ChatUsingFirebase.cs" />
     <Compile Include="ListViewAdapter.cs" />
+    <Compile Include="RoomSelection.cs" />
+    <Compile Include="RoomViewAdapter.cs" />
     <Compile Include="ToXForms.cs" />
     <Compile Include="Dashboard.cs" />
-    <Compile Include="FirebaseAuthenticator.cs" />
     <Compile Include="ForgetPassword.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -218,6 +219,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\List_Item.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Rooms.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

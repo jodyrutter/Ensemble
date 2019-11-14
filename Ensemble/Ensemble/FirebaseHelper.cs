@@ -33,6 +33,8 @@ namespace Ensemble
                     No = item.Object.No
                 }).ToList();
         }
+
+
         //Get all users from Realtime Database except specific email
         public async Task<List<User>> GetAllUsersExcept(string email)
         {
@@ -72,7 +74,8 @@ namespace Ensemble
                 .PostAsync(new User() { Email = e, Pwd = p });
         }
         //add a user with credentials into Realtime Database
-        public async Task AddUser(string e, string p, string fname, int age, string ppic, string favInstrument, string ylink, string bio, List<string> yes, List<string> no)
+        //public User(string e, string p, string fname, int age, string profile, string instrument, string shortbio, string ylink, List<string> yes, List<string> no)
+        public async Task AddUser(string e, string p, string fname, int age, string ppic, string favInstrument, string bio, string ylink, List<string> yes, List<string> no)
         {
             await firebase
                 .Child("Users")

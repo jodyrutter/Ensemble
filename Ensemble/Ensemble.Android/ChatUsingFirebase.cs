@@ -28,6 +28,7 @@ namespace Ensemble.Droid
         private ListView lstChat;
         private EditText edtChat;
         private FloatingActionButton fab;
+        private RelativeLayout cuf;
 
         public int MyResultCode = 1;
 
@@ -40,27 +41,26 @@ namespace Ensemble.Droid
         {
             //User(string e, string p, string fname, int age, string profile, string instrument, string shortbio, string ylink, List<string> yes, List<string> no)
             var i = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
-            myuser = new User(i.Email, i.Pwd, i.uname, i.Age, i.ProfilePic, i.FavInstrument, i.ShortBio, i.yLink, i.Yes, i.No);
+            myuser = i;
         }
 
         public async void GetRecipientFromRealtime()
         {
             var i = await fh.GetUserwithEmail("Testbunny@test.com");
-            recipient = new User(i.Email, i.Pwd, i.uname, i.Age, i.ProfilePic, i.FavInstrument, i.ShortBio, i.yLink, i.Yes, i.No);
+            recipient = i;
         }
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);
+            
 
-            // Create your application here
+            SetTheme(Resource.Style.AppTheme);
+            base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Messages);
 
-
-            
-            FirebaseDatabase.Instance.GetReference("chats").AddValueEventListener(this);
             fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
             edtChat = FindViewById<EditText>(Resource.Id.input);
             lstChat = FindViewById<ListView>(Resource.Id.list_of_messages);
+            cuf = FindViewById<RelativeLayout>(Resource.Id.activity_messages);
 
             GetUserFromAuth();
             fab.Click += delegate

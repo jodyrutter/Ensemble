@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Firebase.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using Xamarin.Forms.Platform.Android;
+using Ensemble.Droid;
+using Android.Content;
 
 namespace Ensemble
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LandingPage : ContentPage
     {
+        FirebaseHelper fh = new FirebaseHelper();
+        User profile;
+        List<User> users = new List<User>();
         Grid grid = new Grid
         {
             VerticalOptions = LayoutOptions.FillAndExpand,
@@ -29,9 +35,11 @@ namespace Ensemble
                 },
             ColumnSpacing = 0,
         };
-
+        
         public LandingPage()
         {
+            
+            
             var profileButton = new Button
             {
                 Text = "Profile",
@@ -81,14 +89,34 @@ namespace Ensemble
             this.Content = grid;
         }
 
+        //Function used to get users from firebase Realtime database
+        /*
+        public async void GetUserList()
+        {
+            var items = await fh.GetAllUsers();
+
+            foreach (var item in items)
+            {
+                users.Add(item);
+            }    
+        }*/
+
+        [Obsolete]
         private void OnComposeButtonClicked(object sender, EventArgs e)
         {
-            //Navigation.PushModalAsync(new ContentPage());
-            if (grid.Children.Count > 3)
-                grid.Children.RemoveAt(3);
-            var cpage = new ContentView();
-            grid.Children.Add(cpage, 0, 1);
-            Grid.SetColumnSpan(cpage, 3);
+            //Uncomment if you want page to show out of format
+            //Navigation.PushModalAsync(new Page1(FirebaseAuth.Instance.CurrentUser.Email));
+
+            var intent = new Intent(Forms.Context, typeof(ChatUsingFirebase));
+            Forms.Context.StartActivity(intent);
+            
+            
+            //if (grid.Children.Count > 3)
+              //  grid.Children.RemoveAt(3);
+            //var cpage = new Message1(FirebaseAuth.Instance.CurrentUser.Email);
+            //grid.Children.Add(cpage, 0, 1);
+            //Grid.SetColumnSpan(cpage, 3);
+            
             
         }
 
