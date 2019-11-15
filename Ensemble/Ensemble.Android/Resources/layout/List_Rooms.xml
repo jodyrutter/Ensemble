@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:src="@drawable/ensemble"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageView1" />
+
+     <EditText
+        android:layout_toRightOf= "@+id/imageView1"
+        android:layout_alignParentBottom = "false"
+        android:layout_alignParentStart = "false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint= "Your message"
+        android:id= "@+id/input"
+    <TextView
+        android:text="Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imageView1"
+        android:id="@+id/user_name" />
+
+
+   
+</RelativeLayout>

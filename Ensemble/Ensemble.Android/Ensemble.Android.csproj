@@ -68,6 +68,9 @@
     <PackageReference Include="MavenNet">
       <Version>2.1.2</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <Version>23.4.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Auth">
       <Version>1.7.0</Version>
     </PackageReference>
@@ -224,6 +227,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Rooms.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\List_Rooms.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

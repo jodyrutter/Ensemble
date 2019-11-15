@@ -45,7 +45,7 @@ namespace Ensemble.Droid
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             LayoutInflater inflater = (LayoutInflater)room.BaseContext.GetSystemService(Context.LayoutInflaterService);
-            View itemView = inflater.Inflate(Resource.Layout.List_Item, null);
+            View itemView = inflater.Inflate(Resource.Layout.List_Rooms, null);
 
             //Controls added when completed
             /*

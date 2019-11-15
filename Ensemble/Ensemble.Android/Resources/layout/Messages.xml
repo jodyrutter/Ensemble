@@ -39,6 +39,4 @@
         android:id= "@+id/list_of_messages"
         android:layout_marginBottom= "16dp"
     />
- 
-
 </RelativeLayout>
