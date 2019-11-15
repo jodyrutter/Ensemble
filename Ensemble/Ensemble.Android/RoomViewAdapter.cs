@@ -14,21 +14,21 @@ namespace Ensemble.Droid
 {
     class RoomViewAdapter : BaseAdapter
     {
-        private RoomSelection room;
-        private List<User> users;
+        private RoomSelection roomSelect;
+        private List<Room> rooms;
 
         public override int Count
         {
             get
             {
-                return users.Count;
+                return rooms.Count;
             }
         }
 
-        public RoomViewAdapter(RoomSelection room, List<User> users)
+        public RoomViewAdapter(RoomSelection roomSelect, List<Room> rooms)
         {
-            this.room = room;
-            this.users = users;
+            this.roomSelect = roomSelect;
+            this.rooms = rooms;
         }
 
 
@@ -44,38 +44,23 @@ namespace Ensemble.Droid
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LayoutInflater inflater = (LayoutInflater)room.BaseContext.GetSystemService(Context.LayoutInflaterService);
+            LayoutInflater inflater = (LayoutInflater)roomSelect.BaseContext.GetSystemService(Context.LayoutInflaterService);
             View itemView = inflater.Inflate(Resource.Layout.List_Rooms, null);
 
             //Controls added when completed
-            /*
-             * 
-             * 
-             * 
-             * 
-             * 
-             * user_name.Text = users[position].Email;
-             * user_Profile.Text = users[position].ProfilePic;
-             * user_ShortBio.Text = users[position].ShortBio;
-             */
+            TextView room_name;
+            TextView lastMsg;
+            TextView lastMsgTime;
+
+            room_name = itemView.FindViewById<TextView>(Resource.Id.room_name);
+            lastMsg = itemView.FindViewById<TextView>(Resource.Id.last_msg);
+            lastMsgTime = itemView.FindViewById<TextView>(Resource.Id.last_msg_time);
+
+            room_name.Text = rooms[position].Name;
+            lastMsg.Text = rooms[position].lastMsg.Message;
+            lastMsgTime.Text = rooms[position].lastMsg.Time;
              
-            return itemView;
-            
-        }
-
-
-            //fill in your items
-            //holder.Title.Text = "new text here";
-
-            
-        }
-
-        //Fill in cound here, currently 0
-
+            return itemView;        
+        }       
     }
-
-    class RoomViewAdapterViewHolder : Java.Lang.Object
-    {
-        //Your adapter views to re-use
-        //public TextView Title { get; set; }
-    }
+}

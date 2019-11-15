@@ -125,30 +125,47 @@ namespace Ensemble
             await firebase.Child("Users").Child(toDelete.Key).DeleteAsync();
         }
 
-        public async Task<List<MessageContent>> GetChatSingle(User sender, User recipient)
+
+        public async Task CreateRoom(List<string> ppl, MessageContent lastMsg, string name, List<MessageContent> messages)
+        {
+            await firebase
+                .Child("Messaging")
+                .PostAsync(new Room(ppl, lastMsg, name, messages));
+        }
+
+        public async Task UpdateRoom(String name, List<String> ppl, List<MessageContent> chat, MessageContent lastMsg)
+        {
+            var toUpdateRoom = (await firebase
+                .Child("Messaging")
+                .OnceAsync<Room>())
+                .Where(a => a.Object.Name == name).FirstOrDefault();
+
+            await firebase
+                .Child("Messaging")
+                .Child(toUpdateRoom.Key)
+                .PutAsync(new Room(ppl, lastMsg, name, chat) { });
+        }
+
+        public async Task<List<Room>> GetAllRooms()
         {
             return (await firebase
-                .Child("Chats")
-                .Child(sender.Email)
-                .Child(recipient.Email)
-                .OnceAsync<MessageContent>()).Select(item => new MessageContent
+                .Child("Messaging")
+                .OnceAsync<Room>()).Select(item => new Room
                 {
-                    Email = item.Object.Email,
-                    Message = item.Object.Message,
-                    Time = item.Object.Time
+                    Name = item.Object.Name,
+                    participants = item.Object.participants,
+                    lastMsg = item.Object.lastMsg,
+                    ChatLog = item.Object.ChatLog
                 }).ToList();
         }
 
-        public async Task AddToChat(User sender, User recipient, string msg)
+        public async Task<Room> GetRoom(String name)
         {
+            var allRooms = await GetAllRooms();
             await firebase
-                .Child("Chats")
-                .Child(sender.Email)
-                .Child(recipient.Email)
-                .PostAsync(new MessageContent(sender.Email, msg)
-                {
-                    
-                });
+                .Child("Messaging")
+                .OnceAsync<Room>();
+            return allRooms.Where(a => a.Name == name).FirstOrDefault();
         }
         
         //need function to delete older chat msgs if 50 msgs or more (delete 49)

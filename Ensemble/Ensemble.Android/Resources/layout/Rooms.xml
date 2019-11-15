@@ -1,9 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text= "Create Chat"
+        android:clickable = "true"
+        android:id = "@+id/add_chat"
+        android:layout_marginLeft = "140dp"
+    />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop = "true"
+        android:layout_alignParentStart = "true"
+        android:divider = "@android:color/transparent"
+        android:dividerHeight= "16dp"
+        android:id= "@+id/list_of_rooms"
+        android:layout_marginBottom= "16dp"
+        android:layout_marginTop= "50dp"
+    />
 
 
-</LinearLayout>
+
+</RelativeLayout>

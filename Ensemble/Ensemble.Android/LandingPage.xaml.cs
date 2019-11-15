@@ -107,7 +107,7 @@ namespace Ensemble
             //Uncomment if you want page to show out of format
             //Navigation.PushModalAsync(new Page1(FirebaseAuth.Instance.CurrentUser.Email));
 
-            var intent = new Intent(Forms.Context, typeof(ChatUsingFirebase));
+            var intent = new Intent(Forms.Context, typeof(RoomSelection));
             Forms.Context.StartActivity(intent);
             
             

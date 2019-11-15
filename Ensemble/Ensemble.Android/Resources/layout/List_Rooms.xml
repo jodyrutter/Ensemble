@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,26 +6,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
-        android:src="@drawable/ensemble"
+        android:src="@drawable/EmptyUser"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_alignParentTop = "true"
+        android:layout_alignParentStart= "true"
         android:id="@+id/imageView1" />
 
-     <EditText
-        android:layout_toRightOf= "@+id/imageView1"
-        android:layout_alignParentBottom = "false"
-        android:layout_alignParentStart = "false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint= "Your message"
-        android:id= "@+id/input"
+   
     <TextView
-        android:text="Text"
+        android:text="User name"
+        android:textSize= "30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft = "10dp"
+        android:layout_alignParentStart= "false"
         android:layout_toRightOf="@id/imageView1"
-        android:id="@+id/user_name" />
+        android:textAppearance = "@style/TextAppearance.AppCompat.Body1"
+        android:id="@+id/room_name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Last Message"
+        android:layout_marginLeft = "10dp"
+        android:layout_toRightOf = "@id/imageView1"
+        android:layout_below = "@+id/room_name"
+        android:textAppearance= "@style/TextAppearance.AppCompat.Body1"
+        android:textSize = "16dp"
+        android:id = "@+id/last_msg"
+        android:layout_marginTop = "5dp"
+        
+    />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Date and time"
+        android:layout_toRightOf= "@+id/room_name"
+        android:layout_alignParentRight = "true"
+        android:id= "@+id/last_msg_time"
+        android:textAppearance= "@style/TextAppearance.AppCompat.Body1"
+        android:layout_marginLeft="40.0dp"
+        android:layout_marginRight="0.0dp"
+        android:textSize = "16dp"
+        android:layout_alignBaseline = "@+id/room_name"
+        
+    />
 
 
-   
-</RelativeLayout>
+    </RelativeLayout>
