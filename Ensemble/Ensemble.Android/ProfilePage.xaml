@@ -3,20 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:o="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
              mc:Ignorable="d"
              x:Class="Ensemble.ProfilePage">
 
-    <StackLayout Margin="20,35,20,25">
-        <Button Text="Save"
-                Clicked="OnDisplayAlertQuestionButtonClicked"
-                TextColor="Black"
-                BackgroundColor="Red"
+    <StackLayout>
+        <o:VideoPlayer o:Source="http://vjs.zencdn.net/v/oceans.mp4" />
+        <Button Text="Settings"
+                TextColor="White"
+                BackgroundColor="DarkSlateGray"
                 BorderColor="Transparent"
-                WidthRequest="50"
-                HeightRequest="35"
-                CornerRadius="150"
-                FontSize="Micro"
-                HorizontalOptions="Start"/>
+                WidthRequest="150"
+                HeightRequest="50"
+                Margin="20,50,20,20"
+                HorizontalOptions="Center"
+                CornerRadius="15"
+                FontSize="Micro"/>
+        <!--
         <Entry Placeholder="Enter your name here"
                FontSize="Micro"
                HeightRequest="35"
@@ -40,7 +43,7 @@
                HeightRequest="35"
                MaxLength="80"
                TextChanged="OnInstrumentTextChanged"
-               />
+               />-->
     </StackLayout>
 
 </ContentView>
