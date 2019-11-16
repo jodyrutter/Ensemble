@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:o="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
+             mc:Ignorable="d"
+             x:Class="Ensemble.ProfilePage">
+
+    <StackLayout>
+        <o:VideoPlayer o:Source="http://vjs.zencdn.net/v/oceans.mp4" />
+        <Button Text="Settings"
+                TextColor="White"
+                BackgroundColor="DarkSlateGray"
+                BorderColor="Transparent"
+                WidthRequest="150"
+                HeightRequest="50"
+                Margin="20,50,20,20"
+                HorizontalOptions="Center"
+                CornerRadius="15"
+                FontSize="Micro"/>
+        <!--
+        <Entry Placeholder="Enter your name here"
+               FontSize="Micro"
+               HeightRequest="35"
+               MaxLength="30"
+               TextChanged="OnNameTextChanged"
+               />
+        <Entry Placeholder="Enter your age here"
+               FontSize="Micro"
+               HeightRequest="35"
+               MaxLength="3"
+               TextChanged="OnAgeTextChanged"
+               />
+        <Entry Placeholder="Enter your gender here"
+               FontSize="Micro"
+               HeightRequest="35"
+               MaxLength="10"
+               TextChanged="OnGenderTextChanged"
+               />
+        <Entry Placeholder="Enter your instrument information here"
+               FontSize="Micro"
+               HeightRequest="35"
+               MaxLength="80"
+               TextChanged="OnInstrumentTextChanged"
+               />-->
+    </StackLayout>
+
+</ContentView>

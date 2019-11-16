@@ -19,7 +19,7 @@ using Ensemble;
 namespace Ensemble.Droid
 {
     [Activity(Label = "DashBoard", Theme = "@style/AppTheme")]
-    public class Dashboard : AppCompatActivity, IOnClickListener, IOnCompleteListener
+    public class ToForms : AppCompatActivity, IOnClickListener, IOnCompleteListener
     {
 
         //Initialize variables
