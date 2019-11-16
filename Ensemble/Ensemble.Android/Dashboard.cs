@@ -65,7 +65,7 @@ namespace Ensemble.Droid
         //Update email and password into Realtime database
         private async void UpdatetoRealtime(string email, string newpwd)
         {
-            await fh.UpdateUser(email, newpwd);
+           // await fh.UpdateUser(email, newpwd);
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

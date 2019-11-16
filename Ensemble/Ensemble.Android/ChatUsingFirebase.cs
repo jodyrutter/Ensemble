@@ -75,7 +75,7 @@ namespace Ensemble.Droid
 
         private async void PostMessage()
         {
-            await fh.AddToChat(myuser, recipient, edtChat.Text);
+            //await fh.AddToChat(myuser, recipient, edtChat.Text);
             edtChat.Text = "";
             DisplayChatMessages();
         }
@@ -94,9 +94,9 @@ namespace Ensemble.Droid
         {
             lstmessages.Clear();
 
-            var items = await fh.GetChatSingle(myuser, recipient);
-            foreach (var item in items)
-                lstmessages.Add(item);
+           // var items = await fh.GetChatSingle(myuser, recipient);
+            //foreach (var item in items)
+              //  lstmessages.Add(item);
             ListViewAdapter adapter = new ListViewAdapter(this, lstmessages);
             lstChat.Adapter = adapter;
         }

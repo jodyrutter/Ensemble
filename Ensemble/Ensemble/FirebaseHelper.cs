@@ -101,17 +101,17 @@ namespace Ensemble
         }
 
         //update user information on Realtime Database
-        public async Task UpdateUser(string e, string p)
+        public async Task UpdateUser(User u)
         {
             var toUpdateUser = (await firebase
                 .Child("Users")
                 .OnceAsync<User>
-                ()).Where(a => a.Object.Email == e).FirstOrDefault();
+                ()).Where(a => (a.Object.Email == u.Email && a.Object.uname == u.uname)).FirstOrDefault();
 
             await firebase
                 .Child("Users")
                 .Child(toUpdateUser.Key)
-                .PutAsync(new User() { Email = e, Pwd = p });
+                .PutAsync(new User(u.Email, u.Pwd, u.uname, u.Age, u.ProfilePic, u.FavInstrument, u.ShortBio, u.yLink, u.Yes, u.No) { });
         }
 
         //Delete user from Realtime Database based on email
@@ -144,6 +144,19 @@ namespace Ensemble
                 .Child("Messaging")
                 .Child(toUpdateRoom.Key)
                 .PutAsync(new Room(ppl, lastMsg, name, chat) { });
+        }
+
+        public async Task UpdateRoom(Room room)
+        {
+            var toUpdateRoom = (await firebase
+                .Child("Messaging")
+                .OnceAsync<Room>())
+                .Where(a => a.Object == room).FirstOrDefault();
+
+            await firebase
+                .Child("Messaging")
+                .Child(toUpdateRoom.Key)
+                .PutAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog) { });
         }
 
         public async Task<List<Room>> GetAllRooms()
