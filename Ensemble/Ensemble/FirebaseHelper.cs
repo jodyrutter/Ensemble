@@ -97,7 +97,6 @@ namespace Ensemble
                 .OnceAsync<User>();
             return allUsers.Where(a => a.uname == Fname).FirstOrDefault();
         }
-
         //update user information on Realtime Database
         public async Task UpdateUser(string e, string p)
         {
