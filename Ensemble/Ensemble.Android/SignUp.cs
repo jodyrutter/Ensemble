@@ -38,8 +38,8 @@ namespace Ensemble.Droid
         EditText input_youlink;
         RelativeLayout activity_sign_up;                         //the xaml file variable for the class
         FirebaseAuth auth;                                       //Firebase auth variable
-        int num;
-        TaskCompletionListener tcl = new TaskCompletionListener();
+        int num;                                                                  
+        TaskCompletionListener tcl = new TaskCompletionListener(); 
         FirebaseHelper fh = new FirebaseHelper();                           //FirebaseHelper variable
         List<string> ye = null;
         List<string> nay = null;
@@ -47,7 +47,7 @@ namespace Ensemble.Droid
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);
+            base.OnCreate(savedInstanceState); 
 
             // Create your application here
             SetContentView(Resource.Layout.SignUp);
@@ -58,7 +58,7 @@ namespace Ensemble.Droid
             ConnectControl();
         }
 
-
+       
 
         //Link initialized variables with controls on Sign Up xml
         void ConnectControl()
@@ -83,9 +83,9 @@ namespace Ensemble.Droid
             //spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
             //var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.instrument_array, Android.Resource.Layout.SimpleSpinnerDropDownItem);
             //spinner.Adapter = adapter;
-
+           
         }
-
+       
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner s = (Spinner)sender;
@@ -112,10 +112,10 @@ namespace Ensemble.Droid
             {
                 Snackbar.Make(activity_sign_up, "Please try again", Snackbar.LengthShort).Show();
             }
-
-
+            
+            
         }
-
+        
         private bool ValidateCredentials()
         {
             bool emailVal;
@@ -126,7 +126,7 @@ namespace Ensemble.Droid
             bool FavVal;
             bool BioVal;
             bool YVal;
-
+            
 
             //validation for email
             if (!input_email.Text.Contains("@"))
@@ -145,7 +145,7 @@ namespace Ensemble.Droid
             }
             else
                 passVal = true;
-
+            
             //validation for username
             if (input_username.Text.Length == 0)
             {
@@ -161,7 +161,7 @@ namespace Ensemble.Droid
                     Snackbar.Make(activity_sign_up, "Username already taken. Try another username", Snackbar.LengthShort).Show();
                 }
                 else*/
-                unameVal = true;
+                    unameVal = true;
             }
 
             //Validation for age
@@ -248,9 +248,9 @@ namespace Ensemble.Droid
         private async void AddtoRealtime()
         {
             int.TryParse(input_age.Text, out num);
-
+            
             await fh.AddUser(input_email.Text, input_pwd.Text, input_username.Text, num, "Picture", input_favInstrument.Text, input_bio.Text, input_youlink.Text, ye, nay);
-
+          
 
 
         }
@@ -259,10 +259,10 @@ namespace Ensemble.Droid
         {
             Snackbar.Make(activity_sign_up, "User Registration Success", Snackbar.LengthShort).Show();
             AddtoRealtime();
-
+            
             StartActivity(typeof(MainActivity));
             Finish();
-
+            
         }
     }
 }
