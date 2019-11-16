@@ -107,7 +107,7 @@ namespace Ensemble.Droid
         private void TaskCompletionListener_Success(object sender, EventArgs e)
         {
             Snackbar.Make(activity_main, "Login Success", Snackbar.LengthShort).Show();
-            StartActivity(typeof(ToXForms));
+            StartActivity(typeof(Dashboard));
         }
         
         //Initialize Firebase Auth to application
