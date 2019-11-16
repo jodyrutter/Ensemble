@@ -13,31 +13,18 @@ using Android.Views;
 using Android.Widget;
 using Firebase.Auth;
 using Firebase.Database;
-//using Firebase.Database.Query;
-using Firebase.Xamarin.Database;
+//using Firebase.Xamarin.Database;
 
 namespace Ensemble.Droid
 {
     [Activity(Label = "ChatUsingFirebase")]
-    public class ChatUsingFirebase : AppCompatActivity, IValueEventListener
+    public class ChatUsingFirebase : Activity
     {
-        private FirebaseClient fbc;
-        private List<MessageContent> lstMessage = new List<MessageContent>();
-
-        private ListView lstChat;
-        private EditText editChat;
-        private FloatingActionButton fab;
-
-        public int MyResultCode = 1;
-        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
-        {
-            base.OnActivityResult(requestCode, resultCode, data);
-        }     
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
+            // Create your application here
             SetContentView(Resource.Layout.MessagesChat);
             fbc = new FirebaseClient("https://ensemble-65b0c.firebaseio.com/");
             FirebaseDatabase.Instance.GetReference("MESSAGES").AddValueEventListener(this);
