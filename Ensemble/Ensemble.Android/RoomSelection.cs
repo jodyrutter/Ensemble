@@ -18,13 +18,14 @@ namespace Ensemble.Droid
     {
         private Button add_chat;
         private ListView rooms;
-        private List<Room> roomList;
+        List<Room> roomList = new List<Room>();
         private FirebaseHelper fh = new FirebaseHelper();
         private RelativeLayout relative;
         private RoomViewAdapter adapter;
-
+        private Room r = new Room();
         public async void GetRoomsList()
         {
+            
             var items = await fh.GetAllRooms();
 
             foreach (var item in items)
@@ -41,22 +42,34 @@ namespace Ensemble.Droid
             add_chat = FindViewById<Button>(Resource.Id.add_chat);
             rooms = FindViewById<ListView>(Resource.Id.list_of_rooms);
             relative = FindViewById<RelativeLayout>(Resource.Id.activity_rooms);
+            roomList.Add(r);
+            GetRoomsList();
             DisplayRooms();
-            
-
-            
 
 
+            add_chat.Click += Add_chat_Click;
+
+
+        }
+
+        private void Add_chat_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void DisplayRooms()
         {
             GetRoomsList();
-            adapter = new RoomViewAdapter(this, roomList);
 
-            if (adapter.Count == 0)
+            if (roomList.Count == 0)
             {
                 Snackbar.Make(relative, "There are no conversations. Time to chat with some musicians", Snackbar.LengthShort).Show();
+
+            }
+            else
+            {
+                adapter = new RoomViewAdapter(this, roomList);
+                rooms.Adapter = adapter;
             }
 
            

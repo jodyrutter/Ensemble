@@ -10,6 +10,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms.Platform.Android;
 using Ensemble.Droid;
 using Android.Content;
+using Android.Support.Design.Widget;
 
 namespace Ensemble
 {
@@ -35,10 +36,16 @@ namespace Ensemble
                 },
             ColumnSpacing = 0,
         };
-        
+
+        /*private async void GetUsers()
+        {
+            profile = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
+            //profile = x;
+        }*/
+
         public LandingPage()
         {
-            
+
             
             var profileButton = new Button
             {

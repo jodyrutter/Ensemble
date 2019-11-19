@@ -57,8 +57,8 @@ namespace Ensemble.Droid
             lastMsgTime = itemView.FindViewById<TextView>(Resource.Id.last_msg_time);
 
             room_name.Text = rooms[position].Name;
-            lastMsg.Text = rooms[position].lastMsg.Message;
-            lastMsgTime.Text = rooms[position].lastMsg.Time;
+            //lastMsg.Text = rooms[position].lastMsg.Message;
+            //lastMsgTime.Text = rooms[position].lastMsg.Time;
              
             return itemView;        
         }       
