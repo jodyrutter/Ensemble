@@ -22,5 +22,13 @@ namespace Ensemble
             Name = name;
             this.ChatLog = ChatLog;
         }
+
+        public Room(List<string> ppl, string name)
+        {
+            participants = ppl;
+            lastMsg = null;
+            Name = name;
+            ChatLog = null;
+        }
     }
 }

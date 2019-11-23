@@ -18,6 +18,7 @@ using Android.Support.V7.App;
 using Firebase;
 using Java.Util;
 using Java.Lang;
+using Ensemble.Droid.Helpers;
 
 //using Firebase.Database;
 
@@ -245,11 +246,27 @@ namespace Ensemble.Droid
             Snackbar.Make(activity_sign_up, "User Registration failed", Snackbar.LengthShort).Show();
         }
         //Add user to Realtime database
-        private async void AddtoRealtime()
+        private void AddtoRealtime()
         {
             int.TryParse(input_age.Text, out num);
 
-            await fh.AddUser(input_email.Text, input_pwd.Text, input_username.Text, num, "Picture", input_favInstrument.Text, input_bio.Text, input_youlink.Text, ye, nay);
+            //await fh.AddUser(input_email.Text, input_pwd.Text, input_username.Text, num, "Picture", input_favInstrument.Text, input_bio.Text, input_youlink.Text, ye, nay);
+
+            HashMap UserInfo = new HashMap();
+            UserInfo.Put("Age", num);
+            UserInfo.Put("Email", input_email.Text);
+            UserInfo.Put("FavInstrument", input_favInstrument.Text);
+            UserInfo.Put("ProfilePic", "Picture");
+            UserInfo.Put("Pwd", input_pwd.Text);
+            UserInfo.Put("ShortBio", input_bio.Text);
+            UserInfo.Put("uname", input_username.Text);
+            UserInfo.Put("yLink", input_youlink.Text);
+            //UserInfo.Put("Yes", num);
+            //UserInfo.Put("No", num);
+
+            DatabaseReference dref = AppDataHelper.GetDatabase().GetReference("Users").Push();
+            dref.SetValue(UserInfo);
+
             Snackbar.Make(activity_sign_up, "Account added to Realtime Database", Snackbar.LengthShort).Show();
 
 

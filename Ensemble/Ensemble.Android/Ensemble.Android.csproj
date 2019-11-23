@@ -65,8 +65,14 @@
     <PackageReference Include="Google.Apis">
       <Version>1.41.1</Version>
     </PackageReference>
+    <PackageReference Include="MaterialSpinner-Xamarin">
+      <Version>1.1.1</Version>
+    </PackageReference>
     <PackageReference Include="MavenNet">
       <Version>2.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.Fragment">
+      <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">
       <Version>28.0.0.3</Version>
@@ -78,6 +84,12 @@
       <Version>60.1142.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Common">
+      <Version>60.1142.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Config">
+      <Version>60.1142.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Core">
       <Version>60.1142.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Database">
@@ -100,8 +112,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddRoom.cs" />
     <Compile Include="ChatUsingFirebase.cs" />
     <Compile Include="CreateRoom.cs" />
+    <Compile Include="EventListener\UserListener.cs" />
+    <Compile Include="Helpers\AppDataHelper.cs" />
     <Compile Include="ListViewAdapter.cs" />
     <Compile Include="RoomSelection.cs" />
     <Compile Include="RoomViewAdapter.cs" />
@@ -241,6 +256,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\CreateRoom.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\list_usernames.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\CreateRoom2.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

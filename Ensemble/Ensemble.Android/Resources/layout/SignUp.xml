@@ -22,7 +22,7 @@
         <EditText
             android:hint="Enter your Email"
             android:id="@+id/signup_email"
-            android:inputType="textCapWords"
+            android:inputType="textEmailAddress"
             android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

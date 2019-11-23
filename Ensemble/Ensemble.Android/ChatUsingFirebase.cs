@@ -73,7 +73,7 @@ namespace Ensemble.Droid
 
         }
 
-        private async void PostMessage()
+        private  void PostMessage()
         {
             //await fh.AddToChat(myuser, recipient, edtChat.Text);
             edtChat.Text = "";

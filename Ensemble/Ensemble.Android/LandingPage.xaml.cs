@@ -37,16 +37,30 @@ namespace Ensemble
             ColumnSpacing = 0,
         };
 
-        /*private async void GetUsers()
+        private async void GetUsers()
         {
-            profile = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
+            var x = await fh.GetAllUsers();
+            foreach (var v in x)
+                users.Add(v);
             //profile = x;
-        }*/
+            for (int i = 0; i < users.Count; i++)
+            {
+                if (users[i].Email == FirebaseAuth.Instance.CurrentUser.Email)
+                    profile = users[i];
+            }
+        }
+
+        private async void GetUser()
+        {
+            var x = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
+            profile = x;
+                
+        }
 
         public LandingPage()
         {
-
-            
+            //GetUser();
+            //GetUsers();
             var profileButton = new Button
             {
                 Text = "Profile",

@@ -1,0 +1,68 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:minWidth = "300dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id = "@+id/Createlayout">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text = "Create Room"
+        android:layout_gravity = "center"
+        android:gravity = "center"
+        android:textSize = "18sp"
+        android:textStyle = "bold"
+    />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background = "#e2e2e2"
+    />
+
+    <LinearLayout
+        android:padding = "16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation= "vertical">
+        
+        <android.support.design.widget.TextInputLayout
+            android:layout_height = "wrap_content"
+            android:layout_width = "match_parent"
+            android:id= "@+id/roomnameText">
+            <EditText
+                android:hint = "Room name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize = "18sp"
+                android:imeOptions = "actionNext"
+            />
+        </android.support.design.widget.TextInputLayout>
+        
+       
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/statusSpinner"
+            app:ms_enableFloatingLabel = "true"
+            app:ms_floatingLabelText = "Select Participant of Room"
+            app:ms_hint = "Select Status"
+            app:ms_alignLabels = "true"
+        />
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity = "center_horizontal"
+            android:text = "Submit"
+            android:background = "?attr/colorPrimary"
+            android:textColor = "#fff"
+            android:layout_marginTop = "20dp"
+            android:id = "@+id/submitButton"
+        />
+    </LinearLayout>
+
+</LinearLayout>

@@ -7,75 +7,89 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Design.Widget;
 using Android.Support.V7.App;
+using Android.Support.V7.RecyclerView.Extensions;
 using Android.Views;
 using Android.Widget;
+using Ensemble.Droid.EventListener;
+using Firebase.Auth;
 using Firebase.Database;
 using Java.Util;
 
 namespace Ensemble.Droid
 {
     [Activity(Label = "CreateRoom")]
-    public class CreateRoom : AppCompatActivity
+    public class CreateRoom : Activity
     {
         FirebaseHelper fh = new FirebaseHelper();
-        Spinner sp;
+        ListView lv;
+        List<string> users = new List<string>();
+        List<User> userList = new List<User>();
+        List<string> part = new List<string>();
+        User user;
+        UserListener UserListener;
+        RelativeLayout rel;
+
         //DatabaseReference reference;
         //FirebaseDatabase db;
-        
+
+
+
+        public void RetrieveData()
+        {
+            UserListener = new UserListener();
+            UserListener.Create();
+            UserListener.UsersRetrieved += UserListener_UsersRetrieved;
+        }
+
+        private void UserListener_UsersRetrieved(object sender, UserListener.UserDataEventArgs e)
+        {
+            userList = e.users;
+            getUserListName();
+            
+        }
+        public void getUserListName()
+        {
+            foreach (User i in userList)
+                users.Add(i.Email);
+        }
+
+        private async void GetAllUsers()
+        {
+            FirebaseHelper vb = new FirebaseHelper();
+            var c = await vb.GetAllUsers();
+            foreach (var z in c)
+            {
+                users.Add(z.Email);
+            }
+
+            var item = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
+            user = item;
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.CreateRoom);
-
-            sp = FindViewById<Spinner>(Resource.Id.spinner1);
-
-            var reference = FirebaseDatabase.Instance.Reference;
-            var db = FirebaseDatabase.Instance;
-            if (reference != null)
+            //SetContentView(Resource.Layout.CreateRoom);
+            GetAllUsers();
+            lv = FindViewById<ListView>(Resource.Id.listView1);
+            rel = FindViewById<RelativeLayout>(Resource.Id.real);
+            //RetrieveData();
+            //GetAllUsers();
+            
+            ArrayAdapter<string> a = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, users);
+            lv.Adapter = a;
+            //ListAdapter = a;
+            //lv.TextFilterEnabled = true;
+            
+            /*lv.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs e)
             {
-                reference.Child("Users").AddValueEventListener(this);
-            }
-
-            /*sp.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner1_ItemSelected);
-            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array., Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            sp.Adapter = adapter;*/
+                Toast.MakeText(Application, ((TextView)e.View).Text, ToastLength.Short).Show();
+            };*/
+            //lv.Adapter = adapter;
         }
 
-        public void OnDataChange(DataSnapshot snapshot)
-        {
-            List<string> usernames = RetrieveUsers(snapshot);
-            UpdateSpinner(usernames);
-        }
-
-        private List<string> RetrieveUsers(DataSnapshot snapshot)
-        {
-            List<string> users = new List<string>();
-            var children = snapshot.Children.ToEnumerable<DataSnapshot>();
-            HashMap map;
-
-            foreach (var s in children)
-            {
-                map = (HashMap)s.Value;
-                if (map.ContainsKey("Email"))
-                {
-                    users.Add(map.Get("Email").ToString());
-                }
-            }
-            return users;
-        }
-
-        /*private void spinner1_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            Spinner spinner = (Spinner)sender;
-            string toast = string.Format("The person to contact is {0}", spinner.GetItemAtPosition(e.Position));
-            Toast.MakeText(this, toast, ToastLength.Long).Show();
-        }*/
-
-        private void UpdateSpinner(List<string> p)
-        {
-            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Resource.Layout.support_simple_spinner_dropdown_item, p);
-        }
+      
     }
 }
