@@ -98,6 +98,7 @@ namespace Ensemble.Droid
             {
                 roomNamebool = false;
             }
+            //there must be a check so that rooms do not have the same name in the Database Child
             else
             {
                 roomNamebool = true;

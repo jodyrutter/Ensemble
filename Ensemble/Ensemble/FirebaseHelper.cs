@@ -210,7 +210,7 @@ namespace Ensemble
                 .Child("Messaging")
                 .Child(user.uname)
                 .OnceAsync<Room>();
-            return allRooms.Where(a => a.Name == name).FirstOrDefault();
+            return allRooms.Where(a => (a.Name == name)).FirstOrDefault();
         }
 
         //need function to delete older chat msgs if 50 msgs or more (delete 49)
