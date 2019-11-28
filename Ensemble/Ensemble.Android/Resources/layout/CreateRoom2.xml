@@ -32,12 +32,15 @@
         <android.support.design.widget.TextInputLayout
             android:layout_height = "wrap_content"
             android:layout_width = "match_parent"
+            
             android:id= "@+id/roomnameText">
+            
             <EditText
                 android:hint = "Room name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize = "18sp"
+                android:inputType = "textCapCharacters"
                 android:imeOptions = "actionNext"
             />
         </android.support.design.widget.TextInputLayout>
