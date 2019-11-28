@@ -91,7 +91,7 @@ namespace Ensemble.Droid
         private void Rooms_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
            
-            Toast.MakeText(this, roomList[Convert.ToInt32(e.Id)].Name, ToastLength.Short).Show();
+            //Toast.MakeText(this, roomList[Convert.ToInt32(e.Id)].Name, ToastLength.Short).Show();
             var intent = new Intent(this, typeof(Chat));
             intent.PutExtra("Room", roomList[Convert.ToInt32(e.Id)].Name);
             this.StartActivity(intent);

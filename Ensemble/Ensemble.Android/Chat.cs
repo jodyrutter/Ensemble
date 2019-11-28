@@ -18,7 +18,10 @@ namespace Ensemble.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.Chatty1);
 
+            string text = Intent.GetStringExtra("Room") ?? "Data is not available";
+            Toast.MakeText(this, text, ToastLength.Long).Show();
             
         }
     }
