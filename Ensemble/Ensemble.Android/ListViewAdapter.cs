@@ -8,12 +8,12 @@ namespace Ensemble.Droid
 {
     internal class ListViewAdapter : BaseAdapter
     {
-        private ChatUsingFirebase mainActivity;
+        private Chat activity;
         private List<MessageContent> lstMessage;
-
-        public ListViewAdapter(ChatUsingFirebase c, List<MessageContent> ls)
+        
+        public ListViewAdapter(Chat c, List<MessageContent> ls)
         {
-            mainActivity = c;
+            activity = c;
             lstMessage = ls;
         }
         public override int Count
@@ -36,7 +36,7 @@ namespace Ensemble.Droid
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LayoutInflater inflater = (LayoutInflater)mainActivity.BaseContext.GetSystemService(Context.LayoutInflaterService);
+            LayoutInflater inflater = (LayoutInflater)activity.BaseContext.GetSystemService(Context.LayoutInflaterService);
             View itemView = inflater.Inflate(Resource.Layout.List_Item, null);
 
             TextView mess_user, mess_time, mess_content;

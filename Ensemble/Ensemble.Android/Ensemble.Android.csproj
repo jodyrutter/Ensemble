@@ -114,7 +114,6 @@
   <ItemGroup>
     <Compile Include="AddRoom.cs" />
     <Compile Include="Chat.cs" />
-    <Compile Include="ChatUsingFirebase.cs" />
     <Compile Include="CreateRoom.cs" />
     <Compile Include="EventListener\UserListener.cs" />
     <Compile Include="Helpers\AppDataHelper.cs" />
