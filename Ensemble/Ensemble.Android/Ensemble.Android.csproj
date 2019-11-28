@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddRoom.cs" />
+    <Compile Include="Chat.cs" />
     <Compile Include="ChatUsingFirebase.cs" />
     <Compile Include="CreateRoom.cs" />
     <Compile Include="EventListener\UserListener.cs" />
@@ -268,6 +269,9 @@
     <AndroidResource Include="Resources\layout\CreateRoom2.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

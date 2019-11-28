@@ -13,7 +13,14 @@
         android:id = "@+id/add_chat"
         android:layout_marginLeft = "140dp"
     />
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Refresh"
+        android:clickable = "true"
+        android:id = "@+id/refresh_btn"
+        android:layout_marginLeft = "30dp"
+    />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +30,7 @@
         android:dividerHeight= "16dp"
         android:id= "@+id/list_of_rooms"
         android:layout_marginBottom= "16dp"
-        android:layout_marginTop= "50dp"
+        android:layout_marginTop= "70dp"
     />
 
 

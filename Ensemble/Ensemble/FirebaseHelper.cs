@@ -129,9 +129,10 @@ namespace Ensemble
 
         public async Task CreateRoom(List<string> ppl, MessageContent lastMsg, string name, List<MessageContent> messages)
         {
+            var user = await GetUserwithEmail(ppl[0]);
             await firebase
                 .Child("Messaging")
-                .Child(ppl[0])
+                .Child(user.uname)
                 .PostAsync(new Room(ppl, lastMsg, name, messages));
         }
 

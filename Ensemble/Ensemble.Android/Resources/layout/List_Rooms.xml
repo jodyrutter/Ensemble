@@ -15,7 +15,7 @@
 
    
     <TextView
-        android:text="User name"
+        
         android:textSize= "30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Last Message"
+        
         android:layout_marginLeft = "10dp"
         android:layout_toRightOf = "@id/imageView1"
         android:layout_below = "@+id/room_name"
@@ -42,7 +42,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Date and time"
+        
         android:layout_toRightOf= "@+id/room_name"
         android:layout_alignParentRight = "true"
         android:id= "@+id/last_msg_time"

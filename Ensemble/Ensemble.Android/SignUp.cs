@@ -19,6 +19,7 @@ using Firebase;
 using Java.Util;
 using Java.Lang;
 using Ensemble.Droid.Helpers;
+using FR.Ganfra.Materialspinner;
 
 //using Firebase.Database;
 
@@ -33,18 +34,39 @@ namespace Ensemble.Droid
         EditText input_email;
         EditText input_pwd;                         //Variables to input email and password
         EditText input_username;
-        EditText input_favInstrument;
+        //EditText input_favInstrument;
         EditText input_age;
         EditText input_bio;
         EditText input_youlink;
         RelativeLayout activity_sign_up;                         //the xaml file variable for the class
         FirebaseAuth auth;                                       //Firebase auth variable
+        MaterialSpinner instrumentSpinner;
+        List<string> instruments;
+        string favInstrument;
         int num;
         TaskCompletionListener tcl = new TaskCompletionListener();
         FirebaseHelper fh = new FirebaseHelper();                           //FirebaseHelper variable
         List<string> ye = null;
         List<string> nay = null;
 
+
+
+        private void SetUpSpinner()
+        {
+            instruments = new List<string>();
+            
+            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.instrumentArray, Android.Resource.Layout.SimpleSpinnerItem);
+            //adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, instruments);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            instrumentSpinner.Adapter = adapter;
+        }
+
+        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            //Spinner spinner = (Spinner)sender;
+            favInstrument = instrumentSpinner.GetItemAtPosition(e.Position).ToString();
+            Toast.MakeText(this, favInstrument, ToastLength.Long).Show();
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -57,6 +79,8 @@ namespace Ensemble.Droid
             auth = FirebaseAuth.GetInstance(MainActivity.app);
             //db = FirebaseDatabase.GetInstance(MainActivity.app);
             ConnectControl();
+            SetUpSpinner();
+            
         }
 
 
@@ -71,7 +95,8 @@ namespace Ensemble.Droid
             input_email = FindViewById<EditText>(Resource.Id.signup_email);
             input_pwd = FindViewById<EditText>(Resource.Id.signup_password);
             input_username = FindViewById<EditText>(Resource.Id.signup_username);
-            input_favInstrument = FindViewById<EditText>(Resource.Id.signup_favInstrument);
+            //input_favInstrument = FindViewById<EditText>(Resource.Id.signup_favInstrument);
+            instrumentSpinner = FindViewById<MaterialSpinner>(Resource.Id.instrumentSpinner);
             input_age = FindViewById<EditText>(Resource.Id.signup_age);
             input_bio = FindViewById<EditText>(Resource.Id.signup_bio);
             input_youlink = FindViewById<EditText>(Resource.Id.signup_ylink);
@@ -80,19 +105,14 @@ namespace Ensemble.Droid
             //Link button presses to functions
             btnSignup.Click += btnSignup_Click;
             //btnLogin.Click += btnLogin_Click;
-
+            instrumentSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
             //spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
             //var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.instrument_array, Android.Resource.Layout.SimpleSpinnerDropDownItem);
             //spinner.Adapter = adapter;
 
         }
 
-        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            Spinner s = (Spinner)sender;
-            string toast = string.Format("The Fav Instrument is {0}", s.GetItemAtPosition(e.Position));
-            Toast.MakeText(this, toast, ToastLength.Long).Show();
-        }
+        
 
         //Go to Main Activity
         private void btnLogin_Click(object sender, EventArgs e)
@@ -186,7 +206,7 @@ namespace Ensemble.Droid
             //Will be put in later
 
             //Validation on Favorite instrument
-            if (input_favInstrument.Text.Length == 0)
+            if (instrumentSpinner.SelectedItem == null || favInstrument == null)
             {
                 FavVal = false;
                 Snackbar.Make(activity_sign_up, "Please enter your Favorite instrument", Snackbar.LengthShort).Show();
@@ -255,7 +275,7 @@ namespace Ensemble.Droid
             HashMap UserInfo = new HashMap();
             UserInfo.Put("Age", num);
             UserInfo.Put("Email", input_email.Text);
-            UserInfo.Put("FavInstrument", input_favInstrument.Text);
+            UserInfo.Put("FavInstrument",favInstrument);
             UserInfo.Put("ProfilePic", "Picture");
             UserInfo.Put("Pwd", input_pwd.Text);
             UserInfo.Put("ShortBio", input_bio.Text);

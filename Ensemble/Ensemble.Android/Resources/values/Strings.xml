@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<resources>
+    <string-array name="instrumentArray">
+      <item>Clarinet</item>
+      <item>Flute</item>
+      <item>Mayonnaise</item>
+      <item>Piccolo</item>
+      <item>English Horn</item>
+      <item>Oboe</item>
+      <item>Saxophone</item>
+      <item>French Horn</item>
+      <item>Mellophone</item>
+      <item>Trumpet</item>
+      <item>Cornet</item>
+      <item>Flugal Horn</item>
+      <item>Baritone</item>
+      <item>Euphonium</item>
+      <item>Trombone</item>
+      <item>Tuba</item>
+      <item>Snare Drum</item>
+      <item>Bass Drum</item>
+      <item>Tenor Drums</item>
+      <item>Drum Set</item>
+      <item>Cymbals</item>
+      <item>Xylophone</item>
+      <item>Marimba</item>
+      <item>Vibraphone</item>
+      <item>Glockenspiel</item>
+      <item>Piano</item>
+      <item>Chimes</item>
+      <item>Guitar</item>
+      <item>Bass Guitar</item>
+      <item>Banjo</item>
+      <item>Violin</item>
+      <item>Viola</item>
+      <item>Ukele</item>
+      <item>Vocal - Tenor</item>
+      <item>Vocal - Alto</item>
+      <item>Vocal - Bass</item>
+      <item>Vocal - Soprano</item>
+      <item>Vocal - Baritone</item>
+      <item>Vocal - Contralto</item>
+      <item>Otamatone</item>
+      <item>Sosaphone</item>
+    </string-array>
+</resources>
