@@ -53,6 +53,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AiForms.SettingsView">
+      <Version>0.5.2</Version>
+    </PackageReference>
     <PackageReference Include="Firebase.js">
       <Version>2.1.2</Version>
     </PackageReference>
@@ -104,6 +107,9 @@
     <Compile Include="ListViewAdapter.cs" />
     <Compile Include="RoomSelection.cs" />
     <Compile Include="RoomViewAdapter.cs" />
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ToXForms.cs" />
     <Compile Include="Dashboard.cs" />
     <Compile Include="ForgetPassword.cs" />
@@ -237,6 +243,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\EmptyUser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Settings.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

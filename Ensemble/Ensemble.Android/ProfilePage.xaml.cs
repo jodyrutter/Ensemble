@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android.Content;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -43,6 +44,11 @@ namespace Ensemble
             string newText = e.NewTextValue;
             name = newText;
 
+        }
+        [Obsolete]
+        async void navSettings(object sender, EventArgs e) {
+            var nextPage = new NavigationPage(new Ensemble.Droid.Settings());
+            await Navigation.PushModalAsync(nextPage);
         }
         /*   void OnNameCompleted(object sender, EventArgs e)
 		   {

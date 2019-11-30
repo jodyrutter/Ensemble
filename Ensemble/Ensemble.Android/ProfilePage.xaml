@@ -3,19 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:o="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
              mc:Ignorable="d"
              x:Class="Ensemble.ProfilePage">
 
     <StackLayout>
-        <o:VideoPlayer o:Source="http://vjs.zencdn.net/v/oceans.mp4" />
-         <Button Text="Settings"
+        <Image WidthRequest="200" 
+               HeightRequest="200"
+               Margin="20,50,20,0"
+               Source="EmptyUser.jpg"></Image>
+        <Label HorizontalTextAlignment="Center" 
+               TextColor="Black">First Last, Age</Label>
+        <Button Text="Settings"
                 TextColor="White"
                 BackgroundColor="DarkSlateGray"
                 BorderColor="Transparent"
                 WidthRequest="150"
                 HeightRequest="50"
-                Margin="20,50,20,20"
+                Margin="20,30,20,20"
+                HorizontalOptions="Center"
+                CornerRadius="15"
+                FontSize="Micro"
+                Clicked="navSettings"
+                />
+        <Button Text="Logout"
+                TextColor="White"
+                BackgroundColor="DarkSlateGray"
+                BorderColor="Transparent"
+                WidthRequest="150"
+                HeightRequest="50"
+                Margin="20,0,20,20"
                 HorizontalOptions="Center"
                 CornerRadius="15"
                 FontSize="Micro"/>

@@ -28,7 +28,7 @@ namespace Ensemble.Droid
     {
         //Initialize all variables
         Button btnSignup;                                        //Sign up button
-        //TextView btnLogin;                       //Login & Forget Password textview buttons
+        TextView btnLogin;                       //Login & Forget Password textview buttons
         EditText input_email;
         EditText input_pwd;                         //Variables to input email and password
         EditText input_username;
@@ -65,7 +65,7 @@ namespace Ensemble.Droid
         {
             //views
             btnSignup = FindViewById<Button>(Resource.Id.signup_btn_register);
-            //btnLogin = FindViewById<TextView>(Resource.Id.signup_btn_login);
+            btnLogin = FindViewById<TextView>(Resource.Id.signup_btn_login);
             //Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner);
             input_email = FindViewById<EditText>(Resource.Id.signup_email);
             input_pwd = FindViewById<EditText>(Resource.Id.signup_password);
@@ -78,7 +78,7 @@ namespace Ensemble.Droid
 
             //Link button presses to functions
             btnSignup.Click += btnSignup_Click;
-            //btnLogin.Click += btnLogin_Click;
+            btnLogin.Click += btnLogin_Click;
 
             //spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
             //var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.instrument_array, Android.Resource.Layout.SimpleSpinnerDropDownItem);
