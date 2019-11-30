@@ -47,6 +47,6 @@
         android:divider = "@android:color/transparent"
         android:dividerHeight= "8dp"
         android:id= "@+id/list_msg"
-        android:layout_marginBottom= "8dp"
+        android:layout_marginBottom= "10dp"
     />
 </RelativeLayout>

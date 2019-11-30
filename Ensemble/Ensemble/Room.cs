@@ -25,10 +25,14 @@ namespace Ensemble
 
         public Room(List<string> ppl, string name)
         {
+            MessageContent emp = new MessageContent("", "", "");
+            List<MessageContent> temp = new List<MessageContent>();
+            temp.Add(emp);
+
             participants = ppl;
-            lastMsg = null;
+            lastMsg = emp;
             Name = name;
-            ChatLog = null;
+            ChatLog = temp;
         }
     }
 }
