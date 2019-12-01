@@ -50,6 +50,9 @@ namespace Ensemble.Droid
             relative = FindViewById<RelativeLayout>(Resource.Id.activity_rooms);
             refresh = FindViewById<Button>(Resource.Id.refresh_btn);
 
+            
+
+
             add_chat.Click += Add_chat_Click;
             refresh.Click += Refresh_Click;
         }

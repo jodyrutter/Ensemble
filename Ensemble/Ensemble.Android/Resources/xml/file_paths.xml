@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<paths xmlns:android="https://schemas.android.com/apk/res/android">
+  <external-path name="my_images" path="Android/data/com.plugin.mediatest/files/Pictures"/>
+  
+</paths>
