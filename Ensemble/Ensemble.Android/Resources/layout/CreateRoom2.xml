@@ -1,4 +1,4 @@
-<?xml version = "1.0" encoding = "utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app = "http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -52,7 +52,7 @@
             android:id = "@+id/statusSpinner1"
             app:ms_enableFloatingLabel = "true"
             app:ms_floatingLabelText = "Select Participant 1"
-            app:ms_hint = "Select Status"
+            app:ms_hint = "Select Participant 1"
             app:ms_alignLabels = "true"
         />
 
@@ -62,7 +62,7 @@
             android:id = "@+id/statusSpinner2"
             app:ms_enableFloatingLabel = "true"
             app:ms_floatingLabelText = "Select Participant 2"
-            app:ms_hint = "Select Status"
+            app:ms_hint = "Select Participant 2 or N/A"
             app:ms_alignLabels = "true"
         />
 
@@ -72,7 +72,7 @@
             android:id = "@+id/statusSpinner3"
             app:ms_enableFloatingLabel = "true"
             app:ms_floatingLabelText = "Select Participant 3"
-            app:ms_hint = "Select Status"
+            app:ms_hint = "Select Participant 3 or N/A"
             app:ms_alignLabels = "true"
         />
 
