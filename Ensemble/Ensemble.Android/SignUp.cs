@@ -51,6 +51,7 @@ namespace Ensemble.Droid
         FirebaseAuth auth;                                       //Firebase auth variable
         MaterialSpinner instrumentSpinner;                       //Spinner for instruments   
         List<string> instruments;
+        User test;
         string favInstrument;
         int num;
 
@@ -144,7 +145,7 @@ namespace Ensemble.Droid
 
         }
 
-        private bool ValidateCredentials()
+        private  bool ValidateCredentials()
         {
             bool emailVal;
             bool passVal;
@@ -183,13 +184,14 @@ namespace Ensemble.Droid
             else
             {
                 //Make sure username doesnt already exist. To do list
-                /*if (fh.GetUserwithUsername(input_username.Text) != null)
+                IsSameUsername();
+                if (test != null)
                 {
                     unameVal = false;
                     Snackbar.Make(activity_sign_up, "Username already taken. Try another username", Snackbar.LengthShort).Show();
                 }
-                else*/
-                unameVal = true;
+                else
+                    unameVal = true;
             }
 
             //Validation for age
@@ -249,6 +251,12 @@ namespace Ensemble.Droid
 
 
             return (emailVal && passVal && unameVal && AgeVal && ProfileVal && FavVal && BioVal && YVal);
+        }
+
+        private async void IsSameUsername()
+        {
+            test = new User();
+            test = await fh.GetUserwithUsername(input_username.Text);
         }
 
         //Create account with FirebaseAuth
