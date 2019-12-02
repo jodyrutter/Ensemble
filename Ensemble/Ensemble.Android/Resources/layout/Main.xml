@@ -18,8 +18,8 @@
         android:layout_height="wrap_content">  
         <EditText  
             android:hint="Enter your Email"  
-            android:id="@+id/login_email"  
-            android:inputType="textCapWords"  
+            android:id="@+id/login_email"
+            android:inputType="textWebEmailAddress"  
             android:maxLines="1"  
             android:layout_width="match_parent"  
             android:layout_height="wrap_content" />  

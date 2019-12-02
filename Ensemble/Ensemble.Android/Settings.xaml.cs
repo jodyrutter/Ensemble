@@ -31,7 +31,7 @@ namespace Ensemble.Droid
         SwitchCell others;
         public Settings()
         {
-            InitializeComponent();
+            //InitializeComponent();
             settings = new SettingsA();
             fh = new FirebaseHelper();
             ConnectControl();
@@ -41,23 +41,23 @@ namespace Ensemble.Droid
             settings.youtube = youtubeURL.Text;
             settings.group = groupCell.On;
             var i = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
-            i.setUserSettings(settings.youtube,settings.group,settings.vocal,settings.guitar,settings.drums,settings.bass,settings.piano,settings.violin,settings.synth,settings.other);
-            await fh.UpdateUserSettings(i);
+            //i.setUserSettings(settings.youtube,settings.group,settings.vocal,settings.guitar,settings.drums,settings.bass,settings.piano,settings.violin,settings.synth,settings.other);
+            //await fh.UpdateUserSettings(i);
             //String a = youtubeURL.Text;
             //Not implemented yet.
         }
         async void ConnectControl() {
             var i = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
-            settings.group = i.lGroup;
-            settings.youtube = i.yLink;
-            settings.vocal = i.sVocal;
-            settings.guitar = i.sGuitar;
-            settings.drums = i.sDrum;
-            settings.bass = i.sBass;
-            settings.piano = i.sPiano;
-            settings.violin = i.sViolins;
-            settings.synth = i.sSynth;
-            settings.other = i.sOther;
+           // settings.group = i.lGroup;
+            //settings.youtube = i.yLink;
+            //settings.vocal = i.sVocal;
+            //settings.guitar = i.sGuitar;
+            //settings.drums = i.sDrum;
+            //settings.bass = i.sBass;
+            //settings.piano = i.sPiano;
+            //settings.violin = i.sViolins;
+            //settings.synth = i.sSynth;
+           // settings.other = i.sOther;
             TableView table;
             labAcc = new TextCell
             {
@@ -65,7 +65,7 @@ namespace Ensemble.Droid
             };
             groupCell = new SwitchCell {
                 Text = "I am in a group",
-                On = i.lGroup,
+                //On = i.lGroup,
             };
             groupCell.OnChanged += (object sender, ToggledEventArgs e) =>
             {
@@ -179,7 +179,7 @@ namespace Ensemble.Droid
                 }
             };
             //table.VerticalOptions = LayoutOptions.FillAndExpand;
-            MainLayout.Children.Add(table);
+           // MainLayout.Children.Add(table);
         }
         private void groupCellChange(object sender, ToggledEventArgs e) {
             settings.group = e.Value;

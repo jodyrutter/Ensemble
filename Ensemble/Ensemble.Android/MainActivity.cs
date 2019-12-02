@@ -106,6 +106,7 @@ namespace Ensemble.Droid
         //Upon success, go to Dashboard
         private void TaskCompletionListener_Success(object sender, EventArgs e)
         {
+
             Snackbar.Make(activity_main, "Login Success", Snackbar.LengthShort).Show();
             StartActivity(typeof(ToXForms));
         }

@@ -17,7 +17,14 @@ namespace Ensemble
         {
             this.Email = email;
             this.Message = message;
-            Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Time = DateTime.Now.ToString("MM-dd-yyyy HH:mm tt");
+        }
+
+        public MessageContent(string email, string message, string time)
+        {
+            this.Email = email;
+            this.Message = message;
+            this.Time = time;
         }
     }
 }

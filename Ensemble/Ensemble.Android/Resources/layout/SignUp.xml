@@ -1,6 +1,7 @@
-
+ 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_sign_up"
     android:padding="16dp"
     android:layout_width="match_parent"
@@ -11,18 +12,20 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/ensemble"
         android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+    />
     
+
     <!-- Email -->
     <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/icon"
+        android:layout_below = "@+id/icon"
         android:id="@+id/signup_input_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
             android:hint="Enter your Email"
             android:id="@+id/signup_email"
-            android:inputType="textCapWords"
+            android:inputType="textEmailAddress"
             android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -60,30 +63,13 @@
                 android:layout_width= "match_parent"
                 android:layout_height = "wrap_content"/>
     </android.support.design.widget.TextInputLayout>
-    
-
-      <android.support.design.widget.TextInputLayout
-            android:layout_below="@+id/signup_input_username"
-            android:id="@+id/signup_input_favInstrument"
-            android:layout_width = "match_parent"
-            android:layout_height= "wrap_content"
-            android:minWidth="25px"
-            android:minHeight="25px">
-            <EditText
-                android:hint="Enter Favorite Instrument"
-                android:id = "@+id/signup_favInstrument"
-                android:inputType= "textCapWords"
-                android:maxLines= "1"
-                android:layout_width= "match_parent"
-                android:layout_height = "wrap_content"/>
-    </android.support.design.widget.TextInputLayout>
-
     <android.support.design.widget.TextInputLayout
-            android:layout_below="@+id/signup_input_favInstrument"
+            android:layout_below="@+id/signup_username"
             android:id="@+id/signup_input_age"
             android:layout_width = "match_parent"
             android:layout_height= "wrap_content"
             android:minWidth="25px"
+        android:layout_marginTop= "275dp"
             android:minHeight="25px">
             <EditText
                 android:hint="Enter Age"
@@ -93,6 +79,7 @@
                 android:layout_width= "match_parent"
                 android:layout_height = "wrap_content"/>
     </android.support.design.widget.TextInputLayout>
+                       <!-- Bio-->
     <android.support.design.widget.TextInputLayout
             android:layout_below="@id/signup_input_age"
             android:id="@+id/signup_input_bio"
@@ -108,6 +95,7 @@
                 android:layout_width= "match_parent"
                 android:layout_height = "wrap_content"/>
     </android.support.design.widget.TextInputLayout>
+                        <!-- YLink-->
     <android.support.design.widget.TextInputLayout
             android:layout_below="@+id/signup_input_bio"
             android:id="@+id/signup_input_ylink"
@@ -118,14 +106,28 @@
             <EditText
                 android:hint="Submit Youtube link"
                 android:id = "@+id/signup_ylink"
-                android:inputType= "textCapWords"
+                android:inputType= "textUri"
                 android:maxLines= "1"
                 android:layout_width= "match_parent"
                 android:layout_height = "wrap_content"/>
     </android.support.design.widget.TextInputLayout>
-     Register button
+                
+    <!-- Spinner-->
+    <fr.ganfra.materialspinner.MaterialSpinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/instrumentSpinner"
+        android:layout_below= "@+id/signup_input_ylink"
+        app:ms_enableFloatingLabel = "true"
+        app:ms_floatingLabelText = "Select Favorite Instrument"
+        app:ms_hint = "Select Instrument"
+        app:ms_alignLabels = "true"
+        />
+
+    
+                <!-- Register button -->
     <Button
-        android:layout_below="@+id/signup_input_ylink"
+        android:layout_below="@+id/instrumentSpinner"
         android:id="@+id/signup_btn_register"
         android:text="Register"
         android:background="#263238"

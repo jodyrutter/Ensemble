@@ -9,13 +9,16 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Firebase.Auth;
 
 namespace Ensemble.Droid
 {
     class RoomViewAdapter : BaseAdapter
     {
+        FirebaseHelper fh = new FirebaseHelper();
         private RoomSelection roomSelect;
         private List<Room> rooms;
+        User user;
 
         public override int Count
         {
@@ -51,16 +54,44 @@ namespace Ensemble.Droid
             TextView room_name;
             TextView lastMsg;
             TextView lastMsgTime;
+            ImageView profilePic;
 
             room_name = itemView.FindViewById<TextView>(Resource.Id.room_name);
             lastMsg = itemView.FindViewById<TextView>(Resource.Id.last_msg);
             lastMsgTime = itemView.FindViewById<TextView>(Resource.Id.last_msg_time);
+            profilePic = itemView.FindViewById<ImageView>(Resource.Id.imageView1);
 
             room_name.Text = rooms[position].Name;
-            lastMsg.Text = rooms[position].lastMsg.Message;
-            lastMsgTime.Text = rooms[position].lastMsg.Time;
-             
+            if (rooms[position].lastMsg == null)
+                lastMsg.Text = null;
+            else
+                lastMsg.Text = rooms[position].lastMsg.Message;
+            
+            if (rooms[position].lastMsg == null)
+                lastMsgTime.Text = null;
+            else
+                lastMsgTime.Text = rooms[position].lastMsg.Time;
+
+            //Gets new profilePic of Chatroom based on the profile pic of the received participant (ppl[1])
+            //Will receiver profile pic from Google Firebase Storage hopefully
+            //will add depending on how much Jody has done
+            //GetUser();
+            //if user.ProfilePic string matches something from Google Firebase Storage, replace pic of image view
+            /*if (true)
+            {
+
+            }
+            //else keep default profile pic
+            else
+            { 
+            
+            }*/
             return itemView;        
-        }       
+        }
+        private async void GetUser()
+        {
+            var item = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
+            item = user;
+        }
     }
 }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Diagnostics;
+using System.IO;
 using Android.App;
 using Android.Content;
 using Android.Gms.Tasks;
@@ -18,32 +19,64 @@ using Android.Support.V7.App;
 using Firebase;
 using Java.Util;
 using Java.Lang;
+using Ensemble.Droid.Helpers;
+using FR.Ganfra.Materialspinner;
+using Firebase.Storage;
+using Android.Graphics;
+using Android.Provider;
 
-//using Firebase.Database;
+using Plugin.Media.Abstractions;
+using Plugin.Media;
+using Android.Content.PM;
+using Android;
 
 namespace Ensemble.Droid
 {
     [Activity(Label = "SignUp", Theme = "@style/AppTheme")]
     public class SignUp : AppCompatActivity
     {
-        //Initialize all variables
+        //Initialize Buttons
         Button btnSignup;                                        //Sign up button
-        TextView btnLogin;                       //Login & Forget Password textview buttons
+        TextView btnLogin;
+        
+        //Initialize fields for creating account
         EditText input_email;
-        EditText input_pwd;                         //Variables to input email and password
+        EditText input_pwd;                         
         EditText input_username;
-        EditText input_favInstrument;
         EditText input_age;
         EditText input_bio;
         EditText input_youlink;
+        
         RelativeLayout activity_sign_up;                         //the xaml file variable for the class
         FirebaseAuth auth;                                       //Firebase auth variable
+        MaterialSpinner instrumentSpinner;                       //Spinner for instruments   
+        List<string> instruments;
+        string favInstrument;
         int num;
+
         TaskCompletionListener tcl = new TaskCompletionListener();
         FirebaseHelper fh = new FirebaseHelper();                           //FirebaseHelper variable
         List<string> ye = null;
         List<string> nay = null;
 
+        
+        //Set up Spinner from Array defined in Resources.String
+        private void SetUpSpinner()
+        {
+            instruments = new List<string>();
+            
+            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.instrumentArray, Android.Resource.Layout.SimpleSpinnerItem);
+            
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            instrumentSpinner.Adapter = adapter;
+        }
+
+        //If selection is made, favInstrument is selection
+        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            favInstrument = instrumentSpinner.GetItemAtPosition(e.Position).ToString();
+            Toast.MakeText(this, favInstrument, ToastLength.Long).Show();
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -54,8 +87,12 @@ namespace Ensemble.Droid
 
             //Initiate Firebase onto Sign Up page
             auth = FirebaseAuth.GetInstance(MainActivity.app);
+            
             //db = FirebaseDatabase.GetInstance(MainActivity.app);
             ConnectControl();
+            SetUpSpinner();
+            
+            
         }
 
 
@@ -63,14 +100,13 @@ namespace Ensemble.Droid
         //Link initialized variables with controls on Sign Up xml
         void ConnectControl()
         {
-            //views
+            //Connecting views of xml to variables of cs file
             btnSignup = FindViewById<Button>(Resource.Id.signup_btn_register);
             btnLogin = FindViewById<TextView>(Resource.Id.signup_btn_login);
-            //Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner);
             input_email = FindViewById<EditText>(Resource.Id.signup_email);
             input_pwd = FindViewById<EditText>(Resource.Id.signup_password);
             input_username = FindViewById<EditText>(Resource.Id.signup_username);
-            input_favInstrument = FindViewById<EditText>(Resource.Id.signup_favInstrument);
+            instrumentSpinner = FindViewById<MaterialSpinner>(Resource.Id.instrumentSpinner);
             input_age = FindViewById<EditText>(Resource.Id.signup_age);
             input_bio = FindViewById<EditText>(Resource.Id.signup_bio);
             input_youlink = FindViewById<EditText>(Resource.Id.signup_ylink);
@@ -80,18 +116,10 @@ namespace Ensemble.Droid
             btnSignup.Click += btnSignup_Click;
             btnLogin.Click += btnLogin_Click;
 
-            //spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
-            //var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.instrument_array, Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            //spinner.Adapter = adapter;
-
+            instrumentSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
         }
 
-        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            Spinner s = (Spinner)sender;
-            string toast = string.Format("The Fav Instrument is {0}", s.GetItemAtPosition(e.Position));
-            Toast.MakeText(this, toast, ToastLength.Long).Show();
-        }
+         
 
         //Go to Main Activity
         private void btnLogin_Click(object sender, EventArgs e)
@@ -180,12 +208,9 @@ namespace Ensemble.Droid
                 else
                     AgeVal = true;
             }
-
-            //Validation for profile pic
-            //Will be put in later
-
+         
             //Validation on Favorite instrument
-            if (input_favInstrument.Text.Length == 0)
+            if (instrumentSpinner.SelectedItem == null || favInstrument == null)
             {
                 FavVal = false;
                 Snackbar.Make(activity_sign_up, "Please enter your Favorite instrument", Snackbar.LengthShort).Show();
@@ -226,6 +251,7 @@ namespace Ensemble.Droid
             return (emailVal && passVal && unameVal && AgeVal && ProfileVal && FavVal && BioVal && YVal);
         }
 
+        //Create account with FirebaseAuth
         void RegisterUser(string email, string pass)
         {
             //link the task Completion listener to functions
@@ -244,12 +270,31 @@ namespace Ensemble.Droid
         {
             Snackbar.Make(activity_sign_up, "User Registration failed", Snackbar.LengthShort).Show();
         }
+        
         //Add user to Realtime database
-        private async void AddtoRealtime()
+        private void AddtoRealtime()
         {
+            //turn age input into into
             int.TryParse(input_age.Text, out num);
+            
+            //encrypt password
+            string encryptedPwd = CryptoEngine.Encrypt(input_pwd.Text);
+            
+            HashMap UserInfo = new HashMap();
+            UserInfo.Put("Age", num);
+            UserInfo.Put("Email", input_email.Text);
+            UserInfo.Put("FavInstrument",favInstrument);
+            UserInfo.Put("ProfilePic", "Picture");
+            UserInfo.Put("Pwd", encryptedPwd);
+            UserInfo.Put("ShortBio", input_bio.Text);
+            UserInfo.Put("uname", input_username.Text);
+            UserInfo.Put("yLink", input_youlink.Text);
+            //UserInfo.Put("Yes", num);
+            //UserInfo.Put("No", num);
 
-            await fh.AddUser(input_email.Text, input_pwd.Text, input_username.Text, num, "Picture", input_favInstrument.Text, input_bio.Text, input_youlink.Text, ye, nay);
+            DatabaseReference dref = AppDataHelper.GetDatabase().GetReference("Users").Push();
+            dref.SetValue(UserInfo);
+
             Snackbar.Make(activity_sign_up, "Account added to Realtime Database", Snackbar.LengthShort).Show();
 
 
@@ -264,5 +309,7 @@ namespace Ensemble.Droid
             Finish();
 
         }
+
+       
     }
 }

@@ -53,14 +53,14 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AiForms.SettingsView">
-      <Version>0.5.2</Version>
-    </PackageReference>
     <PackageReference Include="Firebase.js">
       <Version>2.1.2</Version>
     </PackageReference>
     <PackageReference Include="FirebaseDatabase.net">
       <Version>4.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="FirebaseStorage.net">
+      <Version>1.0.3</Version>
     </PackageReference>
     <PackageReference Include="FirebaseXamarin">
       <Version>1.0.0</Version>
@@ -68,8 +68,17 @@
     <PackageReference Include="Google.Apis">
       <Version>1.41.1</Version>
     </PackageReference>
+    <PackageReference Include="MaterialSpinner-Xamarin">
+      <Version>1.1.1</Version>
+    </PackageReference>
     <PackageReference Include="MavenNet">
       <Version>2.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>4.0.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.Fragment">
+      <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">
       <Version>28.0.0.3</Version>
@@ -81,6 +90,12 @@
       <Version>60.1142.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Common">
+      <Version>60.1142.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Config">
+      <Version>60.1142.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Core">
       <Version>60.1142.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Database">
@@ -103,7 +118,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatUsingFirebase.cs" />
+    <Compile Include="AddRoom.cs" />
+    <Compile Include="Chat.cs" />
+    <Compile Include="CreateRoom.cs" />
+    <Compile Include="EventListener\UserListener.cs" />
+    <Compile Include="Helpers\AppDataHelper.cs" />
     <Compile Include="ListViewAdapter.cs" />
     <Compile Include="RoomSelection.cs" />
     <Compile Include="RoomViewAdapter.cs" />
@@ -112,7 +131,6 @@
     </Compile>
     <Compile Include="SettingsA.cs" />
     <Compile Include="ToXForms.cs" />
-    <Compile Include="Dashboard.cs" />
     <Compile Include="ForgetPassword.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -246,9 +264,33 @@
     <AndroidResource Include="Resources\drawable\EmptyUser.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Settings.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    <AndroidResource Include="Resources\layout\list_usernames.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\CreateRoom2.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Chatty1.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\xml\file_paths.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\xml\file_paths2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Settings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

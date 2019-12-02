@@ -30,18 +30,10 @@ namespace Ensemble
                     yLink = item.Object.yLink,
                     ShortBio = item.Object.ShortBio,
                     Yes = item.Object.Yes,
-                    No = item.Object.No,
-                    lGroup = item.Object.lGroup,
-                    sVocal = item.Object.sVocal,
-                    sGuitar = item.Object.sGuitar,
-                    sBass = item.Object.sBass,
-                    sDrum = item.Object.sDrum,
-                    sPiano = item.Object.sPiano,
-                    sViolins = item.Object.sViolins,
-                    sSynth = item.Object.sSynth,
-                    sOther = item.Object.sOther,
+                    No = item.Object.No
                 }).ToList();
         }
+
 
 
         //Get all users from Realtime Database except specific email
@@ -120,21 +112,7 @@ namespace Ensemble
             await firebase
                 .Child("Users")
                 .Child(toUpdateUser.Key)
-                .PutAsync(new User(u.Email, u.Pwd, u.uname, u.Age, u.ProfilePic, u.FavInstrument, u.ShortBio, u.yLink, u.Yes, u.No, u.lGroup, u.sVocal, u.sGuitar, u.sDrum, u.sBass, u.sPiano, u.sViolins, u.sSynth, u.sOther) { });
-        }
-
-        //update user information on Realtime Database
-        public async Task UpdateUserSettings(User u)
-        {
-            var toUpdateUser = (await firebase
-                .Child("Users")
-                .OnceAsync<User>
-                ()).Where(a => (a.Object.Email == u.Email && a.Object.uname == u.uname)).FirstOrDefault();
-
-            await firebase
-                .Child("Users")
-                .Child(toUpdateUser.Key)
-                .PutAsync(new User(u.Email, u.Pwd, u.uname, u.Age, u.ProfilePic, u.FavInstrument, u.ShortBio, u.yLink, u.Yes, u.No, u.lGroup,u.sVocal,u.sGuitar,u.sDrum,u.sBass,u.sPiano,u.sViolins,u.sSynth,u.sOther) { });
+                .PutAsync(new User(u.Email, u.Pwd, u.uname, u.Age, u.ProfilePic, u.FavInstrument, u.ShortBio, u.yLink, u.Yes, u.No) { });
         }
 
         //Delete user from Realtime Database based on email
@@ -151,41 +129,75 @@ namespace Ensemble
 
         public async Task CreateRoom(List<string> ppl, MessageContent lastMsg, string name, List<MessageContent> messages)
         {
+            var user = await GetUserwithEmail(ppl[0]);
             await firebase
                 .Child("Messaging")
+                .Child(user.uname)
+                .PostAsync(new Room(ppl, lastMsg, name, messages));
+
+            var user2 = await GetUserwithEmail(ppl[1]);
+            await firebase
+                .Child("Messaging")
+                .Child(user2.uname)
                 .PostAsync(new Room(ppl, lastMsg, name, messages));
         }
 
+        public async Task CreateRoom(Room room)
+        {
+            for (int i = 0; i < room.participants.Count; i++)
+            {
+                var user = await GetUserwithEmail(room.participants[i]);
+                await firebase
+                    .Child("Messaging")
+                    .Child(user.uname)
+                    .PostAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog));
+            }
+        }
         public async Task UpdateRoom(String name, List<String> ppl, List<MessageContent> chat, MessageContent lastMsg)
         {
-            var toUpdateRoom = (await firebase
-                .Child("Messaging")
-                .OnceAsync<Room>())
-                .Where(a => a.Object.Name == name).FirstOrDefault();
+            for (int i = 0; i < ppl.Count; i++)
+            {
+                var user = await GetUserwithEmail(ppl[i]);
+                var toUpdateRoom = (await firebase
+                    .Child("Messaging")
+                    .Child(user.uname)
+                    .OnceAsync<Room>())
+                    .Where(a => a.Object.Name == name).FirstOrDefault();
 
-            await firebase
-                .Child("Messaging")
-                .Child(toUpdateRoom.Key)
-                .PutAsync(new Room(ppl, lastMsg, name, chat) { });
+                await firebase
+                    .Child("Messaging")
+                    .Child(user.uname)
+                    .Child(toUpdateRoom.Key)
+                    .PutAsync(new Room(ppl, lastMsg, name, chat) { });
+            }
+            
         }
 
         public async Task UpdateRoom(Room room)
         {
-            var toUpdateRoom = (await firebase
-                .Child("Messaging")
-                .OnceAsync<Room>())
-                .Where(a => a.Object == room).FirstOrDefault();
+            for (int i = 0; i < room.participants.Count; i++)
+            {
+                var user = await GetUserwithEmail(room.participants[i]);
+                var toUpdateRoom = (await firebase
+                    .Child("Messaging")
+                    .Child(user.uname)
+                    .OnceAsync<Room>())
+                    .Where(a => a.Object == room).FirstOrDefault();
 
-            await firebase
-                .Child("Messaging")
-                .Child(toUpdateRoom.Key)
-                .PutAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog) { });
+                await firebase
+                    .Child("Messaging")
+                    .Child(user.uname)
+                    .Child(toUpdateRoom.Key)
+                    .PutAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog) { });
+            }
         }
 
-        public async Task<List<Room>> GetAllRooms()
+        public async Task<List<Room>> GetAllRooms(string email)
         {
+            var user = await GetUserwithEmail(email);
             return (await firebase
                 .Child("Messaging")
+                .Child(user.uname)
                 .OnceAsync<Room>()).Select(item => new Room
                 {
                     Name = item.Object.Name,
@@ -195,15 +207,41 @@ namespace Ensemble
                 }).ToList();
         }
 
-        public async Task<Room> GetRoom(String name)
+        public async Task<List<Room>> GetAllUsersRooms(string user)
         {
-            var allRooms = await GetAllRooms();
+            var userA = await GetUserwithEmail(user);
+            var allRooms = await GetAllRooms(user);
             await firebase
                 .Child("Messaging")
+                .Child(userA.uname)
                 .OnceAsync<Room>();
-            return allRooms.Where(a => a.Name == name).FirstOrDefault();
+            return allRooms.Where(a => (a.participants[0] == user || a.participants[1] == user)).ToList();
         }
-        
+
+        public async Task<Room> GetRoom(String email , String name)
+        {
+            var user = await GetUserwithEmail(email);
+            var allRooms = await GetAllRooms(email);
+            await firebase
+                .Child("Messaging")
+                .Child(user.uname)
+                .OnceAsync<Room>();
+            return allRooms.Where(a => (a.Name == name)).FirstOrDefault();
+        }
+
         //need function to delete older chat msgs if 50 msgs or more (delete 49)
+        public async Task DeleteRoomChat(Room room)
+        {
+            var allChat = await GetRoom(room.participants[0], room.Name);
+
+            if (room.ChatLog.Count <= 50)
+            {
+                for (int i = 0; i < 49; i++)
+                {
+                    room.ChatLog.RemoveAt(0);
+                }
+                await UpdateRoom(room);
+            }
+        }
     }
 }

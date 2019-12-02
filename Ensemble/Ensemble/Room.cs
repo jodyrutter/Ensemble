@@ -22,5 +22,17 @@ namespace Ensemble
             Name = name;
             this.ChatLog = ChatLog;
         }
+
+        public Room(List<string> ppl, string name)
+        {
+            MessageContent emp = new MessageContent("", "", "");
+            List<MessageContent> temp = new List<MessageContent>();
+            temp.Add(emp);
+
+            participants = ppl;
+            lastMsg = emp;
+            Name = name;
+            ChatLog = temp;
+        }
     }
 }

@@ -47,8 +47,8 @@ namespace Ensemble
         }
         [Obsolete]
         async void navSettings(object sender, EventArgs e) {
-            var nextPage = new NavigationPage(new Ensemble.Droid.Settings());
-            await Navigation.PushModalAsync(nextPage);
+            //var nextPage = new NavigationPage(new Ensemble.Droid.Settings());
+            //await Navigation.PushModalAsync(nextPage);
         }
         /*   void OnNameCompleted(object sender, EventArgs e)
 		   {
