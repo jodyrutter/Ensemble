@@ -217,8 +217,13 @@ namespace Ensemble
             if (u.Yes == null)
                 u.Yes = new List<string>();
             await firebaseHelper.UpdateUser(u);
-            List<string> exclude = u.No.Concat(u.Yes).ToList();
-            var lads = await firebaseHelper.GetAllUsersExceptNoList(exclude, u.Email);
+            List<string> excludeNo = u.No;
+            List<string> excludeYes = u.Yes;
+            if (excludeNo == null)
+                excludeNo = new List<string>();
+            if (excludeYes == null)
+                excludeYes = new List<string>();
+            var lads = await firebaseHelper.GetAllUsersExceptNoList(excludeNo, excludeYes, u.Email);
             
             foreach (var p in lads)
             {
