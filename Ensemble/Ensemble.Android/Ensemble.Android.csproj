@@ -110,6 +110,7 @@
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsA.cs" />
     <Compile Include="ToXForms.cs" />
     <Compile Include="Dashboard.cs" />
     <Compile Include="ForgetPassword.cs" />

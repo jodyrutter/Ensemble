@@ -6,8 +6,10 @@
              xmlns:sv="clr-namespace:AiForms.Renderers;assembly=SettingsView"
              mc:Ignorable="d"
              x:Class="Ensemble.Droid.Settings">
-    <StackLayout>
-        <sv:SettingsView HasUnevenRows="false">
+    <StackLayout Orientation="Vertical">
+        <StackLayout x:Name="MainLayout" Padding="10,10,10,0">
+        </StackLayout>
+        <!--<sv:SettingsView HasUnevenRows="false">
             <sv:Section Title="Preferences">
                 <SwitchCell ClassId="already" On="{Binding band}" Text="I'm in a group"></SwitchCell>
                 <SwitchCell ClassId="group" On="{Binding band}" Text="Search for group"></SwitchCell>
@@ -35,7 +37,7 @@
                 <SwitchCell Text="Synth"></SwitchCell>
                 <SwitchCell Text="Other"></SwitchCell>
             </sv:Section>
-            <!--<sv:Section Title="Header1" FooterText="Footer1">
+            --><!--<sv:Section Title="Header1" FooterText="Footer1">
             <sv:CommandCell IconSource="icon.png" IconSize="60,60" IconRadius="30"
             Title="Xam Xamarin" Description="hoge@fuga.com"
             Command="{Binding ToProfileCommand}" CommandParameter="{Binding Parameter}"
@@ -56,7 +58,7 @@
             <sv:TimePickerCell Title="TimePicker" Format="HH:mm" Time="15:30" PickerTitle="Select time" />
             <sv:DatePickerCell Title="DatePicker" Format="yyyy/MM/dd (ddd)" Date="2017/11/11" MinimumDate="2015/1/1" MaximumDate="2018/12/15" TodayText="Today's date"/>
             <sv:EntryCell Title="EntryCell" ValueText="{Binding InputText.Value}" Placeholder="Input text" Keyboard="Email" TextAlignment="End" HintText="{Binding InputError.Value}" />
-        </sv:Section>-->
-        </sv:SettingsView>
+        </sv:Section>--><!--
+        </sv:SettingsView>-->
     </StackLayout>
 </ContentPage>

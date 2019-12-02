@@ -30,7 +30,16 @@ namespace Ensemble
                     yLink = item.Object.yLink,
                     ShortBio = item.Object.ShortBio,
                     Yes = item.Object.Yes,
-                    No = item.Object.No
+                    No = item.Object.No,
+                    lGroup = item.Object.lGroup,
+                    sVocal = item.Object.sVocal,
+                    sGuitar = item.Object.sGuitar,
+                    sBass = item.Object.sBass,
+                    sDrum = item.Object.sDrum,
+                    sPiano = item.Object.sPiano,
+                    sViolins = item.Object.sViolins,
+                    sSynth = item.Object.sSynth,
+                    sOther = item.Object.sOther,
                 }).ToList();
         }
 
@@ -111,7 +120,21 @@ namespace Ensemble
             await firebase
                 .Child("Users")
                 .Child(toUpdateUser.Key)
-                .PutAsync(new User(u.Email, u.Pwd, u.uname, u.Age, u.ProfilePic, u.FavInstrument, u.ShortBio, u.yLink, u.Yes, u.No) { });
+                .PutAsync(new User(u.Email, u.Pwd, u.uname, u.Age, u.ProfilePic, u.FavInstrument, u.ShortBio, u.yLink, u.Yes, u.No, u.lGroup, u.sVocal, u.sGuitar, u.sDrum, u.sBass, u.sPiano, u.sViolins, u.sSynth, u.sOther) { });
+        }
+
+        //update user information on Realtime Database
+        public async Task UpdateUserSettings(User u)
+        {
+            var toUpdateUser = (await firebase
+                .Child("Users")
+                .OnceAsync<User>
+                ()).Where(a => (a.Object.Email == u.Email && a.Object.uname == u.uname)).FirstOrDefault();
+
+            await firebase
+                .Child("Users")
+                .Child(toUpdateUser.Key)
+                .PutAsync(new User(u.Email, u.Pwd, u.uname, u.Age, u.ProfilePic, u.FavInstrument, u.ShortBio, u.yLink, u.Yes, u.No, u.lGroup,u.sVocal,u.sGuitar,u.sDrum,u.sBass,u.sPiano,u.sViolins,u.sSynth,u.sOther) { });
         }
 
         //Delete user from Realtime Database based on email

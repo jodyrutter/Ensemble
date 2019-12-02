@@ -11,8 +11,6 @@
                HeightRequest="200"
                Margin="20,50,20,0"
                Source="EmptyUser.jpg"></Image>
-        <Label HorizontalTextAlignment="Center" 
-               TextColor="Black">First Last, Age</Label>
         <Button Text="Settings"
                 TextColor="White"
                 BackgroundColor="DarkSlateGray"
