@@ -1,3 +1,4 @@
+using Firebase.Auth;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +14,9 @@ namespace Ensemble
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MatchingPage : ContentView
     {
+        FirebaseHelper fh = new FirebaseHelper();
         public ObservableCollection<person> people { get; set; }
+        public ObservableCollection<User> ppl { get; set; }
         ListView lView = new ListView()
         {
             VerticalOptions = LayoutOptions.Fill,
@@ -24,8 +27,8 @@ namespace Ensemble
 
         public MatchingPage()
         {
+            
             people = new ObservableCollection<person>();
-
             DataTemplate ListDataTemplate = new DataTemplate(() =>
             {
                 SwipeGestureGrid gridData = new SwipeGestureGrid()
@@ -98,7 +101,8 @@ namespace Ensemble
             people.Add(new person() { name = "Lucas", instruments = "Recorder", image = "" });
             people.Add(new person() { name = "Tariq", instruments = "Drums", image = "" });
             people.Add(new person() { name = "Jane", instruments = "Singer", image = "" });
-
+            
+            
             lView.ItemTemplate = ListDataTemplate;
             lView.ItemsSource = people;
             Content = lView;
@@ -187,6 +191,13 @@ namespace Ensemble
             public person()
             {
 
+            }
+
+            public person(string name, string instrument, string img)
+            {
+                this.name = name;
+                this.instruments = instrument;
+                this.image = img;
             }
         }
     }
