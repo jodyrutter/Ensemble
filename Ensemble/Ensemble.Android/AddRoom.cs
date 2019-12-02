@@ -21,7 +21,9 @@ namespace Ensemble.Droid
         TextInputLayout roomnameText;
         //TextInputLayout ParticipantText;
         //TextInputLayout SetText;
-        MaterialSpinner partSpinner;
+        MaterialSpinner part1Spinner;
+        MaterialSpinner part2Spinner;
+        MaterialSpinner part3Spinner;
         Button submitButton;
         FirebaseHelper fh;
         //List<string> statusList;
@@ -46,10 +48,12 @@ namespace Ensemble.Droid
             roomnameText = (TextInputLayout)view.FindViewById(Resource.Id.roomnameText);
             //ParticipantText = (TextInputLayout)view.FindViewById(Resource.Id.ParticipantnameText);
             //SetText = (TextInputLayout)view.FindViewById(Resource.Id.SetText);
-            partSpinner = (MaterialSpinner)view.FindViewById(Resource.Id.statusSpinner);
+            part1Spinner = (MaterialSpinner)view.FindViewById(Resource.Id.statusSpinner1);
+            part2Spinner = (MaterialSpinner)view.FindViewById(Resource.Id.statusSpinner2);
+            part3Spinner = (MaterialSpinner)view.FindViewById(Resource.Id.statusSpinner3);
             submitButton = (Button)view.FindViewById(Resource.Id.submitButton);
             ler = (LinearLayout)view.FindViewById(Resource.Id.Createlayout);
-            SetupStatusPinner();
+            SetupPart1Spinner();
 
             submitButton.Click += CreateARoom;
 
@@ -62,9 +66,17 @@ namespace Ensemble.Droid
             if (ValidateEntries())
             {
                 String roomname = roomnameText.EditText.Text;
-                String participant = partSpinner.SelectedItem.ToString();
+                String participant1 = part1Spinner.SelectedItem.ToString();
+                String participant2 = part2Spinner.SelectedItem.ToString();
+                String participant3 = part3Spinner.SelectedItem.ToString();
 
-                participants.Add(participant);
+                participants.Add(participant1);
+
+                if (participant2 != "N/A")
+                    participants.Add(participant2);
+
+                if (participant3 != "N/A")
+                    participants.Add(participant3);
 
                 room = new Room(participants, roomname);
 
@@ -74,9 +86,7 @@ namespace Ensemble.Droid
             }
             else
             {
-                //string toast =  string.Format("Enter all entries");
-                Snackbar.Make(ler, "Enter all entries", Snackbar.LengthShort).Show();
-                //Snackbar.Make(activity_sign_up, "Please try again", Snackbar.LengthShort).Show();
+                Snackbar.Make(ler, "Error", Snackbar.LengthShort).Show();
             }
         }
 
@@ -104,33 +114,38 @@ namespace Ensemble.Droid
                 roomNamebool = true;
             }
 
-            if (partSpinner.SelectedItem == null)
+            if (part1Spinner.SelectedItem == null || part2Spinner.SelectedItem == null || part3Spinner.SelectedItem == null)
             {
                 participantbool = false;
+                Snackbar.Make(ler, "Choose participants or choose N/A", Snackbar.LengthShort).Show();
             }
 
-            else
+            else if(part1Spinner.SelectedItem != null && part2Spinner.SelectedItem != null && part3Spinner.SelectedItem != null)
             {
-                participantbool = true;
+                
+                if (part1Spinner.SelectedItem.ToString() == "N/A")
+                {
+                    Snackbar.Make(ler, "Participant 1 must not be N/A", Snackbar.LengthShort).Show();
+                    participantbool = false;
+                }
+                else
+                {
+                    participantbool = true;
+                }
             }
 
             return roomNamebool && participantbool;
         }
        
-        public async void SetupStatusPinner()
+        public async void SetupPart1Spinner()
         {
-            //statusList = new List<string>();
             userList = new List<User>();
             usernameList = new List<string>();
             participants = new List<string>();
             fh = new FirebaseHelper();
             
-            /*
-            statusList.Add("Graduated");
-            statusList.Add("Undergraduate");
-            statusList.Add("Dropped Out");
-            statusList.Add("Failed");
-            */
+            usernameList.Add("N/A");
+            
             userList = await fh.GetAllUsers();
             foreach (User u in userList)
             {
@@ -144,7 +159,12 @@ namespace Ensemble.Droid
             adapter = new ArrayAdapter<string>(Activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, usernameList);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 
-            partSpinner.Adapter = adapter;
+            part1Spinner.Adapter = adapter;
+            part2Spinner.Adapter = adapter;
+            part3Spinner.Adapter = adapter;
         }
+
+        
     }
+
 }

@@ -9,26 +9,12 @@
     <ImageView
         android:id="@+id/icon"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="false"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/ensemble"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginLeft = "200dp"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "Select from Gallery"
-        android:id = "@+id/pickPic"
-        
     />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "Capture Image"
-        android:id = "@+id/snapPic"
-        android:layout_below = "@+id/pickPic"        
-    />
+    
 
     <!-- Email -->
     <android.support.design.widget.TextInputLayout

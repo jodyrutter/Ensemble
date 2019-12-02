@@ -144,78 +144,52 @@ namespace Ensemble
 
         public async Task CreateRoom(Room room)
         {
-            var user = await GetUserwithEmail(room.participants[0]);
-            await firebase
-                .Child("Messaging")
-                .Child(user.uname)
-                .PostAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog));
-
-            var user2 = await GetUserwithEmail(room.participants[1]);
-            await firebase
-                .Child("Messaging")
-                .Child(user2.uname)
-                .PostAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog));
+            for (int i = 0; i < room.participants.Count; i++)
+            {
+                var user = await GetUserwithEmail(room.participants[i]);
+                await firebase
+                    .Child("Messaging")
+                    .Child(user.uname)
+                    .PostAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog));
+            }
         }
         public async Task UpdateRoom(String name, List<String> ppl, List<MessageContent> chat, MessageContent lastMsg)
         {
-            //UpdateRoom in the database for first user in chatroom
-            var user = await GetUserwithEmail(ppl[0]);
-            var toUpdateRoom = (await firebase
-                .Child("Messaging")
-                .Child(user.uname)
-                .OnceAsync<Room>())
-                .Where(a => a.Object.Name == name).FirstOrDefault();
+            for (int i = 0; i < ppl.Count; i++)
+            {
+                var user = await GetUserwithEmail(ppl[i]);
+                var toUpdateRoom = (await firebase
+                    .Child("Messaging")
+                    .Child(user.uname)
+                    .OnceAsync<Room>())
+                    .Where(a => a.Object.Name == name).FirstOrDefault();
 
-            await firebase
-                .Child("Messaging")
-                .Child(user.uname)
-                .Child(toUpdateRoom.Key)
-                .PutAsync(new Room(ppl, lastMsg, name, chat) { });
-
-            //update room in the database for the other user in chatroom
-            var user2 = await GetUserwithEmail(ppl[1]);
-            var toUpdateRoom2 = (await firebase
-                .Child("Messaging")
-                .Child(user2.uname)
-                .OnceAsync<Room>())
-                .Where(a => a.Object.Name == name).FirstOrDefault();
-
-            await firebase
-                .Child("Messaging")
-                .Child(user2.uname)
-                .Child(toUpdateRoom2.Key)
-                .PutAsync(new Room(ppl, lastMsg, name, chat) { });
+                await firebase
+                    .Child("Messaging")
+                    .Child(user.uname)
+                    .Child(toUpdateRoom.Key)
+                    .PutAsync(new Room(ppl, lastMsg, name, chat) { });
+            }
+            
         }
 
         public async Task UpdateRoom(Room room)
         {
-            //update room for first user
-            var user = await GetUserwithEmail(room.participants[0]);
-            var toUpdateRoom = (await firebase
-                .Child("Messaging")
-                .Child(user.uname)
-                .OnceAsync<Room>())
-                .Where(a => a.Object == room).FirstOrDefault();
+            for (int i = 0; i < room.participants.Count; i++)
+            {
+                var user = await GetUserwithEmail(room.participants[i]);
+                var toUpdateRoom = (await firebase
+                    .Child("Messaging")
+                    .Child(user.uname)
+                    .OnceAsync<Room>())
+                    .Where(a => a.Object == room).FirstOrDefault();
 
-            await firebase
-                .Child("Messaging")
-                .Child(user.uname)
-                .Child(toUpdateRoom.Key)
-                .PutAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog) { });
-
-            //update room for second user
-            var user2 = await GetUserwithEmail(room.participants[1]);
-            var toUpdateRoom2 = (await firebase
-                .Child("Messaging")
-                .Child(user2.uname)
-                .OnceAsync<Room>())
-                .Where(a => a.Object == room).FirstOrDefault();
-
-            await firebase
-                .Child("Messaging")
-                .Child(user2.uname)
-                .Child(toUpdateRoom2.Key)
-                .PutAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog) { });
+                await firebase
+                    .Child("Messaging")
+                    .Child(user.uname)
+                    .Child(toUpdateRoom.Key)
+                    .PutAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog) { });
+            }
         }
 
         public async Task<List<Room>> GetAllRooms(string email)

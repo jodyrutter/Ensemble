@@ -49,9 +49,29 @@
         <fr.ganfra.materialspinner.MaterialSpinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id = "@+id/statusSpinner"
+            android:id = "@+id/statusSpinner1"
             app:ms_enableFloatingLabel = "true"
-            app:ms_floatingLabelText = "Select Participant of Room"
+            app:ms_floatingLabelText = "Select Participant 1"
+            app:ms_hint = "Select Status"
+            app:ms_alignLabels = "true"
+        />
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/statusSpinner2"
+            app:ms_enableFloatingLabel = "true"
+            app:ms_floatingLabelText = "Select Participant 2"
+            app:ms_hint = "Select Status"
+            app:ms_alignLabels = "true"
+        />
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/statusSpinner3"
+            app:ms_enableFloatingLabel = "true"
+            app:ms_floatingLabelText = "Select Participant 3"
             app:ms_hint = "Select Status"
             app:ms_alignLabels = "true"
         />
