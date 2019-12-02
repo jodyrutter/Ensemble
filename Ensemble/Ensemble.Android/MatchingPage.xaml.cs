@@ -209,9 +209,7 @@ namespace Ensemble
         }
         private async void GetPossibleMatches()
         {
-            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "user.txt");
-            string currentEmail = File.ReadAllText(fileName);
-            u = await firebaseHelper.GetUserwithEmail(currentEmail);
+            u = await firebaseHelper.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
             if (u.No == null)
                 u.No = new List<string>();
             if (u.Yes == null)
