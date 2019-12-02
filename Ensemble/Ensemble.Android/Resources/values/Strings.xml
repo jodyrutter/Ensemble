@@ -3,7 +3,6 @@
     <string-array name="instrumentArray">
       <item>Clarinet</item>
       <item>Flute</item>
-      <item>Mayonnaise</item>
       <item>Piccolo</item>
       <item>English Horn</item>
       <item>Oboe</item>
@@ -40,7 +39,5 @@
       <item>Vocal - Soprano</item>
       <item>Vocal - Baritone</item>
       <item>Vocal - Contralto</item>
-      <item>Otamatone</item>
-      <item>Sosaphone</item>
     </string-array>
 </resources>

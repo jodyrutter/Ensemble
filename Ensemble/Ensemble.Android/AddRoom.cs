@@ -28,6 +28,7 @@ namespace Ensemble.Droid
         FirebaseHelper fh;
         //List<string> statusList;
         List<string> usernameList;
+        User user;
         List<User> userList;
         List<string> participants;
         ArrayAdapter<string> adapter;
@@ -145,10 +146,26 @@ namespace Ensemble.Droid
             fh = new FirebaseHelper();
             
             usernameList.Add("N/A");
-            
+
+
+
+
+            user = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
             userList = await fh.GetAllUsers();
             foreach (User u in userList)
             {
+                /*for (int i = 0; i < user.Yes.Count; i++)
+                {
+                    if (u.Email != FirebaseAuth.Instance.CurrentUser.Email)
+                    {
+                        if (u.Email == user.Yes[i])
+                        {
+                            usernameList.Add(u.Email);
+                        }
+                    }
+                }*/
+                
+                
                 if(u.Email != FirebaseAuth.Instance.CurrentUser.Email)
                     usernameList.Add(u.Email);
             }
