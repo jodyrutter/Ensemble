@@ -184,13 +184,13 @@ namespace Ensemble.Droid
             else
             {
                 //Make sure username doesnt already exist. To do list
-                IsSameUsername();
-                if (test != null)
-                {
-                    unameVal = false;
-                    Snackbar.Make(activity_sign_up, "Username already taken. Try another username", Snackbar.LengthShort).Show();
-                }
-                else
+                //IsSameUsername();
+                //if (test != null)
+                //{
+                //    unameVal = false;
+                //    Snackbar.Make(activity_sign_up, "Username already taken. Try another username", Snackbar.LengthShort).Show();
+                //}
+                //else
                     unameVal = true;
             }
 
