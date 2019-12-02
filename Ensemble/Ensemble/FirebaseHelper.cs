@@ -46,29 +46,41 @@ namespace Ensemble
             return AllUsers.Where(a => a.Email != email).ToList();
         }
         //Get all users from Realtime Database except in user's no list
-        public async Task<List<User>> GetAllUsersExceptNoList(List<string> no, string curr)
+        public async Task<List<User>> GetAllUsersExceptNoList(List<string> no, List<string> yes, string curr)
         {
             var AllUsers = await GetAllUsers();
-
-
+            List<User> returnList = new List<User>();
             await firebase
                 .Child("Users")
                 .OnceAsync<User>();
 
-            for (int i = 0; i < AllUsers.Count; i++)
+            foreach (var user in AllUsers)
             {
-                if (AllUsers[i].Email.Equals(curr))
-                    AllUsers.RemoveAt(i);
-
+                bool t = true;
+                if (user.Email.Equals(curr))
+                {
+                    continue;
+                }
                 for (int j = 0; j < no.Count; j++)
                 {
-                    if (AllUsers[i].Email.Equals(no[j]) || AllUsers[i].Email.Equals(curr))
+                    if (user.Email.Equals(no[j]))
                     {
-                        AllUsers.RemoveAt(i);
+                        t = false;
+                        break;
                     }
                 }
+                for (int k = 0; k < yes.Count; k++)
+                {
+                    if (user.Email.Equals(yes[k]))
+                    {
+                        t = false;
+                        break;
+                    }
+                }
+                if(t)
+                    returnList.Add(user);
             }
-            return AllUsers;
+            return returnList;
         }
 
         //Add 1 user to Realtime Database
