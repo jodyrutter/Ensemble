@@ -54,7 +54,7 @@ namespace Ensemble.Droid
             part3Spinner = (MaterialSpinner)view.FindViewById(Resource.Id.statusSpinner3);
             submitButton = (Button)view.FindViewById(Resource.Id.submitButton);
             ler = (LinearLayout)view.FindViewById(Resource.Id.Createlayout);
-            SetupPart1Spinner();
+            SetupPartSpinners();
 
             submitButton.Click += CreateARoom;
 
@@ -138,7 +138,7 @@ namespace Ensemble.Droid
             return roomNamebool && participantbool;
         }
        
-        public async void SetupPart1Spinner()
+        public async void SetupPartSpinners()
         {
             userList = new List<User>();
             usernameList = new List<string>();
@@ -154,7 +154,7 @@ namespace Ensemble.Droid
             userList = await fh.GetAllUsers();
             foreach (User u in userList)
             {
-                /*for (int i = 0; i < user.Yes.Count; i++)
+                for (int i = 0; i < user.Yes.Count; i++)
                 {
                     if (u.Email != FirebaseAuth.Instance.CurrentUser.Email)
                     {
@@ -163,11 +163,11 @@ namespace Ensemble.Droid
                             usernameList.Add(u.Email);
                         }
                     }
-                }*/
+                }
                 
                 
-                if(u.Email != FirebaseAuth.Instance.CurrentUser.Email)
-                    usernameList.Add(u.Email);
+                //if(u.Email != FirebaseAuth.Instance.CurrentUser.Email)
+                  //  usernameList.Add(u.Email);
             }
 
             participants.Add(FirebaseAuth.Instance.CurrentUser.Email);

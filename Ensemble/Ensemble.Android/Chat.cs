@@ -22,6 +22,7 @@ namespace Ensemble.Droid
         String text;
         RelativeLayout rel;
         TextView RoomName;
+        Button refresh;
         FloatingActionButton fab;
         EditText msg;
         ListView listMsg;
@@ -47,6 +48,7 @@ namespace Ensemble.Droid
 
             rel = FindViewById<RelativeLayout>(Resource.Id.real1);
             RoomName = FindViewById<TextView>(Resource.Id.roomName);
+            refresh = FindViewById<Button>(Resource.Id.refresh_btn_chat);
             fab = FindViewById<FloatingActionButton>(Resource.Id.fab1);
             msg = FindViewById<EditText>(Resource.Id.input_msg);
             listMsg = FindViewById<ListView>(Resource.Id.list_msg);
@@ -58,6 +60,12 @@ namespace Ensemble.Droid
             GetUser();
             GetRoom();
             fab.Click += Fab_Click;
+            refresh.Click += Refresh_Click;
+            DisplayChatMessages();
+        }
+
+        private void Refresh_Click(object sender, EventArgs e)
+        {
             DisplayChatMessages();
         }
 

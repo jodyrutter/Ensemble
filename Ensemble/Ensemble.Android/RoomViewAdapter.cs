@@ -72,20 +72,7 @@ namespace Ensemble.Droid
             else
                 lastMsgTime.Text = rooms[position].lastMsg.Time;
 
-            //Gets new profilePic of Chatroom based on the profile pic of the received participant (ppl[1])
-            //Will receiver profile pic from Google Firebase Storage hopefully
-            //will add depending on how much Jody has done
-            //GetUser();
-            //if user.ProfilePic string matches something from Google Firebase Storage, replace pic of image view
-            /*if (true)
-            {
-
-            }
-            //else keep default profile pic
-            else
-            { 
             
-            }*/
             return itemView;        
         }
         private async void GetUser()

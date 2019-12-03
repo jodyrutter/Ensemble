@@ -8,13 +8,22 @@
     android:id = "@+id/real1">
     <TextView
         android:text="Room Name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:minWidth="25px"
         android:minHeight="25px"
         android:textSize = "25dp"
         android:id="@+id/roomName"
         />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf = "@id/roomName"
+        android:text = "Refresh"
+        android:layout_marginHorizontal = "70dp"
+        android:id = "@+id/refresh_btn_chat"
+    />
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
