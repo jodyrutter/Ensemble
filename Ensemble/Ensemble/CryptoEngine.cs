@@ -39,5 +39,3 @@ namespace Ensemble
     }
 }
 
-//string encryptedWord = CryptoEngine.Encrypt(word);
-//string decryptedWord = CryptoEngine.Decrypt(word);

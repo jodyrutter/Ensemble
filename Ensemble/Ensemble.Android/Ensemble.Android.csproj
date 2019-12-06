@@ -246,7 +246,7 @@
     <AndroidResource Include="Resources\drawable\Send.png" />
   </ItemGroup>
   <ItemGroup>
-  <EmbeddedResource Include="Settings.xaml">
+    <EmbeddedResource Include="Settings.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <AndroidResource Include="Resources\layout\List_Item.xml">

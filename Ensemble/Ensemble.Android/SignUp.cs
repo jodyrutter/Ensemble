@@ -10,7 +10,6 @@ using Android.Gms.Tasks;
 using Android.OS;
 using Firebase.Auth;
 using Firebase.Database;
-using static Android.Views.View;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -21,14 +20,9 @@ using Java.Util;
 using Java.Lang;
 using Ensemble.Droid.Helpers;
 using FR.Ganfra.Materialspinner;
-using Firebase.Storage;
-using Android.Graphics;
-using Android.Provider;
-
-using Plugin.Media.Abstractions;
-using Plugin.Media;
-using Android.Content.PM;
 using Android;
+
+using static Android.Views.View;
 
 namespace Ensemble.Droid
 {
@@ -47,27 +41,25 @@ namespace Ensemble.Droid
         EditText input_bio;
         EditText input_youlink;
         
-        RelativeLayout activity_sign_up;                         //the xaml file variable for the class
+        RelativeLayout activity_sign_up;                         //the relativeLayout from the xml file
         FirebaseAuth auth;                                       //Firebase auth variable
         MaterialSpinner instrumentSpinner;                       //Spinner for instruments   
-        List<string> instruments;
-        User test;
-        string favInstrument;
-        int num;
+        List<string> instruments;                                //String of instruments user to choose from
+        User test;                                               //test user to check if username is the same
+        string favInstrument;                                    //favInstrument choice of user
+        int num;                                                 //int used to parse string into an integer
 
         TaskCompletionListener tcl = new TaskCompletionListener();
         FirebaseHelper fh = new FirebaseHelper();                           //FirebaseHelper variable
-        List<string> ye = null;
-        List<string> nay = null;
+
 
         
         //Set up Spinner from Array defined in Resources.String
         private void SetUpSpinner()
         {
             instruments = new List<string>();
-            
+
             var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.instrumentArray, Android.Resource.Layout.SimpleSpinnerItem);
-            
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             instrumentSpinner.Adapter = adapter;
         }
@@ -76,7 +68,7 @@ namespace Ensemble.Droid
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             favInstrument = instrumentSpinner.GetItemAtPosition(e.Position).ToString();
-            Toast.MakeText(this, favInstrument, ToastLength.Long).Show();
+            //Toast.MakeText(this, favInstrument, ToastLength.Long).Show();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -89,7 +81,6 @@ namespace Ensemble.Droid
             //Initiate Firebase onto Sign Up page
             auth = FirebaseAuth.GetInstance(MainActivity.app);
             
-            //db = FirebaseDatabase.GetInstance(MainActivity.app);
             ConnectControl();
             SetUpSpinner();
             
@@ -117,6 +108,7 @@ namespace Ensemble.Droid
             btnSignup.Click += btnSignup_Click;
             btnLogin.Click += btnLogin_Click;
 
+            //initialize spinner selection to class
             instrumentSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
         }
 
@@ -133,18 +125,20 @@ namespace Ensemble.Droid
         //If Signup button is pressed
         private void btnSignup_Click(object sender, EventArgs e)
         {
+            //if credentials are filled in correctly, register user, else error
             if (ValidateCredentials())
             {
                 RegisterUser(input_email.Text, input_pwd.Text);
             }
             else
             {
-                Snackbar.Make(activity_sign_up, "Please try again", Snackbar.LengthShort).Show();
+                Snackbar.Make(activity_sign_up, "Please try again", Snackbar.LengthLong).Show();
             }
 
 
         }
 
+        //Check the validations of every entry that is entered
         private  bool ValidateCredentials()
         {
             bool emailVal;
@@ -157,29 +151,29 @@ namespace Ensemble.Droid
             bool YVal;
 
 
-            //validation for email
+            //validation for email, making sure there is a '@'
             if (!input_email.Text.Contains("@"))
             {
                 emailVal = false;
-                Snackbar.Make(activity_sign_up, "Please enter a valid email", Snackbar.LengthShort).Show();
+                Snackbar.Make(activity_sign_up, "Please enter a valid email", Snackbar.LengthLong).Show();
             }
             else
                 emailVal = true;
 
-            //validation for password
+            //validation for password 
             if (input_pwd.Text.Length < 8)
             {
                 passVal = false;
-                Snackbar.Make(activity_sign_up, "Please enter a password up to 8 characters", Snackbar.LengthShort).Show();
+                Snackbar.Make(activity_sign_up, "Please enter a password up to 8 characters", Snackbar.LengthLong).Show();
             }
             else
                 passVal = true;
 
-            //validation for username
+            //validation for username there needs to be some characters for username
             if (input_username.Text.Length == 0)
             {
                 unameVal = false;
-                Snackbar.Make(activity_sign_up, "Please enter a username", Snackbar.LengthShort).Show();
+                Snackbar.Make(activity_sign_up, "Please enter a username", Snackbar.LengthLong).Show();
             }
             else
             {
@@ -198,40 +192,42 @@ namespace Ensemble.Droid
             if (input_age.Text.Length == 0)
             {
                 AgeVal = false;
-                Snackbar.Make(activity_sign_up, "Please enter your age", Snackbar.LengthShort).Show();
+                Snackbar.Make(activity_sign_up, "Please enter your age", Snackbar.LengthLong).Show();
             }
             else
             {
+                //entry in input_age is not integer, then error
                 if (!int.TryParse(input_age.Text, out num))
                 {
                     AgeVal = false;
-                    Snackbar.Make(activity_sign_up, "Age entered invalid. Try again", Snackbar.LengthShort).Show();
+                    Snackbar.Make(activity_sign_up, "Age entered invalid. Try again", Snackbar.LengthLong).Show();
                 }
                 else
                     AgeVal = true;
             }
          
-            //Validation on Favorite instrument
+            //Validation on Favorite instrument: if there is no selection for favinstrument, then error
             if (instrumentSpinner.SelectedItem == null || favInstrument == null)
             {
                 FavVal = false;
-                Snackbar.Make(activity_sign_up, "Please enter your Favorite instrument", Snackbar.LengthShort).Show();
+                Snackbar.Make(activity_sign_up, "Please enter your Favorite instrument", Snackbar.LengthLong).Show();
             }
             else
                 FavVal = true;
 
-            //Validation for Short Bio
+            //Validation for Short Bio: need entry for short bio
             if (input_bio.Text.Length == 0)
             {
                 BioVal = false;
-                Snackbar.Make(activity_sign_up, "Please enter short bio about yourself", Snackbar.LengthShort).Show();
+                Snackbar.Make(activity_sign_up, "Please enter short bio about yourself", Snackbar.LengthLong).Show();
             }
             else
             {
+                //if bio is more than 250 words, error because too long
                 if (input_bio.Text.Length > 250)
                 {
                     BioVal = false;
-                    Snackbar.Make(activity_sign_up, "Short Bio too long.", Snackbar.LengthShort).Show();
+                    Snackbar.Make(activity_sign_up, "Short Bio too long.", Snackbar.LengthLong).Show();
                 }
                 else
                     BioVal = true;
@@ -245,7 +241,6 @@ namespace Ensemble.Droid
             }
             else
             {
-                //Will put in validation of youtube link later
                 YVal = true;
             }
 
@@ -276,10 +271,10 @@ namespace Ensemble.Droid
         //Upon failure, try again
         private void TaskCompletionListener_Failure(object sender, EventArgs e)
         {
-            Snackbar.Make(activity_sign_up, "User Registration failed", Snackbar.LengthShort).Show();
+            Snackbar.Make(activity_sign_up, "User Registration failed", Snackbar.LengthLong).Show();
         }
         
-        //Add user to Realtime database
+        //Add user credentials to Firebase Realtime database
         private void AddtoRealtime()
         {
             //turn age input into into
@@ -297,20 +292,20 @@ namespace Ensemble.Droid
             UserInfo.Put("ShortBio", input_bio.Text);
             UserInfo.Put("uname", input_username.Text);
             UserInfo.Put("yLink", input_youlink.Text);
-            //UserInfo.Put("Yes", num);
-            //UserInfo.Put("No", num);
 
+            //Push hashmap to database under User child
             DatabaseReference dref = AppDataHelper.GetDatabase().GetReference("Users").Push();
             dref.SetValue(UserInfo);
 
-            Snackbar.Make(activity_sign_up, "Account added to Realtime Database", Snackbar.LengthShort).Show();
+            //Success message
+            Snackbar.Make(activity_sign_up, "Account added to Realtime Database", Snackbar.LengthLong).Show();
 
 
         }
         //Upon success, Add to Realtime database & go to Main Activity page
         private void TaskCompletionListener_Success(object sender, EventArgs e)
         {
-            Snackbar.Make(activity_sign_up, "User Registration Success", Snackbar.LengthShort).Show();
+            Snackbar.Make(activity_sign_up, "User Registration Success", Snackbar.LengthLong).Show();
             AddtoRealtime();
 
             StartActivity(typeof(MainActivity));

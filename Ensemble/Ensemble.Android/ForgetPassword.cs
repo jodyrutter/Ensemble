@@ -30,18 +30,19 @@ namespace Ensemble.Droid
         //initialize button clicks
         public void OnClick(View v)
         {
+            //if back button clicked, then go to MainActivity
             if (v.Id == Resource.Id.forget_btn_back)
             {
                 StartActivity(new Intent(this, typeof(MainActivity)));
                 Finish();
             }
+            //If forget button clicked,go to Reset password
             else if (v.Id == Resource.Id.forget_btn_reset)
             {
                 ResetPassword(input_email.Text);
             }
         }
         //Reset password by sending link to email
-        //May be tricky if we keep putting password into Realtime database
         private void ResetPassword(string email)
         {
             auth.SendPasswordResetEmail(email).AddOnCompleteListener(this, this);
@@ -52,10 +53,10 @@ namespace Ensemble.Droid
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ForgetPassword);
 
-            //Init Firebase
+            //Initialize Firebase
             auth = FirebaseAuth.GetInstance(MainActivity.app);
 
-            //Views
+            //Initialize Views
             input_email = FindViewById<EditText>(Resource.Id.forget_email);
             btnResetPas = FindViewById<Button>(Resource.Id.forget_btn_reset);
             btnBack = FindViewById<TextView>(Resource.Id.forget_btn_back);
@@ -66,15 +67,16 @@ namespace Ensemble.Droid
         }
         public void OnComplete(Task task)
         {
+            //if task fails, send error message
             if (task.IsSuccessful == false)
             {
-                Snackbar sn = Snackbar.Make(activity_forget, "Reset Password Failed!", Snackbar.LengthShort);
+                Snackbar sn = Snackbar.Make(activity_forget, "Reset Password Failed!", Snackbar.LengthLong);
                 sn.Show();
             }
-
+            //on success, tell user to check email
             else
             {
-                Snackbar sn = Snackbar.Make(activity_forget, "Reset Password link sent to email: " + input_email.Text, Snackbar.LengthShort);
+                Snackbar sn = Snackbar.Make(activity_forget, "Reset Password link sent to email: " + input_email.Text, Snackbar.LengthLong);
                 sn.Show();
             }
         }

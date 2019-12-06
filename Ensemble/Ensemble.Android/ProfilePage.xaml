@@ -7,10 +7,13 @@
              x:Class="Ensemble.ProfilePage">
 
     <StackLayout>
+        <!-- Image of Empty User-->
         <Image WidthRequest="200" 
                HeightRequest="200"
                Margin="20,50,20,0"
-               Source="EmptyUser.jpg"></Image>
+               Source="EmptyUser.jpg">
+        </Image>
+        <!-- Settings Button-->
         <Button Text="Settings"
                 TextColor="White"
                 BackgroundColor="DarkSlateGray"
@@ -23,6 +26,7 @@
                 FontSize="Micro"
                 Clicked="navSettings"
                 />
+        <!--Log out Button-->
         <Button Text="Logout"
                 TextColor="White"
                 BackgroundColor="DarkSlateGray"
@@ -32,43 +36,7 @@
                 Margin="20,0,20,20"
                 HorizontalOptions="Center"
                 CornerRadius="15"
-                FontSize="Micro"/>
-        <!--
-        <Button Text="Save"
-                Clicked="OnDisplayAlertQuestionButtonClicked"
-                TextColor="Black"
-                BackgroundColor="Red"
-                BorderColor="Transparent"
-                WidthRequest="50"
-                HeightRequest="35"
-                CornerRadius="150"
                 FontSize="Micro"
-                HorizontalOptions="Start"/>
-       
-        <Entry Placeholder="Enter your name here"
-               FontSize="Micro"
-               HeightRequest="35"
-               MaxLength="30"
-               TextChanged="OnNameTextChanged"
-               />
-        <Entry Placeholder="Enter your age here"
-               FontSize="Micro"
-               HeightRequest="35"
-               MaxLength="3"
-               TextChanged="OnAgeTextChanged"
-               />
-        <Entry Placeholder="Enter your gender here"
-               FontSize="Micro"
-               HeightRequest="35"
-               MaxLength="10"
-               TextChanged="OnGenderTextChanged"
-               />
-        <Entry Placeholder="Enter your instrument information here"
-               FontSize="Micro"
-               HeightRequest="35"
-               MaxLength="80"
-               TextChanged="OnInstrumentTextChanged"
-               /-->
+                Clicked="LogOut"/>
     </StackLayout>
-
 </ContentView>

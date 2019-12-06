@@ -16,9 +16,8 @@ namespace Ensemble
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LandingPage : ContentPage
     {
-        FirebaseHelper fh = new FirebaseHelper();
-        User profile;
-        List<User> users = new List<User>();
+        
+        //Initialize grid for the page
         Grid grid = new Grid
         {
             VerticalOptions = LayoutOptions.FillAndExpand,
@@ -38,8 +37,7 @@ namespace Ensemble
         
         public LandingPage()
         {
-            
-            
+           //initialize Profile Button for page            
             var profileButton = new Button
             {
                 Text = "Profile",
@@ -52,6 +50,7 @@ namespace Ensemble
             profileButton.Clicked += OnProfileButtonClicked;
             grid.Children.Add(profileButton, 0, 0);
 
+            //Initialize Match button
             var matchButton = new Button
             {
                 Text = "Match",
@@ -64,6 +63,7 @@ namespace Ensemble
             matchButton.Clicked += OnMatchButtonClicked;
             grid.Children.Add(matchButton, 1, 0);
 
+            //Initialize Compose Button
             var composeButton = new Button
             {
                 Text = "Compose",
@@ -75,54 +75,20 @@ namespace Ensemble
             };
             composeButton.Clicked += OnComposeButtonClicked;
             grid.Children.Add(composeButton, 2, 0);
-
-            //var tPage = new TabbedPage();
-            //tPage.Children.Add(new ProfilePage { Title = "Profile" });
-            //tPage.Children.Add(new MatchingPage { Title = "Match" });
-            //tPage.Children.Add(new ContentPage { Title = "Compose" });
-
-            //Xamarin.Forms.PlatformConfiguration.AndroidSpecific.TabbedPage.SetIsSwipePagingEnabled(tPage, false);
-
-            //tPage.Title = "Ensemble";
-            //App.Current.MainPage = new NavigationPage();
-            //Navigation.PushModalAsync(new TabbedPage());
             this.Content = grid;
         }
 
-        //Function used to get users from firebase Realtime database
-        /*
-        public async void GetUserList()
-        {
-            var items = await fh.GetAllUsers();
-
-            foreach (var item in items)
-            {
-                users.Add(item);
-            }    
-        }*/
-
+        //When Compose is clicked, go to RoomSelection Activity
         [Obsolete]
         private void OnComposeButtonClicked(object sender, EventArgs e)
         {
-            //Uncomment if you want page to show out of format
-            //Navigation.PushModalAsync(new Page1(FirebaseAuth.Instance.CurrentUser.Email));
-
             var intent = new Intent(Forms.Context, typeof(RoomSelection));
             Forms.Context.StartActivity(intent);
-            
-            
-            //if (grid.Children.Count > 3)
-              //  grid.Children.RemoveAt(3);
-            //var cpage = new Message1(FirebaseAuth.Instance.CurrentUser.Email);
-            //grid.Children.Add(cpage, 0, 1);
-            //Grid.SetColumnSpan(cpage, 3);
-            
-            
         }
 
+        //When Match is clicked, go to Matching Page
         private void OnMatchButtonClicked(object sender, EventArgs e)
         {
-            //Navigation.PushModalAsync(new MatchingPage());
             if(grid.Children.Count > 3)
                 grid.Children.RemoveAt(3);
             var mpage = new MatchingPage();
@@ -130,20 +96,14 @@ namespace Ensemble
             Grid.SetColumnSpan(mpage, 3);
         }
 
+        //When Profile is clicked, go to Profile page
         private void OnProfileButtonClicked(object sender, EventArgs e)
         {
-            //Navigation.PushModalAsync(new ProfilePage());
             if (grid.Children.Count > 3)
                 grid.Children.RemoveAt(3);
             var ppage = new ProfilePage();
             grid.Children.Add(ppage, 0, 1);
             Grid.SetColumnSpan(ppage, 3);
-
         }
-
-        /*  void OnProfile(object sender, EventArgs args)
-          {
-              Navigation.PushModalAsync(new Page1());
-          }*/
     }
 }

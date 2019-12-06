@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Ensemble;
+using Android.Content;
 
 namespace Ensemble.Droid
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Settings : ContentPage
     {
+        //initialize variables 
         public static string SettingsScreenTitle = "Settings";
         private FirebaseHelper fh;
         SettingsA settings;
@@ -27,13 +30,13 @@ namespace Ensemble.Droid
             ConnectControl();
             Title = SettingsScreenTitle;
         }
+        //Allows user to save changes made to account
         async private void saveSettings() {
             settings.youtube = youtubeURL.Text;
             var i = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
             i.yLink = settings.youtube;
             await fh.UpdateUser(i);
-            //String a = youtubeURL.Text;
-            //Not implemented yet.
+
         }
         async void ConnectControl() {
             var i = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
@@ -41,7 +44,7 @@ namespace Ensemble.Droid
             TableView table;
             labAcc = new TextCell
             {
-                Text = "Account Prefereces",
+                Text = "Account Preferences",
             };
             youtubeURL = new EntryCell {
                 Placeholder = "YouTube video of performance",
@@ -61,15 +64,21 @@ namespace Ensemble.Droid
                     new TableSection{
                         labAcc,
                         youtubeURL,
-                        //Removed delete do to issues.
+                        
                     }
                 }
             };
             table.VerticalOptions = LayoutOptions.FillAndExpand;
             MainLayout.Children.Add(table);
         }
+        //save changes upon closing application
         protected override async void OnDisappearing() {
             base.OnDisappearing();
+            saveSettings();
+        }
+        //save changes upon pressing save button
+        private void Save_Settings(object sender, EventArgs e)
+        {
             saveSettings();
         }
     }

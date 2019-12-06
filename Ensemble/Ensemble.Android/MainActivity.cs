@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -8,7 +7,6 @@ using Android.Widget;
 using Android.OS;
 using Firebase;
 using Firebase.Auth;
-using static Android.Views.View;
 using Android.Support.V7.App;
 using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
@@ -16,6 +14,8 @@ using System.Collections.Generic;
 using Android.Content;
 using System.Numerics;
 using Firebase.Database;
+
+using static Android.Views.View;
 
 namespace Ensemble.Droid
 {
@@ -48,23 +48,23 @@ namespace Ensemble.Droid
             btnForgetPwd = FindViewById<TextView>(Resource.Id.login_btn_forget_password);
             activity_main = FindViewById<RelativeLayout>(Resource.Id.activity_main);
 
-            //initialize button presses
+            //initialize button presses and FirebaseAuth
             btnLogin.Click += LoginButton_Click;
             btnSignUp.Click += BtnSignUp_Click;
             btnForgetPwd.Click += BtnForgetPwd_Click;
             InitFirebaseAuth();
         }
-        //Go to Sign Up page
+        //Go to Sign Up page when signup button is clicked
         private void BtnSignUp_Click(object sender, EventArgs e)
         {
             StartActivity(typeof(SignUp));
         }
-        //Go to Forgot Password Page
+        //Go to Forgot Password Page when forgot password button is clicked
         private void BtnForgetPwd_Click(object sender, EventArgs e)
         {
             StartActivity(typeof(ForgetPassword));
         }
-        //Try to log in
+        //Try to log in when log in button is clicked
         private void LoginButton_Click(object sender, EventArgs e)
         {
             string em, p; 
@@ -76,13 +76,13 @@ namespace Ensemble.Droid
             //email invalid if no @ sign
             if (!em.Contains("@"))
             {
-                Snackbar.Make(activity_main, "Please provide valid email", Snackbar.LengthShort).Show();
+                Snackbar.Make(activity_main, "Please provide valid email", Snackbar.LengthLong).Show();
                 return;
             }
             //password invalid if below 8 characters
             else if (p.Length < 8)
             {
-                Snackbar.Make(activity_main, "Please provide valid password", Snackbar.LengthShort).Show();
+                Snackbar.Make(activity_main, "Please provide valid password", Snackbar.LengthLong).Show();
                 return;
             }
             //Initialize task completion listener and link to functions
@@ -100,14 +100,14 @@ namespace Ensemble.Droid
         //Upon failure of logging in, try again
         private void TaskCompletionListener_Failure(object sender, EventArgs e)
         {
-            Snackbar.Make(activity_main, "Login Failed", Snackbar.LengthShort).Show();
+            Snackbar.Make(activity_main, "Login Failed", Snackbar.LengthLong).Show();
         }
         
         //Upon success, go to Dashboard
         private void TaskCompletionListener_Success(object sender, EventArgs e)
         {
 
-            Snackbar.Make(activity_main, "Login Success", Snackbar.LengthShort).Show();
+            Snackbar.Make(activity_main, "Login Success", Snackbar.LengthLong).Show();
             StartActivity(typeof(ToXForms));
         }
         
@@ -129,7 +129,7 @@ namespace Ensemble.Droid
                 app = FirebaseApp.InitializeApp(this, options);
             }
             mAuth = FirebaseAuth.GetInstance(app);
-            Snackbar.Make(activity_main, "Firebase initialized", Snackbar.LengthShort).Show(); 
+            Snackbar.Make(activity_main, "Firebase Authentication initialized", Snackbar.LengthLong).Show(); 
         }
     }
 }

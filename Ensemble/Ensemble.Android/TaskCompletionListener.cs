@@ -14,6 +14,7 @@ using Java.Lang;
 
 namespace Ensemble.Droid
 {
+    //Class created to show different methods on success or failure of something
     public class TaskCompletionListener : Java.Lang.Object, IOnSuccessListener, IOnFailureListener
     {
         public event EventHandler Success;

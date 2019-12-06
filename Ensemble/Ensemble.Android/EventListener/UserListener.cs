@@ -14,6 +14,7 @@ using Firebase.Database;
 
 namespace Ensemble.Droid.EventListener
 {
+    //User listener was a program used to create a account and post it to the Firebase Realtime database.
     public class UserListener : Java.Lang.Object, IValueEventListener
     {
         List<User> userList = new List<User>();
@@ -49,8 +50,7 @@ namespace Ensemble.Droid.EventListener
                     user.FavInstrument = data.Child("FavInstrument").Value.ToString();
                     user.ShortBio = data.Child("ShortBio").Value.ToString();
                     user.yLink = data.Child("yLink").Value.ToString();
-                    //user.Yes = data.Child("ProfilePic").;
-                    //user.No = ;
+
                     userList.Add(user);
                 }
                 UsersRetrieved.Invoke(this, new UserDataEventArgs { users = userList });

@@ -4,6 +4,7 @@ namespace Ensemble
 {
     public class MessageContent
     {
+        //Initialize variable for Message
         public string Email { get; set; }
         public string Message { get; set; }
         public string Time { get; set; }
@@ -12,7 +13,7 @@ namespace Ensemble
         {
 
         }
-
+        //Initialize Message upon creation. Time will be created upon message created
         public MessageContent(string email, string message)
         {
             this.Email = email;

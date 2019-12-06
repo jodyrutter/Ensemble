@@ -22,6 +22,7 @@ namespace Ensemble.Droid
     [Activity(Label = "CreateRoom")]
     public class CreateRoom : Activity
     {
+        //Initialize variables
         FirebaseHelper fh = new FirebaseHelper();
         ListView lv;
         List<string> users = new List<string>();
@@ -31,11 +32,7 @@ namespace Ensemble.Droid
         UserListener UserListener;
         RelativeLayout rel;
 
-        //DatabaseReference reference;
-        //FirebaseDatabase db;
-
-
-
+        //Retreve user information
         public void RetrieveData()
         {
             UserListener = new UserListener();
@@ -71,23 +68,12 @@ namespace Ensemble.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            //SetContentView(Resource.Layout.CreateRoom);
             GetAllUsers();
-           // lv = FindViewById<ListView>(Resource.Id.listView1);
-            //rel = FindViewById<RelativeLayout>(Resource.Id.real);
-            //RetrieveData();
-            //GetAllUsers();
+
             
             ArrayAdapter<string> a = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, users);
             lv.Adapter = a;
-            //ListAdapter = a;
-            //lv.TextFilterEnabled = true;
-            
-            /*lv.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs e)
-            {
-                Toast.MakeText(Application, ((TextView)e.View).Text, ToastLength.Short).Show();
-            };*/
-            //lv.Adapter = adapter;
+
         }
 
       

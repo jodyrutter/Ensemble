@@ -6,7 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-
+using Firebase.Auth;
+using Ensemble.Droid;
 
 namespace Ensemble
 {
@@ -15,87 +16,33 @@ namespace Ensemble
 
     public partial class ProfilePage : ContentView
     {
-        public string name { get; set; }
-        public string gender { get; set; }
-        public string age { get; set; }
-        public string instr { get; set; }
-	protected Profile profile;
-
-	public ProfilePage()
+        FirebaseAuth auth;
+	    public ProfilePage()
         {
-            profile = new Profile();
             InitializeComponent();
+            auth = FirebaseAuth.Instance;
         }
 
-        async void OnDisplayAlertQuestionButtonClicked(object sender, EventArgs e)
-        {
-            bool response = await App.Current.MainPage.DisplayAlert("Save?", "Would you like to save your data?", "Yes", "No");
-            Console.WriteLine("Save data: " + response);
-            profile.Age = age;
-            profile.Gender = gender;
-            profile.Name = name;
-            profile.Instr = instr;
-            profile.printto();
-        }
-
-        void OnNameTextChanged(object sender, TextChangedEventArgs e)
-        {
-            string oldText = e.OldTextValue;
-            string newText = e.NewTextValue;
-            name = newText;
-
-        }
+        //Upon click, navigates to Settings page
         [Obsolete]
         async void navSettings(object sender, EventArgs e) {
             var nextPage = new NavigationPage(new Ensemble.Droid.Settings());
             await Navigation.PushModalAsync(nextPage);
         }
-        /*   void OnNameCompleted(object sender, EventArgs e)
-		   {
-			   /*string text = ((Editor)sender).Text;
-			   profile.name = text;
 
-			   name = ((Editor)sender).Text;
-		   }*/
-        /*  void OnEmailCompleted(object sender, EventArgs e)
-		  {
-			  //string text = ((Editor)sender).Text;
-			  /*profile.email= ;
-			  profile.printto();
-		  }*/
-
-        void OnAgeTextChanged(object sender, TextChangedEventArgs e)
+        //Upon click, logs user out of account and navigates them to the Log In Screen
+        [Obsolete]
+        private void LogOut(object sender, EventArgs e)
         {
-            var oldText = e.OldTextValue;
-            var newText = e.NewTextValue;
-            age = newText;
+            
+            auth.SignOut();
+            //if current user is null, go back to main activity
+            if (auth.CurrentUser == null)
+            {
+                var intent = new Intent(Forms.Context, typeof(MainActivity));
+                Forms.Context.StartActivity(intent);
+                
+            }
         }
-        /* void OnAgeCompleted(object sender, EventArgs e)
-		 {
-			 var text = ((Editor)sender).Text;
-		 }*/
-
-        void OnGenderTextChanged(object sender, TextChangedEventArgs e)
-        {
-            string oldText = e.OldTextValue;
-            string newText = e.NewTextValue;
-            gender = newText;
-
-        }
-        /*   void OnGenederCompleted(object sender, EventArgs e)
-		   {
-			   string text = ((Editor)sender).Text;
-		   }*/
-
-        void OnInstrumentTextChanged(object sender, TextChangedEventArgs e)
-        {
-            string oldText = e.OldTextValue;
-            string newText = e.NewTextValue;
-            instr = newText;
-        }
-        /*    void OnInstrumentCompleted(object sender, EventArgs e)
-			{
-				string text = ((Editor)sender).Text;
-			}*/
     }
 }

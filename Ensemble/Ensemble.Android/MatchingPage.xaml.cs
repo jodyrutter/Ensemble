@@ -16,6 +16,7 @@ namespace Ensemble
    
     public partial class MatchingPage : ContentView
     {
+        //initialize variables
         public ObservableCollection<User> people { get; set; }
         ListView lView = new ListView()
         {
@@ -99,13 +100,6 @@ namespace Ensemble
 
             GetPossibleMatches();
 
-            //people.Add(new person() { name = "Steve", instruments = "Guitar", image = "" });
-            //people.Add(new person() { name = "John", instruments = "Piano", image = "" });
-            //people.Add(new person() { name = "Tom", instruments = "Flute", image = "" });
-            //people.Add(new person() { name = "Lucas", instruments = "Recorder", image = "" });
-            //people.Add(new person() { name = "Tariq", instruments = "Drums", image = "" });
-            //people.Add(new person() { name = "Jane", instruments = "Singer", image = "" });
-
             lView.ItemTemplate = ListDataTemplate;
             lView.ItemsSource = people;
             Content = lView;
@@ -118,8 +112,7 @@ namespace Ensemble
                 if (sender is Button)
                 {
                     var templateGrid = ((Button)sender);
-                    //templateGrid.Parent = gridBase
-                    //templateGrid.Parent.Parent = cell
+
                     if (templateGrid.Parent != null && templateGrid.Parent.Parent != null && templateGrid.Parent.Parent.BindingContext != null)
                     {
                         var deletedate = templateGrid.Parent.Parent.BindingContext;
@@ -145,11 +138,13 @@ namespace Ensemble
 
             }
         }
+        //create room and add it to firebase realtime database
         private async void AddRoomToRealtime(Room room)
         {
             await firebaseHelper.CreateRoom(room);
         }
 
+        //update user information and add to firebase realtime database
         private async void updateUser()
         {
             await firebaseHelper.UpdateUser(u);
@@ -158,9 +153,7 @@ namespace Ensemble
         private void GridTemplate_Tapped(object sender, EventArgs e)
         {
             var tappedUser = (User)(((SwipeGestureGrid)sender).Parent.Parent.BindingContext);
-            //string url = "https:" + "//www.youtube.com/embed/" + tappedUser.yLink.Substring(tappedUser.yLink.IndexOf("v=")+2);
-            //string html = @"<iframe width=""853"" height=""480"" src=""" + url + @""" frameborder=""0"" allow=""accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"" allowfullscreen></iframe>";
-            WebView webView = new WebView()
+           WebView webView = new WebView()
             {
                 HeightRequest = App.Current.MainPage.Height,
                 Source = tappedUser.yLink
@@ -208,6 +201,7 @@ namespace Ensemble
 
             }
         }
+        //gets user and checks if 
         private async void GetPossibleMatches()
         {
             u = await firebaseHelper.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
@@ -229,7 +223,7 @@ namespace Ensemble
                 people.Add(p);
             }
         }
-
+        //if user swipes to the right on profile
         private void GridTemplate_SwipeRight(object sender, EventArgs e)
         {
             try
@@ -260,8 +254,7 @@ namespace Ensemble
                 if (sender is Button)
                 {
                     var templateGrid = ((Button)sender);
-                    //templateGrid.Parent = gridBase
-                    //templateGrid.Parent.Parent = cell
+
                     if (templateGrid.Parent != null && templateGrid.Parent.Parent != null && templateGrid.Parent.Parent.BindingContext != null)
                     {
                         var deletedate = templateGrid.Parent.Parent.BindingContext;
@@ -278,15 +271,6 @@ namespace Ensemble
 
             }
         }
-        public class person
-        {
-            public string name { get; set; }
-            public string instruments { get; set; }
-            public string image { get; set; }
-            public person()
-            {
 
-            }
-        }
     }
 }

@@ -58,7 +58,7 @@
             <EditText
                 android:hint="Enter Username"
                 android:id = "@+id/signup_username"
-                android:inputType= "textCapWords"
+                android:inputType= "text"
                 android:maxLines= "1"
                 android:layout_width= "match_parent"
                 android:layout_height = "wrap_content"/>
@@ -74,7 +74,7 @@
             <EditText
                 android:hint="Enter Age"
                 android:id = "@+id/signup_age"
-                android:inputType= "textCapWords"
+                android:inputType= "numberSigned"
                 android:maxLines= "1"
                 android:layout_width= "match_parent"
                 android:layout_height = "wrap_content"/>
@@ -90,7 +90,7 @@
             <EditText
                 android:hint="Enter Short Bio"
                 android:id = "@+id/signup_bio"
-                android:inputType= "textCapWords"
+                android:inputType= "text"
                 android:maxLines= "1"
                 android:layout_width= "match_parent"
                 android:layout_height = "wrap_content"/>
@@ -104,7 +104,7 @@
             android:minWidth="25px"
             android:minHeight="25px">
             <EditText
-                android:hint="Submit Youtube link"
+                android:hint="Submit YouTube link"
                 android:id = "@+id/signup_ylink"
                 android:inputType= "textUri"
                 android:maxLines= "1"
@@ -119,7 +119,7 @@
         android:id = "@+id/instrumentSpinner"
         android:layout_below= "@+id/signup_input_ylink"
         app:ms_enableFloatingLabel = "true"
-        app:ms_floatingLabelText = "Select Favorite Instrument"
+        app:ms_floatingLabelText = "Favorite Instrument"
         app:ms_hint = "Select Instrument"
         app:ms_alignLabels = "true"
         />

@@ -8,7 +8,7 @@ using Firebase.Database.Query;
 
 namespace Ensemble
 {
-
+    //class created to interact with Firebase Realtime database
     public class FirebaseHelper
     {
         //makes sure it links to Ensemble Firebase Realtime database
@@ -90,14 +90,15 @@ namespace Ensemble
                 .Child("Users")
                 .PostAsync(new User() { Email = e, Pwd = p });
         }
+        
         //add a user with credentials into Realtime Database
-        //public User(string e, string p, string fname, int age, string profile, string instrument, string shortbio, string ylink, List<string> yes, List<string> no)
         public async Task AddUser(string e, string p, string fname, int age, string ppic, string favInstrument, string bio, string ylink, List<string> yes, List<string> no)
         {
             await firebase
                 .Child("Users")
                 .PostAsync(new User(e, p, fname, age, ppic, favInstrument, bio, ylink, yes, no));
         }
+
         //Get user from Realtime Database based on email
         public async Task<User> GetUserwithEmail(string email)
         {
@@ -107,7 +108,8 @@ namespace Ensemble
                 .OnceAsync<User>();
             return allUsers.Where(a => a.Email == email).FirstOrDefault();
         }
-        //Find user based on name
+        
+        //Find user based on username
         public async Task<User> GetUserwithUsername(string Fname)
         {
             var allUsers = await GetAllUsers();
@@ -142,7 +144,7 @@ namespace Ensemble
             await firebase.Child("Users").Child(toDelete.Key).DeleteAsync();
         }
 
-
+        //Create room for all of the participants in the room with all credentials of the room
         public async Task CreateRoom(List<string> ppl, MessageContent lastMsg, string name, List<MessageContent> messages)
         {
             var user = await GetUserwithEmail(ppl[0]);
@@ -158,6 +160,7 @@ namespace Ensemble
                 .PostAsync(new Room(ppl, lastMsg, name, messages));
         }
 
+        //Create room for all of the participants in the room with the room
         public async Task CreateRoom(Room room)
         {
             for (int i = 0; i < room.participants.Count; i++)
@@ -169,6 +172,7 @@ namespace Ensemble
                     .PostAsync(new Room(room.participants, room.lastMsg, room.Name, room.ChatLog));
             }
         }
+        //Update room with credentials
         public async Task UpdateRoom(String name, List<String> ppl, List<MessageContent> chat, MessageContent lastMsg)
         {
             for (int i = 0; i < ppl.Count; i++)
@@ -189,6 +193,7 @@ namespace Ensemble
             
         }
 
+        //Update room with selected room
         public async Task UpdateRoom(Room room)
         {
             for (int i = 0; i < room.participants.Count; i++)
@@ -208,6 +213,7 @@ namespace Ensemble
             }
         }
 
+        //Get all rooms with given user's email
         public async Task<List<Room>> GetAllRooms(string email)
         {
             var user = await GetUserwithEmail(email);
@@ -222,7 +228,7 @@ namespace Ensemble
                     ChatLog = item.Object.ChatLog
                 }).ToList();
         }
-
+        //get all rooms using username
         public async Task<List<Room>> GetAllUsersRooms(string user)
         {
             var userA = await GetUserwithEmail(user);
@@ -234,6 +240,7 @@ namespace Ensemble
             return allRooms.Where(a => (a.participants[0] == user || a.participants[1] == user)).ToList();
         }
 
+        //Get specific room based on roomname and user's email
         public async Task<Room> GetRoom(String email , String name)
         {
             var user = await GetUserwithEmail(email);
@@ -244,6 +251,50 @@ namespace Ensemble
                 .OnceAsync<Room>();
             return allRooms.Where(a => (a.Name == name)).FirstOrDefault();
         }
+
+        //Validation to check if each user has swiped yes on each other. If not, they cannot communicate
+        public async Task<bool> ValidateRoom(string uname1, string uname2)
+        {
+            if (uname1 == "N/A" || uname2 == "N/A")
+            {
+                return true;
+            }
+            
+            var userA = await GetUserwithEmail(uname1);
+            var userB = await GetUserwithEmail(uname2);
+            bool check1 = true;
+            bool check2 = true;
+
+            for (int i = 0; i < userA.Yes.Count; i++)
+            {
+                if (userA.Yes[i] == uname2)
+                {
+                    check1 = true;
+                    break;
+                }
+                else
+                {
+                    check1 = false;
+                }
+            }
+
+            for (int i = 0; i < userB.Yes.Count; i++)
+            {
+                if (userB.Yes[i] == uname1)
+                {
+                    check2 = true;
+                    break;
+                }
+                else
+                {
+                    check1 = false;
+                }
+            }
+
+            
+            return check1 && check2;
+        }
+
 
         //need function to delete older chat msgs if 50 msgs or more (delete 49)
         public async Task DeleteRoomChat(Room room)

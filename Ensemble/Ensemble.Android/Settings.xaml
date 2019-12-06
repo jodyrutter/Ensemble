@@ -6,58 +6,23 @@
              mc:Ignorable="d"
              x:Class="Ensemble.Droid.Settings">
     <StackLayout Orientation="Vertical">
+        
+        
+
+
         <StackLayout x:Name="MainLayout" Padding="10,10,10,0">
         </StackLayout>
-        <!--<sv:SettingsView HasUnevenRows="false">
-            <sv:Section Title="Preferences">
-                <SwitchCell ClassId="already" On="{Binding band}" Text="I'm in a group"></SwitchCell>
-                <SwitchCell ClassId="group" On="{Binding band}" Text="Search for group"></SwitchCell>
-                <SwitchCell ClassId="individuals" Text="Search for individuals"></SwitchCell>
-                <EntryCell ClassId="vid" Placeholder="Video URL                                           "></EntryCell>
-            </sv:Section>
-            <sv:Section Title="Musical Style">
-                <SwitchCell Text="Classical"></SwitchCell>
-                <SwitchCell Text="Rock"></SwitchCell>
-                <SwitchCell Text="Metal"></SwitchCell>
-                <SwitchCell Text="Country"></SwitchCell>
-                <SwitchCell Text="Pop"></SwitchCell>
-                <SwitchCell Text="Rap"></SwitchCell>
-                <SwitchCell Text="Electronic"></SwitchCell>
-                <SwitchCell Text="Cultural"></SwitchCell>
-                <SwitchCell Text="Other"></SwitchCell>
-            </sv:Section>
-            <sv:Section Title="Preferred Instrument">
-                <SwitchCell Text="Vocals"></SwitchCell>
-                <SwitchCell Text="Guitar"></SwitchCell>
-                <SwitchCell Text="Drums"></SwitchCell>
-                <SwitchCell Text="Bass"></SwitchCell>
-                <SwitchCell Text="Piano"></SwitchCell>
-                <SwitchCell Text="Violin"></SwitchCell>
-                <SwitchCell Text="Synth"></SwitchCell>
-                <SwitchCell Text="Other"></SwitchCell>
-            </sv:Section>
-            --><!--<sv:Section Title="Header1" FooterText="Footer1">
-            <sv:CommandCell IconSource="icon.png" IconSize="60,60" IconRadius="30"
-            Title="Xam Xamarin" Description="hoge@fuga.com"
-            Command="{Binding ToProfileCommand}" CommandParameter="{Binding Parameter}"
-            KeepSelectedUntilBack="true"            
-        />
-            <sv:ButtonCell Title="Toggle Section"
-             TitleAlignment="Center" Command="{Binding SectionToggleCommand}" />
-            <sv:LabelCell Title="Label" ValueText="value" />
-            <sv:SwitchCell Title="Switch" On="true" 
-            Description="This is description." />
-            <sv:CheckboxCell Title="Checkbox" Checked="true" />
-        </sv:Section>
-
-        <sv:Section Title="Header2" FooterText="Footer2" IsVisible="{Binding SctionIsVisible}">
-            <sv:PickerCell Title="Favorites" ItemsSource="{Binding ItemsSource}" DisplayMember="Name" MaxSelectedNumber="3" 
-        SelectedItems="{Binding SelectedItems}" KeepSelectedUntilBack="true" PageTitle="select 3 items" />
-            <sv:NumberPickerCell Title="NumberPicker" Min="0" Max="99" Number="15" PickerTitle="Select number" />
-            <sv:TimePickerCell Title="TimePicker" Format="HH:mm" Time="15:30" PickerTitle="Select time" />
-            <sv:DatePickerCell Title="DatePicker" Format="yyyy/MM/dd (ddd)" Date="2017/11/11" MinimumDate="2015/1/1" MaximumDate="2018/12/15" TodayText="Today's date"/>
-            <sv:EntryCell Title="EntryCell" ValueText="{Binding InputText.Value}" Placeholder="Input text" Keyboard="Email" TextAlignment="End" HintText="{Binding InputError.Value}" />
-        </sv:Section>--><!--
-        </sv:SettingsView>-->
+        <Button Text="Save"
+                TextColor="White"
+                BackgroundColor="DarkSlateGray"
+                BorderColor="Transparent"
+                WidthRequest="120"
+                HeightRequest="60"
+                Margin="20,400,20,0"
+                HorizontalOptions="Center"
+                CornerRadius="15"
+                FontSize="Micro"
+                Clicked="Save_Settings"
+                />
     </StackLayout>
 </ContentPage>
