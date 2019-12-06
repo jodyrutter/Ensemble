@@ -6,23 +6,11 @@
              mc:Ignorable="d"
              x:Class="Ensemble.Droid.Settings">
     <StackLayout Orientation="Vertical">
-        
-        
+
+
 
 
         <StackLayout x:Name="MainLayout" Padding="10,10,10,0">
         </StackLayout>
-        <Button Text="Save"
-                TextColor="White"
-                BackgroundColor="DarkSlateGray"
-                BorderColor="Transparent"
-                WidthRequest="120"
-                HeightRequest="60"
-                Margin="20,400,20,0"
-                HorizontalOptions="Center"
-                CornerRadius="15"
-                FontSize="Micro"
-                Clicked="Save_Settings"
-                />
     </StackLayout>
 </ContentPage>

@@ -17,14 +17,9 @@ namespace Ensemble.Droid
     {
         public bool group { get; set; }
         public string youtube { get; set; }
-        public bool vocal { get; set; }
-        public bool guitar { get; set; }
-        public bool drums { get; set; }
-        public bool bass { get; set; }
-        public bool piano { get; set; }
-        public bool violin { get; set; }
-        public bool synth { get; set; }
-        public bool other { get; set; }
+        public int age { get; set; }
+        public string favInst { get; set; }
+        public string bio { get; set; }
         public SettingsA() {
         }
     }

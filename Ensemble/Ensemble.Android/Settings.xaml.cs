@@ -19,7 +19,11 @@ namespace Ensemble.Droid
         public static string SettingsScreenTitle = "Settings";
         private FirebaseHelper fh;
         SettingsA settings;
+        EntryCell age;
+        EntryCell favInstrument;
+        EntryCell bio;
         EntryCell youtubeURL;
+        TextCell save;
         TextCell delete;
         TextCell labAcc;
         public Settings()
@@ -33,14 +37,29 @@ namespace Ensemble.Droid
         //Allows user to save changes made to account
         async private void saveSettings() {
             settings.youtube = youtubeURL.Text;
+            try
+            {
+                settings.age = Int32.Parse(age.Text);
+            }
+            catch (FormatException) {
+                //Age not an int
+            }
+            settings.bio = bio.Text;
+            settings.favInst = favInstrument.Text;
             var i = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
             i.yLink = settings.youtube;
+            i.ShortBio = settings.bio;
+            i.Age = settings.age;
+            i.FavInstrument = settings.favInst;
             await fh.UpdateUser(i);
 
         }
         async void ConnectControl() {
             var i = await fh.GetUserwithEmail(FirebaseAuth.Instance.CurrentUser.Email);
             settings.youtube = i.yLink;
+            settings.age = i.Age;
+            settings.bio = i.ShortBio;
+            settings.favInst = i.FavInstrument;
             TableView table;
             labAcc = new TextCell
             {
@@ -50,6 +69,21 @@ namespace Ensemble.Droid
                 Placeholder = "YouTube video of performance",
                 Text = settings.youtube,
             };
+            age = new EntryCell
+            {
+                Placeholder = "Age",
+                Text = settings.age.ToString(),
+            };
+            bio = new EntryCell
+            {
+                Placeholder = "Enter short bio",
+                Text = settings.bio,
+            };
+            favInstrument = new EntryCell
+            {
+                Placeholder = "Enter favorite instrument",
+                Text = settings.favInst,
+            };
             delete = new TextCell
             {
                 Text = "Delete Account",
@@ -58,13 +92,23 @@ namespace Ensemble.Droid
             {
                 await fh.DeleteUser(i.Email);
             };
+            save = new TextCell {
+                Text = "Save",
+            };
+            save.Tapped += (object sender, EventArgs e) =>
+            {
+                Save_Settings(sender, e);
+            };
             table = new TableView {
                 Root = new TableRoot
                 {
                     new TableSection{
                         labAcc,
                         youtubeURL,
-                        
+                        age,
+                        bio,
+                        favInstrument,
+                        save,
                     }
                 }
             };
