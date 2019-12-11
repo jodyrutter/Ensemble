@@ -116,7 +116,7 @@ namespace Ensemble.Droid
             MainLayout.Children.Add(table);
         }
         //save changes upon closing application
-        protected override async void OnDisappearing() {
+        protected override void OnDisappearing() {
             base.OnDisappearing();
             saveSettings();
         }
